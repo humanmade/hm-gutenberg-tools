@@ -42,8 +42,5 @@
     "react-select": "^1.1.0",
     "react-wp-scripts": "^0.1.1",
     "webpack": "^3.10.0"
-  },
-  "dependencies": {
-    "whatwg-fetch": "^2.0.3"
   }
 }

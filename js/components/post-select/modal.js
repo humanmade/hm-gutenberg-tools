@@ -168,6 +168,11 @@ class PostSelectModal extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.postsCollection.off();
+		delete this.postsCollection;
+	}
+
 	render() {
 		const {
 			isLoading,
@@ -179,7 +184,7 @@ class PostSelectModal extends React.Component {
 			onSelect,
 		} = this.props;
 
-		return <div>
+		return <div className="post-select post-select-modal">
 			<div className="media-modal-backdrop"></div>
 				<div className="modal media-modal wp-core-ui">
 				<Button
@@ -229,9 +234,9 @@ class PostSelectModal extends React.Component {
 							isPrimary={true}
 							onClick={ () => {
 								let postModels = this.state.selectedPosts.map( id => {
-									return this.postsCollection.findWhere({ id: id })
+									return this.postsCollection.findWhere({ id: id }).toJSON();
 								});
-								onSelect( postModels )
+								onSelect( postModels );
 							} }
 						>Select</Button>
 					</div>
@@ -349,50 +354,8 @@ PostSelectModal.propTypes = {
 	minPosts: PropTypes.number.isRequired,
 	maxPosts: PropTypes.number.isRequired,
 	onSelect: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
 }
 
-class PostSelect extends React.Component {
-	constructor( props ) {
-		super( props );
-		this.state = { modalVisible: false }
-	}
+export default PostSelectModal;
 
-	render(){
-		const {
-			btnText,
-			onSelect,
-		} = this.props;
-
-		const { modalVisible } = this.state;
-
-		return <div className="post-select">
-			<Button
-				isLarge={true}
-				onClick={ () => this.setState( { modalVisible: true } ) }
-			>{ btnText }</Button>
-			{ modalVisible && <PostSelectModal
-				{ ...this.props }
-				onClose={ () => this.setState( { modalVisible: false } ) }
-				onSelect={ ( posts ) => {
-					this.props.onSelect( posts );
-					this.setState( { modalVisible: false } );
-				} }
-			/> }
-		</div>
-	}
-}
-
-PostSelect.defaultProps = {
-	minPosts: 1,
-	maxPosts: 1,
-	btnText: __( 'Select post' ),
-}
-
-PostSelect.propTypes = {
-	minPosts: PropTypes.number,
-	maxPosts: PropTypes.number,
-	btnText: PropTypes.string,
-	onSelect: PropTypes.func.isRequired,
-}
-
-export default PostSelect;
