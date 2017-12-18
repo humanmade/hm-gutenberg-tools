@@ -5,6 +5,7 @@ A place to bundle useful reusable Gutenberg components and other tools.
 
 ## What does this include?
 
+* Image upload control for sidebar (InspectorControls). `window.hm.controls.ImageControl`
 * PostSelect interface. `window.hm.components.PostSelect`
 
 ## Development
