@@ -23,7 +23,7 @@ const ImageControl = props => {
 	} = props;
 
 	const uploadButtonProps = { isLarge: true };
-	const removeButtonProps = { isLarge: true };
+	const removeButtonProps = { isLarge: true, style: { marginLeft: '8px' } };
 
 	return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
 		<img
