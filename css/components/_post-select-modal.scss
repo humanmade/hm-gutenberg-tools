@@ -1,0 +1,105 @@
+.post-select .modal {
+	position: fixed;
+	top: 20px;
+}
+
+.post-select .media-frame-title {
+	left: 300px;
+	background: white;
+	border-bottom: 1px solid #e2e4e7;
+}
+
+.post-select .media-frame-menu {
+	width: 300px;
+}
+
+.post-select .post-select-filters {
+	padding: 16px;
+	box-sizing: border-box;
+	font-size: 14px;
+}
+
+.post-select-filters-row {
+	margin-bottom: 16px;
+}
+
+.post-select .post-select-filters label {
+	margin-bottom: 8px;
+	display: block;
+}
+
+.post-select .post-select-filters input[type="text"],
+.post-select .post-select-filters input[type="search"] {
+	width: 100%;
+	border-color: #CCC;
+}
+
+.post-select .post-select-filters input[type="search"] {
+	padding-top: 6px;
+	padding-bottom: 6px;
+	height: 36px;
+	font-size: 14px;
+	box-sizing: border-box;
+}
+
+.post-select .media-modal-content {
+	padding-left: 300px;
+	padding-top: 50px;
+	padding-bottom: 60px;
+}
+
+.post-select .media-modal-content > div {
+	overflow: auto;
+}
+
+.post-select .media-modal-content .spinner {
+	float: left;
+	margin: 16px;
+}
+
+.post-select .media-modal-content .prev-page {
+	margin: 16px;
+}
+
+.post-select .media-modal-content .next-page {
+	margin: 16px;
+}
+
+.post-select .media-modal-content .prev-page + div .post-select-result:first-child {
+	border-top: 1px solid #e2e4e7;
+}
+
+.post-select-result {
+	padding: 10px 20px;
+	border-bottom: 1px solid #e2e4e7;
+}
+
+.post-select-result:last-child {
+	// border-bottom: none;
+}
+
+.post-select-result:nth-child(odd) {
+	background: #f8f9f9;
+}
+
+.post-select-result h2 {
+	margin-top: 0;
+	margin-bottom: 8px;
+}
+
+.post-select-result.focused {
+	background: rgb(255,255,200);
+}
+
+.post-select .media-frame-toolbar {
+	left: 300px;
+	background: white;
+}
+
+.post-select .media-frame-toolbar .media-toolbar {
+	background: #FFF;
+	padding: 16px;
+	bottom: -60px;
+	display: flex;
+	justify-content: right;
+}

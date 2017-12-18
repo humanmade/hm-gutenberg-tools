@@ -1,0 +1,49 @@
+{
+  "name": "hm-gutenberg-tools",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"npm run js:build\" \"npm run css:build\"",
+    "watch": "concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"npm run js:watch\" \"npm run css:watch\"",
+    "lint": "eslint ./js --fix",
+    "js:build": "NODE_ENV=production webpack",
+    "js:watch": "webpack --watch",
+    "css:build": "npm run css:sass:build && npm run css:postcss:build",
+    "css:watch": "npm run css:sass:watch",
+    "css:postcss:build": "postcss ./build/*.css --no-map --use autoprefixer postcss-clean --replace",
+    "css:sass:build": "node-sass-chokidar --source-map true css/ -o ./build/",
+    "css:sass:watch": "chokidar './css/**/*.scss' -c 'npm run css:sass:build'"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.34",
+    "@babel/core": "^7.0.0-beta.34",
+    "@babel/preset-env": "^7.0.0-beta.34",
+    "@babel/preset-react": "^7.0.0-beta.34",
+    "autoprefixer": "^7.2.2",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "chokidar-cli": "^1.2.0",
+    "classnames": "^2.2.5",
+    "concurrently": "^3.5.1",
+    "eslint": "^3.19.0",
+    "eslint-config-humanmade": "^0.2.0",
+    "eslint-config-react-app": "^0.5.2",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^6.10.3",
+    "node-sass": "^4.7.2",
+    "node-sass-chokidar": "0.0.3",
+    "postcss-clean": "^1.1.0",
+    "postcss-cli": "^4.1.1",
+    "prop-types": "^15.6.0",
+    "react-select": "^1.1.0",
+    "react-wp-scripts": "^0.1.1",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "whatwg-fetch": "^2.0.3"
+  }
+}
