@@ -10,6 +10,8 @@ const {
 	Button,
 } = wp.components;
 
+const { __ } = wp.i18n;
+
 /**
  * InspectorControl for image upload.
  */
@@ -26,26 +28,27 @@ const ImageControl = props => {
 	const removeButtonProps = { isLarge: true, style: { marginLeft: '8px' } };
 
 	return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
-		<img
+		{ value.src && <img
 			src={ value.src }
 			data-id={ value.id }
 			width="100"
 			height="100"
 			style={ { display: 'block', marginBottom: '8px' } }
-		/>
+		/> }
+
 		<MediaUploadButton
 			buttonProps={ uploadButtonProps }
 			onSelect={ onChange }
 			type="image"
 		>
-			{ value.src ? 'Change' : 'Select' }
+			{ value.src ? __( 'Change' ) : __( 'Select' ) }
 		</MediaUploadButton>
 
 		{ value.src && <Button
 			{ ...removeButtonProps }
-			onClick={ () => onChange }
+			onClick={ () => onChange() }
 		>
-			Remove
+			{ __( 'Remove' ) }
 		</Button> }
 	</InspectorControls.BaseControl>
 }
