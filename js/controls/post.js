@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
+import _get from 'lodash/get';
 
 import PostSelectButton from '../components/post-select/button';
 
@@ -9,6 +10,8 @@ const {
 	MediaUploadButton,
 } = wp.blocks;
 
+const { Spinner } = wp.components;
+
 const { __ } = wp.i18n;
 
 /**
@@ -16,11 +19,29 @@ const { __ } = wp.i18n;
  */
 class PostControl extends React.Component {
 	state = {
+		isLoading: false,
 		posts: [],
 	}
 
+	componentWillMount() {
+		const { value = [], postSelectProps = {} } = this.props;
+
+		// Load current state.
+		if ( value.length > 1 && this.state.posts.length < 1 ) {
+			const Collection = _get( postSelectProps, 'collectionType', 'Posts' );
+			const collection = new wp.api.collections[ Collection ]();
+
+			this.setState({ isLoading: true });
+			collection.fetch( { data: { per_page: value.length, filter: { include: value } } } )
+				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
+		}
+	}
+
 	render() {
-		const { posts } = this.state;
+		const {
+			posts,
+			isLoading
+		} = this.state;
 
 		const {
 			label,
@@ -33,7 +54,8 @@ class PostControl extends React.Component {
 		} = this.props;
 
 		return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
-			{ posts.length > 0 && (
+			{ isLoading && <Spinner /> }
+			{ ( ! isLoading && posts.length > 0 ) && (
 				<ul>
 					{ this.state.posts.map( post => {
 						return <li key={ post.id }>{ post.title.rendered }</li>
