@@ -17,7 +17,7 @@ function enqueue_block_editor_assets() {
 		'hm-gb-tools-editor',
 		HM_GB_TOOLS_URL . '/build/editor.bundle.js',
 		[ 'wp-blocks', 'wp-element' ],
-		filemtime( HM_GB_TOOLS_PATH . '/build/editor.bundle.js' ),
+		filemtime( HM_GB_TOOLS_DIR . '/build/editor.bundle.js' ),
 		false
 	);
 
@@ -25,6 +25,6 @@ function enqueue_block_editor_assets() {
 		'hm-gb-tools-editor',
 		HM_GB_TOOLS_URL . '/build/editor.css',
 		[],
-		filemtime( HM_GB_TOOLS_PATH . '/build/editor.css' )
+		filemtime( HM_GB_TOOLS_DIR . '/build/editor.css' )
 	);
 }
