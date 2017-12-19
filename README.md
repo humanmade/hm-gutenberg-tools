@@ -5,9 +5,11 @@ A place to bundle useful reusable Gutenberg components and other tools.
 
 ## What does this include?
 
-* PostSelect interface. `window.hm.components.PostSelectButton`
-* Image upload control for sidebar (InspectorControls). `window.hm.controls.ImageControl`
-* Post select control for sidebar (InspectorControls). `window.hm.controls.PostControl`
+* Better Post Select interface that supports searching, filtering and multi-select.
+  * Post Select Modal is a "media modal"-like UI for selecting posts.`window.hm.components.PostSelectModal`
+  * Post Select Button is a simple button that triggers the modal. `window.hm.components.PostSelectButton`
+  * Post Control is a sidebar control for managing posts. Just a wrapper for the above really.  `window.hm.controls.PostControl`  
+* Image upload control for sidebar (InspectorControls). `window.hm.controls.ImageControl`.
 
 ## Development
 
