@@ -274,8 +274,6 @@ class PostSelectModal extends React.Component {
 			wp.api.collections.Posts
 		);
 
-		console.log( this.props.collectionType );
-
 		this.postsCollection = new Collection();
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => this.setState({
