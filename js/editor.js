@@ -1,5 +1,4 @@
 import PostSelectButton from './components/post-select/button';
-import PostSelectModal from './components/post-select/modal';
 import ImageControl from './controls/image';
 import PostControl from './controls/post';
 
@@ -12,6 +11,5 @@ window.hm = {
 	// Misc components.
 	components: {
 		PostSelectButton,
-		PostSelectModal,
 	},
 };

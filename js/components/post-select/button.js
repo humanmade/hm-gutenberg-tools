@@ -18,7 +18,7 @@ class PostSelectButton extends React.Component {
 
 	render(){
 		const {
-			btnText,
+			children,
 			onSelect,
 		} = this.props;
 
@@ -30,7 +30,7 @@ class PostSelectButton extends React.Component {
 			<Button
 				isLarge={true}
 				onClick={ () => this.setState( { modalVisible: true } ) }
-			>{ btnText }</Button>
+			>{ children }</Button>
 			{ modalVisible && (
 				ReactDOM.createPortal(
 					<PostSelectModal
@@ -51,7 +51,6 @@ class PostSelectButton extends React.Component {
 PostSelectButton.defaultProps = {
 	minPosts: 1,
 	maxPosts: 1,
-	btnText: __( 'Select post' ),
 }
 
 PostSelectButton.propTypes = {

@@ -41,7 +41,7 @@ class PostControl extends React.Component {
 			<PostSelectButton onSelect={ posts => {
 				this.setState( { posts } );
 				onChange( posts );
-			} } />
+			} }>{ __( 'Select post' ) }</PostSelectButton>
 		</InspectorControls.BaseControl>
 	}
 }
