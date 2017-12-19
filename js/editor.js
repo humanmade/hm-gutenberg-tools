@@ -12,5 +12,6 @@ window.hm = {
 	// Misc components.
 	components: {
 		PostSelectButton,
+		PostSelectModal,
 	},
 };
