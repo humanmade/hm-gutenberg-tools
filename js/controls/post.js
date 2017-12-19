@@ -28,6 +28,8 @@ class PostControl extends React.Component {
 			help,
 			onChange,
 			value = [],
+			postSelectProps = {},
+			btnText = __( 'Select post' ),
 		} = this.props;
 
 		return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
@@ -38,10 +40,14 @@ class PostControl extends React.Component {
 					} ) }
 				</ul>
 			) }
-			<PostSelectButton onSelect={ posts => {
-				this.setState( { posts } );
-				onChange( posts );
-			} }>{ __( 'Select post' ) }</PostSelectButton>
+			<PostSelectButton
+				{ ...postSelectProps }
+				value={ value }
+				onSelect={ posts => {
+					this.setState( { posts } );
+					onChange( posts );
+				} }
+			>{ btnText }</PostSelectButton>
 		</InspectorControls.BaseControl>
 	}
 }

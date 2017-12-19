@@ -48,14 +48,7 @@ class PostSelectButton extends React.Component {
 	}
 }
 
-PostSelectButton.defaultProps = {
-	minPosts: 1,
-	maxPosts: 1,
-}
-
 PostSelectButton.propTypes = {
-	minPosts: PropTypes.number,
-	maxPosts: PropTypes.number,
 	btnText: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
 }

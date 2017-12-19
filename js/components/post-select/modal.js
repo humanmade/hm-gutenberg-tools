@@ -268,7 +268,15 @@ class PostSelectModal extends React.Component {
 	initPostsCollection() {
 		this.setState({ isLoading: true });
 
-		this.postsCollection = new wp.api.collections.Posts();
+		const Collection = _get(
+			wp.api.collections,
+			this.props.collectionType,
+			wp.api.collections.Posts
+		);
+
+		console.log( this.props.collectionType );
+
+		this.postsCollection = new Collection();
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => this.setState({
 			posts: this.postsCollection.toJSON()
@@ -348,6 +356,12 @@ class PostSelectModal extends React.Component {
 			this.setState( { selectedPosts: newSelectedPosts } );
 		}
 	}
+}
+
+PostSelectModal.defaultProps = {
+	minPosts: 1,
+	maxPosts: 1,
+	collectionType: 'Posts',
 }
 
 PostSelectModal.propTypes = {
