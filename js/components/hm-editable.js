@@ -43,7 +43,8 @@ class HmEditable extends React.Component {
 	// Helper to convert multiline editable into an array of react elements.
 	toEditableValue( value ) {
 		return ( value && Array.isArray( value ) ) ? value.map( ( paragraph, i ) => {
-			return <p key={ i }>{ paragraph }</p>
+			const Tag = this.props.multiline;
+			return <Tag key={ i }>{ paragraph }</Tag>
 		} ) : [];
 	}
 
