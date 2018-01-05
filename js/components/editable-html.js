@@ -1,4 +1,6 @@
 import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import HtmlToReactParser from 'html-to-react';
 import _get from 'lodash/get';
 import _flatten from 'lodash/flatten';
 import _isEqual from 'lodash/isEqual';
@@ -7,10 +9,10 @@ const { Editable } = wp.blocks;
 
 /**
  * The Editable component doesn't really work if you're data is not stored in markup.
- * This component means that you can store your data as a simple array of strings,
- * and this handles converting the data for you.
+ * This component is a wrapper that lets you store simple HTML strings.
+ * It handles converting it to react, and back to a string.
  */
-class HmEditable extends React.Component {
+class EditableHTML extends React.Component {
 	state = {
 		text: [],
 	}
@@ -42,18 +44,29 @@ class HmEditable extends React.Component {
 
 	// Helper to convert multiline editable into an array of react elements.
 	toEditableValue( value ) {
-		return ( value && Array.isArray( value ) ) ? value.map( ( paragraph, i ) => {
-			const Tag = this.props.multiline;
-			return <Tag key={ i }>{ paragraph }</Tag>
-		} ) : [];
+		if ( ! value || typeof value !== 'string' || value.length < 1 ) {
+			return [];
+		}
+
+		const parser = new HtmlToReactParser.Parser();
+		return parser.parse( '<div>' + value + '</div>' ).props.children;
 	}
 
 	// Helper to convert react elements into array of strings.
 	fromEditableValue( value ) {
-		return _flatten( ( value && Array.isArray( value ) ) ? value.map( subValue => {
-			return _get( subValue, 'props.children', '' );
-		} ) : [] );
+		// Strip last item if br or empty.
+		if ( typeof value === 'array' && value.length > 1 ) {
+			let last = value.slice(-1)[0];
+			if (
+				last === '' ||
+				( typeof last === 'object' && 'type' in last && last.type === 'br' )
+			) {
+				value.pop();
+			}
+		}
+
+		return ReactDOMServer.renderToStaticMarkup( value );
 	}
 }
 
-export default HmEditable;
+export default EditableHTML;

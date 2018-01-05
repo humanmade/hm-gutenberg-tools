@@ -1,5 +1,5 @@
 import PostSelectButton from './components/post-select/button';
-import HmEditable from './components/hm-editable';
+import EditableHTML from './components/editable-html';
 import ImageControl from './controls/image';
 import PostControl from './controls/post';
 import LinkControl from './controls/link';
@@ -14,6 +14,6 @@ window.hm = {
 	// Misc components.
 	components: {
 		PostSelectButton,
-		HmEditable,
+		EditableHTML,
 	},
 };
