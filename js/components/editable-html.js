@@ -49,7 +49,8 @@ class EditableHTML extends React.Component {
 		}
 
 		const parser = new HtmlToReactParser.Parser();
-		return parser.parse( '<div>' + value + '</div>' ).props.children;
+		const parsed = parser.parse( '<div>' + value + '</div>' );
+		return React.Children.toArray( parsed.props.children );
 	}
 
 	// Helper to convert react elements into array of strings.
