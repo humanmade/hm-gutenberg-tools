@@ -12,11 +12,11 @@ Text Domain:  hm-gb
 Domain Path:  /languages
 */
 
-define( 'HM_GB_TOOLS_DIR', plugin_dir_path( __FILE__ ) );
-define( 'HM_GB_TOOLS_URL', plugin_dir_url( __FILE__ ) );
+defined( 'HM_GB_TOOLS_DIR' ) OR define( 'HM_GB_TOOLS_DIR', plugin_dir_path( __FILE__ ) );
+defined( 'HM_GB_TOOLS_URL' ) OR define( 'HM_GB_TOOLS_URL', plugin_dir_url( __FILE__ ) );
 
 require_once __DIR__ . '/inc/namespace.php';
 
-add_action( 'plugins_loaded', function() {
+add_action( 'after_setup_theme', function() {
 	\HM\GutenbergTools\setup();
 });
