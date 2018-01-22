@@ -1,8 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require( 'path' );
 
 module.exports = {
-	entry : {
+	entry: {
 		editor: './js/editor.js',
 	},
 	output: {
@@ -12,35 +11,40 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.(js|jsx|mjs)$/,
 				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: 'babel-loader',
 					options: {
-						presets: [
-							'@babel/preset-env',
-							'@babel/preset-react'
-						],
+						presets: [ '@babel/preset-env', '@babel/preset-react' ],
 						plugins: [
-							"transform-object-rest-spread",
-							"transform-class-properties",
-							[ "transform-react-jsx", {
-								"pragma": "wp.element.createElement"
-							} ]
+							[
+								'transform-object-rest-spread',
+								{
+									useBuiltIns: true,
+								},
+							],
+							'transform-class-properties',
+							[
+								'transform-react-jsx',
+								{
+									pragma: 'wp.element.createElement',
+								},
+							],
 						],
-					}
-				}
+					},
+				},
 			},
-		]
+		],
 	},
 	externals: {
-		'jquery': 'jQuery',
-		'react': 'React',
+		jquery: 'jQuery',
+		react: 'React',
 		'react-dom': 'ReactDOM',
 		'react-dom/server': 'ReactDOMServer',
-		'tinymce': 'tinymce',
-		'moment': 'moment',
-		'wp': 'wp',
+		tinymce: 'tinymce',
+		moment: 'moment',
+		wp: 'wp',
 	},
 	stats: {
 		colors: true,
