@@ -13,13 +13,15 @@ const { __ } = wp.i18n;
 class PostSelectButton extends React.Component {
 	state = {
 		modalVisible: false,
-		posts: [],
 	}
 
 	render(){
 		const {
 			children,
 			onSelect,
+			value = [],
+			minPosts = 1,
+			maxPosts = 1,
 		} = this.props;
 
 		const { modalVisible } = this.state;
@@ -40,6 +42,7 @@ class PostSelectButton extends React.Component {
 							onClose();
 						} }
 						onClose={ onClose }
+						selectedPosts={ value }
 					/>,
 					document.getElementById('wpbody')
 				)
