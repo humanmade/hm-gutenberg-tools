@@ -6,7 +6,8 @@ import _uniqueId from 'lodash/uniqueId';
 import _pull from 'lodash/pull';
 import classNames from 'classnames';
 
-import PostSelectUI from './post-select-ui';
+import PostSelectBrowse from './browse';
+import PostSelectSelection from './selection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -14,7 +15,7 @@ const { __ } = wp.i18n;
 class PostSelectModal extends React.Component {
 	state = {
 		selectedPosts: [],
-		contentState: 'list',
+		contentState: 'browse',
 	}
 
 	constructor( props ) {
@@ -30,8 +31,10 @@ class PostSelectModal extends React.Component {
 		this.state.selectedPosts = new Collection();
 
 		if ( props.value && props.value.length > 0 ) {
-			this.state.selectedPosts.add( props.value.map( id => { return { id } } ) );
-			this.state.selectedPosts.each( post => post.fetch() );
+			this.state.selectedPosts.fetch( {
+				hmCache: 30,
+				data: { per_page: props.value.length, filter: { include: props.value } }
+			} );
 		}
 	}
 
@@ -58,14 +61,29 @@ class PostSelectModal extends React.Component {
 					<h1>{ modalTitle }</h1>
 				</div>
 				<div className="media-modal-content">
-					<PostSelectUI
+					{ ( this.state.contentState === 'browse' ) && <PostSelectBrowse
 						{ ...this.state }
 						collectionType={ collectionType }
 						togglePostSelected={ post => this.togglePostSelected( post ) }
-					/>
+					/> }
+					{ ( this.state.contentState === 'selection' ) && <PostSelectSelection
+						selectedPosts={ selectedPosts }
+					/> }
 				</div>
 				<div className="media-frame-toolbar">
 					<div className="media-toolbar">
+						{ ( this.state.contentState !== 'selection' ) && <Button
+							isPrimary={false}
+							isLarge={true}
+							style={{ marginRight: '15px' }}
+							onClick={ () => this.setState( { contentState: 'selection' }) }
+						>View selection</Button> }
+						{ ( this.state.contentState !== 'browse' ) && <Button
+							isPrimary={false}
+							isLarge={true}
+							style={{ marginRight: '15px' }}
+							onClick={ () => this.setState( { contentState: 'browse' }) }
+						>Browse posts</Button> }
 						<Button
 							isPrimary={true}
 							isLarge={true}

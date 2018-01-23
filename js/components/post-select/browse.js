@@ -5,16 +5,15 @@ import _get from 'lodash/get';
 import _extend from 'lodash/extend';
 import _isEqual from 'lodash/isEqual';
 
-import PostSelectUIFilters from './post-select-ui-filters';
+import PostSelectBrowseFilters from './browse-filters';
 import PostList from './post-list';
 import termFilters from './term-filters';
-import './cached-collection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
 const { Spinner } = wp.components;
 
-class PostSelectUI extends React.Component {
+class PostSelectBrowse extends React.Component {
 	state = {
 		posts: [],
 		isLoading: false,
@@ -42,7 +41,9 @@ class PostSelectUI extends React.Component {
 
 		return <div className="menu-container">
 			<div className="menu">
-				<PostSelectUIFilters onUpdate={ filters => this.setState( { filters } ) }/>
+				<PostSelectBrowseFilters
+					onUpdate={ filters => this.setState( { filters } ) }
+				/>
 			</div>
 			<div>
 				{ isLoading && <Spinner /> }
@@ -165,4 +166,4 @@ class PostSelectUI extends React.Component {
 	}
 }
 
-export default PostSelectUI;
+export default PostSelectBrowse;

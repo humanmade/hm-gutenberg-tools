@@ -32,7 +32,7 @@ class PostControl extends React.Component {
 			const collection = new wp.api.collections[ Collection ]();
 
 			this.setState({ isLoading: true });
-			collection.fetch( { data: { per_page: value.length, filter: { include: value } } } )
+			collection.fetch( { hmCache: 30, data: { per_page: value.length, filter: { include: value } } } )
 				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
 		}
 	}

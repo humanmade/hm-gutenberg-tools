@@ -10,7 +10,7 @@ import termFilters from './term-filters';
 const { Button } = wp.components;
 const { __ } = wp.i18n;
 
-class PostSelectUIFilters extends React.Component {
+class PostBrowseFilters extends React.Component {
 	state = {
 		category: [],
 	}
@@ -114,4 +114,4 @@ class PostSelectUIFilters extends React.Component {
 	}
 }
 
-export default PostSelectUIFilters;
+export default PostBrowseFilters;
