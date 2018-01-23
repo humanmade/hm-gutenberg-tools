@@ -8,6 +8,7 @@ import _isEqual from 'lodash/isEqual';
 import PostSelectUIFilters from './post-select-ui-filters';
 import PostList from './post-list';
 import termFilters from './term-filters';
+import './cached-collection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -67,11 +68,12 @@ class PostSelectUI extends React.Component {
 
 	postCollectionFetchData() {
 		const args = {
+			page: 1,
 			per_page: 25,
 		};
 
 		const search = _get( this.state, 'filters.search' );
-		if ( search && search.length ) {
+		if ( search && search.length > 0 ) {
 			args.search = search;
 		}
 
@@ -103,15 +105,16 @@ class PostSelectUI extends React.Component {
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.postsCollection.on( 'sync', () => this.setState( { isLoading: false } ) );
 
-		this.postsCollection.fetch( { data: this.postCollectionFetchData() } );
+		this.postsCollection.fetch( { hmCache: 30, data: this.postCollectionFetchData() } );
 	}
 
 	fetchPostsCollection() {
-		this.postsCollection.fetch( { data: this.postCollectionFetchData() } );
+		this.postsCollection.fetch( { hmCache: 30, data: this.postCollectionFetchData() } );
 	}
 
 	nextPostsPage( options = {} ) {
 		this.setState( { page: this.state.page += 1 });
+		options.hmCache = 30;
 		this.postsCollection.more( options );
 	}
 
@@ -122,19 +125,18 @@ class PostSelectUI extends React.Component {
 	 * @returns {*}.
 	 */
 	prevPostsPage( options = {} ) {
-		options.data = options.data || {};
+		options.hmCache = 30,
+		options.data  = options.data || {};
 		_extend( options.data, this.postCollectionFetchData() );
 
-		if ( 'undefined' === typeof options.data.page ) {
-			if ( ! this.hasPrev() ) {
-				return false;
-			}
+		if ( ! this.hasPrev() ) {
+			return false;
+		}
 
-			if ( null === this.postsCollection.state.currentPage || this.postsCollection.state.currentPage <= 1 ) {
-				options.data.page = 1;
-			} else {
-				options.data.page = this.postsCollection.state.currentPage - 1;
-			}
+		if ( null === this.postsCollection.state.currentPage || this.postsCollection.state.currentPage <= 1 ) {
+			options.data.page = 1;
+		} else {
+			options.data.page = this.postsCollection.state.currentPage - 1;
 		}
 
 		this.postsCollection.fetch( options );

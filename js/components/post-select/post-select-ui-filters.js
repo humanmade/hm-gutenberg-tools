@@ -93,6 +93,7 @@ class PostSelectUIFilters extends React.Component {
 		const collection = new wp.api.collections[ collectionName ]();
 
 		const fetchData = {
+			hmCache: true,
 			data: {
 				search: query
 			}
