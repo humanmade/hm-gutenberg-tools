@@ -6,15 +6,20 @@ import _uniqueId from 'lodash/uniqueId';
 import _pull from 'lodash/pull';
 import classNames from 'classnames';
 
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import SortableContainer from './sortable-container';
+
 class PostSelectSelection extends React.Component {
 	render() {
 		const { selectedPosts } = this.props;
 
-		return <ol className="selection-ui">
-			{ selectedPosts.toJSON().map( ( post, i ) => {
-				return <li key={ i }>{ post.title.rendered }</li>
-			} ) }
-		</ol>
+		const selection = selectedPosts.toJSON().map( post => { return {
+			id: post.id,
+			title: post.title.rendered,
+		} } );
+
+		return <SortableContainer list={ selection }/>
 	}
 }
 
@@ -23,4 +28,5 @@ PostSelectSelection.propTypes = {
 	// onUpdateSelection: PropTypes.object.isRequired,
 }
 
-export default PostSelectSelection;
+export default DragDropContext(HTML5Backend)(PostSelectSelection);
+// export default PostSelectSelection;
