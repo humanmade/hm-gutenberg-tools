@@ -88,7 +88,7 @@ const itemTarget = {
 
 export default flow(
 	DropTarget("ITEM", itemTarget, connect => ({
-		connectDropTarget: connect.dropTarget()
+		connectDropTarget: connect.dropTarget(),
 	})),
 	DragSource("ITEM", itemSource, (connect, monitor) => ({
 		connectDragSource: connect.dragSource(),
