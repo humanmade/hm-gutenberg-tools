@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 import _get from 'lodash/get';
 import _uniqueId from 'lodash/uniqueId';
-import _pull from 'lodash/pull';
+import _indexOf from 'lodash/indexOf';
 import classNames from 'classnames';
 
 import PostSelectBrowse from './browse';
@@ -13,6 +13,19 @@ const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostSelectModal extends React.Component {
+	static defaultProps = {
+		minPosts: 1,
+		maxPosts: 1,
+		collectionType: 'Posts',
+	}
+
+	static propTypes = {
+		minPosts: PropTypes.number.isRequired,
+		maxPosts: PropTypes.number.isRequired,
+		onSelect: PropTypes.func.isRequired,
+		onClose: PropTypes.func.isRequired,
+	}
+
 	state = {
 		selectedPosts: [],
 		contentState: 'browse',
@@ -31,6 +44,8 @@ class PostSelectModal extends React.Component {
 		this.state.selectedPosts = new Collection();
 
 		if ( props.value && props.value.length > 0 ) {
+			this.state.selectedPosts.comparator = post => _indexOf( props.value, post.id );
+
 			this.state.selectedPosts.fetch( {
 				hmCache: 30,
 				data: { per_page: props.value.length, filter: { include: props.value } }
@@ -39,7 +54,7 @@ class PostSelectModal extends React.Component {
 	}
 
 	render() {
-		const { isLoading, selectedPosts } = this.state;
+		const { isLoading } = this.state;
 
 		const {
 			onClose,
@@ -67,7 +82,8 @@ class PostSelectModal extends React.Component {
 						togglePostSelected={ post => this.togglePostSelected( post ) }
 					/> }
 					{ ( this.state.contentState === 'selection' ) && <PostSelectSelection
-						selectedPosts={ selectedPosts }
+						selectedPosts={ this.state.selectedPosts.toJSON() }
+						onUpdateSelection={ newSelectionOrder => this.updateSelectionOrder( newSelectionOrder ) }
 					/> }
 				</div>
 				<div className="media-frame-toolbar">
@@ -87,7 +103,7 @@ class PostSelectModal extends React.Component {
 						<Button
 							isPrimary={true}
 							isLarge={true}
-							onClick={ () => onSelect( selectedPosts.toJSON() ) }
+							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
 						>Select</Button>
 					</div>
 				</div>
@@ -109,19 +125,16 @@ class PostSelectModal extends React.Component {
 
 		this.setState( { selectedPosts: newSelectedPosts } );
 	}
-}
 
-PostSelectModal.defaultProps = {
-	minPosts: 1,
-	maxPosts: 1,
-	collectionType: 'Posts',
-}
+	updateSelectionOrder( newSelectionOrder ) {
+		const { selectedPosts } = this.state;
 
-PostSelectModal.propTypes = {
-	minPosts: PropTypes.number.isRequired,
-	maxPosts: PropTypes.number.isRequired,
-	onSelect: PropTypes.func.isRequired,
-	onClose: PropTypes.func.isRequired,
+		let newSelectedPosts = selectedPosts.clone();
+		newSelectedPosts.comparator = post => _indexOf( newSelectionOrder, post.id );
+		newSelectedPosts.sort();
+
+		this.setState( { selectedPosts: newSelectedPosts } );
+	}
 }
 
 export default PostSelectModal;

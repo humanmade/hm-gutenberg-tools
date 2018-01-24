@@ -7,16 +7,18 @@ import classNames from 'classnames';
 import SortablePostList from './sortable-post-list';
 
 class PostSelectSelection extends React.Component {
-	render() {
-		const { selectedPosts } = this.props;
-
-		return <SortablePostList id={ _uniqueId() } posts={ selectedPosts.toJSON() }/>
+	static propTypes = {
+		selectedPosts: PropTypes.array.isRequired,
+		onUpdateSelection: PropTypes.func.isRequired,
 	}
-}
 
-PostSelectSelection.propTypes = {
-	selectedPosts: PropTypes.object.isRequired,
-	// onUpdateSelection: PropTypes.object.isRequired,
+	render() {
+		return <SortablePostList
+			id={ _uniqueId() }
+			posts={ this.props.selectedPosts }
+			onSort={ newSelectionOrder => this.props.onUpdateSelection( newSelectionOrder ) }
+		/>
+	}
 }
 
 export default PostSelectSelection;

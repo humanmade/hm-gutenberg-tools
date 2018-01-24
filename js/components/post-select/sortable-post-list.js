@@ -4,22 +4,31 @@ import update from 'immutability-helper';
 import { DropTarget, DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import Item from './sortable-post-list-item';
+import _isEqual from 'lodash/isEqual';
 
 class SortablePostList extends Component {
 
 	static propTypes = {
 		id: PropTypes.string.isRequired,
 		posts: PropTypes.array.isRequired,
+		onSort: PropTypes.func.isRequired,
 	}
 
 	constructor(props) {
 		super(props);
 
-		this.moveItem = this.moveItem.bind( this );
-
 		this.state = {
 			posts: props.posts
 		};
+	}
+
+	componentDidUpdate( prevProps, prevState ) {
+		const oldOrder = prevState.posts.map( p => p.id );
+		const newOrder = this.state.posts.map( p => p.id );
+
+		if ( ! _isEqual( oldOrder, newOrder ) ) {
+			this.props.onSort( newOrder );
+		}
 	}
 
 	moveItem(dragIndex, hoverIndex) {
@@ -45,7 +54,7 @@ class SortablePostList extends Component {
 				key={ post.id }
 				index={ i }
 				post={ post }
-				moveItem={ this.moveItem }
+				moveItem={ this.moveItem.bind( this ) }
 			/> ) }
 		</ol>
   }
