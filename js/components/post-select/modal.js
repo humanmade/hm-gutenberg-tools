@@ -53,6 +53,13 @@ class PostSelectModal extends React.Component {
 		}
 	}
 
+	componentDidMount() {
+		this.modalEl.focus();
+	}
+
+	componentWillUnmount() {
+	}
+
 	render() {
 		const { isLoading } = this.state;
 
@@ -65,7 +72,11 @@ class PostSelectModal extends React.Component {
 
 		return <div className="post-select post-select-modal">
 			<div className="media-modal-backdrop"></div>
-			<div className="modal media-modal wp-core-ui">
+			<div
+				className="modal media-modal wp-core-ui"
+				ref={ el => { this.modalEl = el } }
+				tabIndex="0"
+			>
 				<Button
 					className="media-modal-close"
 					onClick={ () => onClose() }
