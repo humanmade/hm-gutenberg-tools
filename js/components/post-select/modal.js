@@ -49,15 +49,19 @@ class PostSelectModal extends React.Component {
 			this.state.selectedPosts.fetch( {
 				hmCache: 30,
 				data: { per_page: props.value.length, filter: { include: props.value } }
+			} ).then( () => {
+				this.mounted && this.forceUpdate()
 			} );
 		}
 	}
 
 	componentDidMount() {
+		this.mounted = true;
 		this.modalEl.focus();
 	}
 
 	componentWillUnmount() {
+		this.mounted = false;
 	}
 
 	render() {
