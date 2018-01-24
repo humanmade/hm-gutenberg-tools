@@ -1,6 +1,7 @@
 .post-select .modal {
 	position: fixed;
 	top: 20px;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.7);
 }
 
 .post-select .media-frame-title {
@@ -46,6 +47,7 @@
 	min-height: 0;
 	top: 50px;
 	bottom: 60px;
+	box-shadow: none;
 }
 
 .post-select .menu-container {
