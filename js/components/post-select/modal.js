@@ -20,8 +20,9 @@ class PostSelectModal extends React.Component {
 	}
 
 	static propTypes = {
-		minPosts: PropTypes.number.isRequired,
-		maxPosts: PropTypes.number.isRequired,
+		collectionType: PropTypes.string,
+		minPosts: PropTypes.number,
+		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
 		onClose: PropTypes.func.isRequired,
 	}
