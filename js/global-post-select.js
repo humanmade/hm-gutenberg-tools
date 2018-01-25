@@ -2,9 +2,9 @@
 // And indeed, they worked pretty well.
 // Until I tried to do drag/drop inside the modal.
 // This works perfectly, as long as the PostSelectButton component (that creates the portal) wasn't a child of the gutenberg block list component.
-// So whilst it worked fine if the button is in the sidebar. It broke if it was actually in the editor.
-// I couldn't find a good solution. I suspect its related to the way React handles event bubbling, and react-dnd listens for drag events.
-// Notes - Gutenberg calls e.preventDefault() for onDragStart on the block list component. If you remove this line, it all works fine.
+// So it worked fine if the button is in the sidebar, but it broke if it was actually in the editor.
+// I couldn't find a good solution.
+// I suspect its related to the way React handles event bubbling in portals, and that react-dnd is listening for drag events on window.
 // This is an alternative approach that keeps the modal completely independent from Gutenberg.
 // And you just trigger it with some globally available helpers.
 // Then, it cleans itself up on close or submit.
