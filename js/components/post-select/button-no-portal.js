@@ -11,7 +11,7 @@ const PostSelectButton = props => {
 		<Button
 			isLarge={true}
 			onClick={ () => {
-				hmPostSelect.init( props );
+				window.hmPostSelect( props );
 			} }
 		>{ props.children }</Button>
 	</div>
