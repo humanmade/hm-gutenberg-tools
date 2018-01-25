@@ -108,7 +108,7 @@ class PostSelectModal extends React.Component {
 							isLarge={true}
 							style={{ marginRight: '15px' }}
 							onClick={ () => this.setState( { contentState: 'selection' }) }
-						>View selection</Button> }
+						>View / Edit Selected Posts</Button> }
 						{ ( this.state.contentState !== 'browse' ) && <Button
 							isPrimary={false}
 							isLarge={true}
