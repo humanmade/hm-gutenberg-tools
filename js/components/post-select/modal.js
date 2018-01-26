@@ -3,18 +3,33 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 import _get from 'lodash/get';
 import _uniqueId from 'lodash/uniqueId';
-import _pull from 'lodash/pull';
+import _indexOf from 'lodash/indexOf';
 import classNames from 'classnames';
 
-import PostSelectUI from './post-select-ui';
+import PostSelectBrowse from './browse';
+import PostSelectSelection from './selection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostSelectModal extends React.Component {
+	static defaultProps = {
+		minPosts: 1,
+		maxPosts: 1,
+		collectionType: 'Posts',
+	}
+
+	static propTypes = {
+		collectionType: PropTypes.string,
+		minPosts: PropTypes.number,
+		maxPosts: PropTypes.number,
+		onSelect: PropTypes.func.isRequired,
+		onClose: PropTypes.func.isRequired,
+	}
+
 	state = {
 		selectedPosts: [],
-		contentState: 'list',
+		contentState: 'browse',
 	}
 
 	constructor( props ) {
@@ -30,13 +45,28 @@ class PostSelectModal extends React.Component {
 		this.state.selectedPosts = new Collection();
 
 		if ( props.value && props.value.length > 0 ) {
-			this.state.selectedPosts.add( props.value.map( id => { return { id } } ) );
-			this.state.selectedPosts.each( post => post.fetch() );
+			this.state.selectedPosts.comparator = post => _indexOf( props.value, post.id );
+
+			this.state.selectedPosts.fetch( {
+				hmCache: 120,
+				data: { per_page: props.value.length, filter: { include: props.value } }
+			} ).then( () => {
+				this.mounted && this.forceUpdate()
+			} );
 		}
 	}
 
+	componentDidMount() {
+		this.mounted = true;
+		this.modalEl.focus();
+	}
+
+	componentWillUnmount() {
+		this.mounted = false;
+	}
+
 	render() {
-		const { isLoading, selectedPosts } = this.state;
+		const { isLoading } = this.state;
 
 		const {
 			onClose,
@@ -47,7 +77,11 @@ class PostSelectModal extends React.Component {
 
 		return <div className="post-select post-select-modal">
 			<div className="media-modal-backdrop"></div>
-			<div className="modal media-modal wp-core-ui">
+			<div
+				className="modal media-modal wp-core-ui"
+				ref={ el => { this.modalEl = el } }
+				tabIndex="0"
+			>
 				<Button
 					className="media-modal-close"
 					onClick={ () => onClose() }
@@ -58,18 +92,35 @@ class PostSelectModal extends React.Component {
 					<h1>{ modalTitle }</h1>
 				</div>
 				<div className="media-modal-content">
-					<PostSelectUI
+					{ ( this.state.contentState === 'browse' ) && <PostSelectBrowse
 						{ ...this.state }
 						collectionType={ collectionType }
 						togglePostSelected={ post => this.togglePostSelected( post ) }
-					/>
+					/> }
+					{ ( this.state.contentState === 'selection' ) && <PostSelectSelection
+						selectedPosts={ this.state.selectedPosts.toJSON() }
+						onUpdateSelection={ newSelectionOrder => this.updateSelectionOrder( newSelectionOrder ) }
+						onRemoveItem={ post => this.togglePostSelected( post ) }
+					/> }
 				</div>
 				<div className="media-frame-toolbar">
 					<div className="media-toolbar">
+						{ ( this.state.contentState !== 'selection' ) && <Button
+							isPrimary={false}
+							isLarge={true}
+							style={{ marginRight: '15px' }}
+							onClick={ () => this.setState( { contentState: 'selection' }) }
+						>View / Edit Selected Posts</Button> }
+						{ ( this.state.contentState !== 'browse' ) && <Button
+							isPrimary={false}
+							isLarge={true}
+							style={{ marginRight: '15px' }}
+							onClick={ () => this.setState( { contentState: 'browse' }) }
+						>Browse posts</Button> }
 						<Button
 							isPrimary={true}
 							isLarge={true}
-							onClick={ () => onSelect( selectedPosts.toJSON() ) }
+							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
 						>Select</Button>
 					</div>
 				</div>
@@ -80,7 +131,6 @@ class PostSelectModal extends React.Component {
 	togglePostSelected( post ) {
 		const { selectedPosts } = this.state;
 		const { maxPosts } = this.props;
-
 		const newSelectedPosts = selectedPosts.clone();
 
 		if ( selectedPosts.findWhere({ id: post.id  }) ) {
@@ -91,19 +141,15 @@ class PostSelectModal extends React.Component {
 
 		this.setState( { selectedPosts: newSelectedPosts } );
 	}
-}
 
-PostSelectModal.defaultProps = {
-	minPosts: 1,
-	maxPosts: 1,
-	collectionType: 'Posts',
-}
+	updateSelectionOrder( newSelectionOrder ) {
+		const newSelectedPosts = this.state.selectedPosts.clone();
 
-PostSelectModal.propTypes = {
-	minPosts: PropTypes.number.isRequired,
-	maxPosts: PropTypes.number.isRequired,
-	onSelect: PropTypes.func.isRequired,
-	onClose: PropTypes.func.isRequired,
+		newSelectedPosts.comparator = post => _indexOf( newSelectionOrder, post.id );
+		newSelectedPosts.sort();
+
+		this.setState( { selectedPosts: newSelectedPosts } );
+	}
 }
 
 export default PostSelectModal;

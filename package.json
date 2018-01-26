@@ -28,6 +28,7 @@
     "chokidar-cli": "^1.2.0",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
+    "cross-env": "^5.*",
     "eslint": "^3.19.0",
     "eslint-config-humanmade": "^0.2.0",
     "eslint-config-react-app": "^0.5.2",
@@ -36,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^6.10.3",
     "html-to-react": "^1.3.2",
+    "immutability-helper": "^2.6.4",
     "node-sass": "^4.7.2",
     "node-sass-chokidar": "0.0.3",
     "object-hash": "^1.2.0",
@@ -44,7 +46,10 @@
     "prop-types": "^15.6.0",
     "react-select": "^1.1.0",
     "react-wp-scripts": "^0.1.1",
-    "webpack": "^3.10.0",
-	"cross-env": "^5.*"
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "react-dnd": "^2.5.4",
+    "react-dnd-html5-backend": "^2.5.4"
   }
 }

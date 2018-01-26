@@ -22,17 +22,17 @@ class PostSelectButton extends React.Component {
 			value = [],
 			minPosts = 1,
 			maxPosts = 1,
+			btnProps = {}
 		} = this.props;
 
 		const { modalVisible } = this.state;
 
 		const onClose = () => this.setState( { modalVisible: false } );
 
+		btnProps.onClick = () => this.setState( { modalVisible: true } );
+
 		return <div className="post-select">
-			<Button
-				isLarge={true}
-				onClick={ () => this.setState( { modalVisible: true } ) }
-			>{ children }</Button>
+			<Button { ...btnProps }>{ children }</Button>
 			{ modalVisible && (
 				ReactDOM.createPortal(
 					<PostSelectModal

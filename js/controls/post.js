@@ -23,7 +23,7 @@ class PostControl extends React.Component {
 		posts: [],
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		const { value = [], postSelectProps = {} } = this.props;
 
 		// Load current state.
@@ -32,7 +32,7 @@ class PostControl extends React.Component {
 			const collection = new wp.api.collections[ Collection ]();
 
 			this.setState({ isLoading: true });
-			collection.fetch( { data: { per_page: value.length, filter: { include: value } } } )
+			collection.fetch( { hmCache: 120, data: { per_page: value.length, filter: { include: value } } } )
 				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
 		}
 	}
@@ -49,19 +49,14 @@ class PostControl extends React.Component {
 			help,
 			onChange,
 			value = [],
-			postSelectProps = {},
+			postSelectProps = { btnProps: {} },
 			btnText = __( 'Select post' ),
 		} = this.props;
 
-		return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
-			{ isLoading && <Spinner /> }
-			{ ( ! isLoading && posts.length > 0 ) && (
-				<ul>
-					{ this.state.posts.map( post => {
-						return <li key={ post.id }>{ post.title.rendered }</li>
-					} ) }
-				</ul>
-			) }
+		postSelectProps.btnProps = postSelectProps.btnProps || {};
+		postSelectProps.btnProps.isLarge = true;
+
+		return <InspectorControls.BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
 			<PostSelectButton
 				{ ...postSelectProps }
 				value={ value }
@@ -70,6 +65,17 @@ class PostControl extends React.Component {
 					onChange( posts );
 				} }
 			>{ btnText }</PostSelectButton>
+			{ ( value.length > 0 ) && <div className="hm-post-control-current-selection">
+				<p>Current Selection</p>
+				{ isLoading && <Spinner style={ { float: 'none' } } /> }
+				{ ( ! isLoading && posts.length ) && (
+					<ul className="hm-post-select-control-list">
+						{ this.state.posts.map( post => {
+							return <li key={ post.id }>{ post.title.rendered }</li>
+						} ) }
+					</ul>
+				) }
+			</div> }
 		</InspectorControls.BaseControl>
 	}
 }
