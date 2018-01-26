@@ -6,7 +6,7 @@ import flow from 'lodash/flow';
 import classNames from 'classnames';
 import wp from 'wp';
 
-const { Button } = wp.components;
+const { Button, Dashicon } = wp.components;
 
 class Item extends Component {
 	static propTypes = {
@@ -29,7 +29,10 @@ class Item extends Component {
 			<li className={ cssClass }>
 				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
 				<div className="post-select-result-meta">Type, Date, author</div>
-				<Button onClick={ () => removeItem() } isSmall={ true }>Remove</Button>
+				<Button className="post-list-item-remove" onClick={ () => removeItem() } isSmall={ true }>
+					<Dashicon icon="dismiss" />
+					<span class="screen-reader-text">Remove</span>
+				</Button>
 			</li>
 		) );
 	}

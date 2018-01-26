@@ -134,6 +134,19 @@
 
 .sortable-post-list .post-list-item {
 	cursor: move;
+	padding-right: 60px;
+}
+
+.post-list-item-remove {
+	position: absolute;
+	top: 50%;
+	right: 20px;
+	margin-top: -10px;
+	opacity: 0.6;
+
+	&:hover {
+		opacity: 1;
+	}
 }
 
 .post-select .media-frame-toolbar {
