@@ -66,11 +66,11 @@ class PostControl extends React.Component {
 				} }
 			>{ btnText }</PostSelectButton>
 			{ ( value.length > 0 ) && <div className="hm-post-control-current-selection">
-				<p>Current Selection</p>
+				<p>{ __( 'Current Selection' ) }</p>
 				{ isLoading && <Spinner style={ { float: 'none' } } /> }
-				{ ( ! isLoading && posts.length ) && (
+				{ ( ! isLoading && posts.length > 0 ) && (
 					<ul className="hm-post-select-control-list">
-						{ this.state.posts.map( post => {
+						{ posts.map( post => {
 							return <li key={ post.id }>{ post.title.rendered }</li>
 						} ) }
 					</ul>
