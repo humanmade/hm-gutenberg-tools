@@ -48,7 +48,7 @@ class PostSelectModal extends React.Component {
 			this.state.selectedPosts.comparator = post => _indexOf( props.value, post.id );
 
 			this.state.selectedPosts.fetch( {
-				hmCache: 30,
+				hmCache: 120,
 				data: { per_page: props.value.length, filter: { include: props.value } }
 			} ).then( () => {
 				this.mounted && this.forceUpdate()
@@ -100,6 +100,7 @@ class PostSelectModal extends React.Component {
 					{ ( this.state.contentState === 'selection' ) && <PostSelectSelection
 						selectedPosts={ this.state.selectedPosts.toJSON() }
 						onUpdateSelection={ newSelectionOrder => this.updateSelectionOrder( newSelectionOrder ) }
+						onRemoveItem={ post => this.togglePostSelected( post ) }
 					/> }
 				</div>
 				<div className="media-frame-toolbar">
@@ -130,7 +131,6 @@ class PostSelectModal extends React.Component {
 	togglePostSelected( post ) {
 		const { selectedPosts } = this.state;
 		const { maxPosts } = this.props;
-
 		const newSelectedPosts = selectedPosts.clone();
 
 		if ( selectedPosts.findWhere({ id: post.id  }) ) {
@@ -143,9 +143,8 @@ class PostSelectModal extends React.Component {
 	}
 
 	updateSelectionOrder( newSelectionOrder ) {
-		const { selectedPosts } = this.state;
+		const newSelectedPosts = this.state.selectedPosts.clone();
 
-		let newSelectedPosts = selectedPosts.clone();
 		newSelectedPosts.comparator = post => _indexOf( newSelectionOrder, post.id );
 		newSelectedPosts.sort();
 

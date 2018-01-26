@@ -4,6 +4,9 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import classNames from 'classnames';
+import wp from 'wp';
+
+const { Button } = wp.components;
 
 class Item extends Component {
 	static propTypes = {
@@ -14,10 +17,11 @@ class Item extends Component {
 		id: PropTypes.any.isRequired,
 		post: PropTypes.object.isRequired,
 		moveItem: PropTypes.func.isRequired,
+		removeItem: PropTypes.func.isRequired,
 	}
 
 	render() {
-		const { post, isDragging, connectDragSource, connectDropTarget } = this.props;
+		const { post, isDragging, connectDragSource, connectDropTarget, removeItem } = this.props;
 
 		const cssClass = classNames( 'post-list-item', { 'is-dragging': isDragging } );
 
@@ -25,6 +29,7 @@ class Item extends Component {
 			<li className={ cssClass }>
 				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
 				<div className="post-select-result-meta">Type, Date, author</div>
+				<Button onClick={ () => removeItem() } isSmall={ true }>Remove</Button>
 			</li>
 		) );
 	}

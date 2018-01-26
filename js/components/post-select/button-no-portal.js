@@ -7,9 +7,11 @@ const {
 } = wp.components;
 
 const PostSelectButton = props => {
+	const { btnProps = {} } = props;
+
 	return <div className="post-select">
 		<Button
-			isLarge={true}
+			{ ...btnProps }
 			onClick={ () => {
 				window.hmPostSelect( props );
 			} }

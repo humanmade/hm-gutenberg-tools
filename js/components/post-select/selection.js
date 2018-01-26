@@ -10,6 +10,7 @@ class PostSelectSelection extends React.Component {
 	static propTypes = {
 		selectedPosts: PropTypes.array.isRequired,
 		onUpdateSelection: PropTypes.func.isRequired,
+		onRemoveItem: PropTypes.func.isRequired,
 	}
 
 	render() {
@@ -17,6 +18,7 @@ class PostSelectSelection extends React.Component {
 			id={ _uniqueId() }
 			posts={ this.props.selectedPosts }
 			onSort={ newSelectionOrder => this.props.onUpdateSelection( newSelectionOrder ) }
+			onRemoveItem={ this.props.onRemoveItem }
 		/>
 	}
 }

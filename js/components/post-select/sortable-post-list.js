@@ -12,41 +12,24 @@ class SortablePostList extends Component {
 		id: PropTypes.string.isRequired,
 		posts: PropTypes.array.isRequired,
 		onSort: PropTypes.func.isRequired,
+		onRemoveItem: PropTypes.func.isRequired,
 	}
 
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			posts: props.posts
-		};
-	}
-
-	componentDidUpdate( prevProps, prevState ) {
-		const oldOrder = prevState.posts.map( p => p.id );
-		const newOrder = this.state.posts.map( p => p.id );
-
-		if ( ! _isEqual( oldOrder, newOrder ) ) {
-			this.props.onSort( newOrder );
-		}
-	}
-
-	moveItem(dragIndex, hoverIndex) {
-		const { posts } = this.state;
+	moveItem( dragIndex, hoverIndex ) {
+		const { posts, onSort } = this.props;
 		const dragItem = posts[dragIndex];
 
-		this.setState( update( this.state, {
-			posts: {
-				$splice: [
-					[dragIndex, 1],
-					[hoverIndex, 0, dragItem]
-				]
-			}
-		} ) );
+		const newOrder = update( posts, { $splice: [
+				[dragIndex, 1],
+				[hoverIndex, 0, dragItem]
+			] }
+		);
+
+		onSort( newOrder.map( p => p.id ) );
 	}
 
 	render() {
-		const { posts } = this.state;
+		const { posts, onRemoveItem } = this.props;
 
 		return <ol className="post-list sortable-post-list">
 			{ posts.map( ( post, i ) => <Item
@@ -55,6 +38,7 @@ class SortablePostList extends Component {
 				index={ i }
 				post={ post }
 				moveItem={ this.moveItem.bind( this ) }
+				removeItem={ () => onRemoveItem( post ) }
 			/> ) }
 		</ol>
   }
