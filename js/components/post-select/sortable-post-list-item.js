@@ -31,7 +31,7 @@ class Item extends Component {
 				<div className="post-select-result-meta">Type, Date, author</div>
 				<Button className="post-list-item-remove" onClick={ () => removeItem() } isSmall={ true }>
 					<Dashicon icon="dismiss" />
-					<span class="screen-reader-text">Remove</span>
+					<span className="screen-reader-text">Remove</span>
 				</Button>
 			</li>
 		) );
