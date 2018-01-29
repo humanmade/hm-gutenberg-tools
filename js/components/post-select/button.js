@@ -54,6 +54,8 @@ class PostSelectButton extends React.Component {
 PostSelectButton.propTypes = {
 	btnText: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
+	postType: PropTypes.string,
+	termFilters: PropTypes.object,
 }
 
 export default PostSelectButton;
