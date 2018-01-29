@@ -39,7 +39,7 @@ To use the simple button, use the react component `hm.components.PostSelectButto
 const { PostSelectButton } = hm.components;
 
 <PostSelectButton 
-    onSelect={ value => this.setAttributes( { value }) }
+    onSelect={ value => this.setAttributes( { value } ) }
     postType="page" 
     btnProps={ { isLarge: true } }
 />
