@@ -7,7 +7,6 @@ import _isEqual from 'lodash/isEqual';
 
 import PostSelectBrowseFilters from './browse-filters';
 import PostList from './post-list';
-import termFilters from './term-filters';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -37,11 +36,12 @@ class PostSelectBrowse extends React.Component {
 
 	render() {
 		const { posts, isLoading } = this.state;
-		const { selectedPosts, togglePostSelected } = this.props;
+		const { selectedPosts, togglePostSelected, termFilters } = this.props;
 
 		return <div className="menu-container">
 			<div className="menu">
 				<PostSelectBrowseFilters
+					termFilters={ termFilters }
 					onUpdate={ filters => this.setState( { filters } ) }
 				/>
 			</div>
@@ -78,7 +78,7 @@ class PostSelectBrowse extends React.Component {
 			args.search = search;
 		}
 
-		termFilters.forEach( termFilter => {
+		this.props.termFilters.forEach( termFilter => {
 			const terms = _get( this.state, `filters.${termFilter.slug}` );
 			if ( terms ) {
 				args[ termFilter.rest ] = terms.join(',');

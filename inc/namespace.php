@@ -27,4 +27,32 @@ function enqueue_block_editor_assets() {
 		[],
 		filemtime( HM_GB_TOOLS_DIR . '/build/editor.css' )
 	);
+
+	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
+		'postTypeTaxonomies' => get_post_type_taxonomies(),
+	] );
+}
+
+/**
+ * Get taxonomies for each public post type.
+ *
+ * Used by the post select UI display filters.
+ *
+ * @return array.
+ */
+function get_post_type_taxonomies() {
+	$post_types = get_post_types();
+
+	$data = array_combine( $post_types, array_map( function( $post_type ) {
+		return array_values( array_filter( array_map( function( $tax ) {
+			if ( isset( $tax->show_in_rest ) && $tax->show_in_rest ) {
+				return [
+					'slug' => $tax->name,
+					'label' => $tax->label,
+				];
+			}
+		}, get_object_taxonomies( $post_type, 'object' ) ) ) );
+	}, $post_types ) );
+
+	return apply_filters( 'hm_gb_tools_post_type_taxonomies', $data );
 }

@@ -6,6 +6,8 @@ import _uniqueId from 'lodash/uniqueId';
 import _indexOf from 'lodash/indexOf';
 import classNames from 'classnames';
 
+import getPostTypeCollection from '../../utils/get-post-type-collection';
+import getPostTypeTaxFilters from '../../utils/get-post-type-tax-filters';
 import PostSelectBrowse from './browse';
 import PostSelectSelection from './selection';
 
@@ -16,11 +18,11 @@ class PostSelectModal extends React.Component {
 	static defaultProps = {
 		minPosts: 1,
 		maxPosts: 1,
-		collectionType: 'Posts',
+		postType: 'post',
 	}
 
 	static propTypes = {
-		collectionType: PropTypes.string,
+		postType: PropTypes.string,
 		minPosts: PropTypes.number,
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
@@ -36,11 +38,7 @@ class PostSelectModal extends React.Component {
 		super( props );
 		this.id = _uniqueId( 'post-select-modal' );
 
-		const Collection = _get(
-			wp.api.collections,
-			this.props.collectionType,
-			wp.api.collections.Posts
-		);
+		const Collection = getPostTypeCollection( this.props.postType ) || wp.api.collections.Posts;
 
 		this.state.selectedPosts = new Collection();
 
@@ -72,7 +70,8 @@ class PostSelectModal extends React.Component {
 			onClose,
 			modalTitle = __( 'Select a post' ),
 			onSelect,
-			collectionType,
+			postType,
+			termFilters = getPostTypeTaxFilters( this.props.postType ),
 		} = this.props;
 
 		return <div className="post-select post-select-modal">
@@ -94,8 +93,9 @@ class PostSelectModal extends React.Component {
 				<div className="media-modal-content">
 					{ ( this.state.contentState === 'browse' ) && <PostSelectBrowse
 						{ ...this.state }
-						collectionType={ collectionType }
+						postType={ postType }
 						togglePostSelected={ post => this.togglePostSelected( post ) }
+						termFilters={ termFilters }
 					/> }
 					{ ( this.state.contentState === 'selection' ) && <PostSelectSelection
 						selectedPosts={ this.state.selectedPosts.toJSON() }
