@@ -81,8 +81,10 @@ class PostSelectBrowse extends React.Component {
 
 		this.props.termFilters.forEach( termFilter => {
 			const terms = _get( this.state, `filters.${termFilter.slug}` );
-			if ( terms ) {
+			if ( terms && terms.length > 0 ) {
 				args[ termFilter.rest ] = terms.join(',');
+			} else {
+				delete args[ termFilter.rest ];
 			}
 		} );
 
