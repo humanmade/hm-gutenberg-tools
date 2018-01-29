@@ -49,7 +49,7 @@ var PostSelectButton = hm.components.PostSelectButton;
 
 React.createElement( PostSelectButton, {
     onSelect: function( value ) { setAttributes( { value: value } ) }, 
-    postType: 'page', Default is post.
+    postType: 'page',
     btnProps: { isLarge: true }, 
 );
 ```
