@@ -5,6 +5,7 @@ import _get from 'lodash/get';
 import _extend from 'lodash/extend';
 import _isEqual from 'lodash/isEqual';
 
+import getPostTypeCollection from '../../utils/get-post-type-collection';
 import PostSelectBrowseFilters from './browse-filters';
 import PostList from './post-list';
 
@@ -91,17 +92,14 @@ class PostSelectBrowse extends React.Component {
 	initPostsCollection() {
 		this.setState({ isLoading: true });
 
-		const Collection = _get(
-			wp.api.collections,
-			this.props.collectionType,
-			wp.api.collections.Posts
-		);
-
+		const Collection = getPostTypeCollection( this.props.postType ) || wp.api.collections.Posts;
 		this.postsCollection = new Collection();
 
-		this.postsCollection.on( 'add remove update change destroy reset sort', () => this.setState({
-			posts: this.postsCollection.toJSON()
-		}));
+		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
+			this.setState({
+				posts: this.postsCollection.toJSON()
+			}
+		)});
 
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.postsCollection.on( 'sync', () => this.setState( { isLoading: false } ) );

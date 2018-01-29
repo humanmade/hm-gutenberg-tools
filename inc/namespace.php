@@ -47,8 +47,9 @@ function get_post_type_taxonomies() {
 		return array_values( array_filter( array_map( function( $tax ) {
 			if ( isset( $tax->show_in_rest ) && $tax->show_in_rest ) {
 				return [
-					'slug' => $tax->name,
+					'slug'  => $tax->name,
 					'label' => $tax->label,
+					'rest'  => ! empty( $tax->rest_base ) ? $tax->rest_base : $tax->name,
 				];
 			}
 		}, get_object_taxonomies( $post_type, 'object' ) ) ) );
