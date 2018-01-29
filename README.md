@@ -34,17 +34,10 @@ There are 2 components you can use for this. The first is a simple button, the s
 
 To use the simple button, use the react component `hm.components.PostSelectButton`. Its probably worth creating a reference to make this easier to use.
 
-```
+```js
 // ES6
 const { PostSelectButton } = hm.components;
-// ES5
-var PostSelectButton = hm.components.PostSelectButton;
-```
 
-Then you can just use this component in your code. You need to provide the following props.
-
-```js
-// ES6/JSX
 <PostSelectButton 
     onSelect={ value => this.setAttributes( { value }) }
     postType="page" 
@@ -52,20 +45,22 @@ Then you can just use this component in your code. You need to provide the follo
 />
 
 // ES5
+var PostSelectButton = hm.components.PostSelectButton;
+
 React.createElement( PostSelectButton, {
     onSelect: function( value ) { this.setAttributes( { value }) }.bind( this ), 
     postType: 'page', Default is post.
     btnProps: { isLarge: true }, 
 );
-
-// Information on props.
-// onSelect. Function. Required. Called when the 'select' button is clicked and posts are selected.
-// postType String. Post type. Supports custom post types as long as they are configured to show in the REST API. 
-// btnProps. Object. Optional. Props passed to the Gutenberg Button component. Refer to this for more info on what is supported. If you don't pass anything here, your button will have no visual appearance - which is useful if you want to make part of your UI clickable and trigger the modal. 
-// termFilters. Array. What filters are supported. By default this is all public taxonomies for this post type, so you probably don't need this. If you do, each item in the filters array needs the following data { slug: 'publisher', 'label': 'Publishers', rest: 'publisher'  }
 ```
 
-Optionsl 
+**Information on props**
+* **onSelect** Function. Required. Called when the 'select' button is clicked and posts are selected.
+* **postType** String. Post type. Supports custom post types as long as they are configured to show in the REST API. 
+* **btnProps** Object. Optional. Props passed to the Gutenberg Button component. Refer to this for more info on what is supported. If you don't pass anything here, your button will have no visual appearance - which is useful if you want to make part of your UI clickable and trigger the modal. 
+* **termFilters** Array. What filters are supported. By default this is all public taxonomies for this post type, so you probably don't need this. If you do, each item in the filters array needs the following data `{ slug: 'publisher', 'label': 'Publishers', rest: 'publisher' }`
+
+The sidebar control accepts slightly different properties.
 
 ## Development
 
