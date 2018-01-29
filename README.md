@@ -51,7 +51,7 @@ React.createElement( PostSelectButton, {
     onSelect: function( value ) { setAttributes( { value: value } ) }, 
     postType: 'page',
     btnProps: { isLarge: true }, 
-);
+} );
 ```
 
 **Information on props**
