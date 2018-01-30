@@ -56,9 +56,9 @@ React.createElement( PostSelectButton, {
 
 **Information on props**
 * **onSelect** Function. Required. Called when the 'select' button is clicked and posts are selected.
-* **postType** String. Post type. Supports custom post types as long as they are configured to show in the REST API. 
-* **btnProps** Object. Optional. Props passed to the Gutenberg Button component. Refer to this for more info on what is supported. If you don't pass anything here, your button will have no visual appearance - which is useful if you want to make part of your UI clickable and trigger the modal. 
-* **termFilters** Array. What filters are supported. By default this is all public taxonomies for this post type, so you probably don't need this. If you do, each item in the filters array needs the following data `{ slug: 'publisher', 'label': 'Publishers', rest: 'publisher' }`
+* **postType** String. Post type. Supports a single custom post types as long as they are configured to show in the REST API. 
+* **btnProps** Object. Optional. Props passed to the Gutenberg core Button component. Refer to the documentation/code for that component for more info on what is supported. If you don't pass anything here, your button will have no visual appearance - which is useful if you want to make part of your UI clickable and trigger the modal. Otherwise, you should pass `isLarge:true` to give it the appearance of a button.
+* **termFilters** Array. What taxonomy filters are supported in the browse view. If not provided, this defaults to all public taxonomies for this post type, so unless you need to change this, don't worry about seeting this property. Each item in the filters array needs the following data `{ slug: 'publisher', 'label': 'Publishers', rest: 'publisher' }`
 
 The sidebar control accepts slightly different properties.
 
