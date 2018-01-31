@@ -28,39 +28,7 @@ HM Gutenberg Tools automatically loads its JS when the Gutenberg editor loads, a
 
 ![image](https://user-images.githubusercontent.com/494927/35505702-d334667e-04de-11e8-8afc-4e21b1f83138.png)
 
-**Usage**
-
-There are 2 components you can use for this. The first is a simple button, the second is a block sidebar control.
-
-To use the simple button, use the react component `hm.components.PostSelectButton`. Its probably worth creating a reference to make this easier to use.
-
-```js
-// ES6
-const { PostSelectButton } = hm.components;
-
-<PostSelectButton 
-    onSelect={ value => setAttributes( { value } ) }
-    postType="page" 
-    btnProps={ { isLarge: true } }
-/>
-
-// ES5
-var PostSelectButton = hm.components.PostSelectButton;
-
-React.createElement( PostSelectButton, {
-    onSelect: function( value ) { setAttributes( { value: value } ) }, 
-    postType: 'page',
-    btnProps: { isLarge: true }, 
-} );
-```
-
-**Information on props**
-* **onSelect** Function. Required. Called when the 'select' button is clicked and posts are selected.
-* **postType** String. Post type. Supports a single custom post types as long as they are configured to show in the REST API. 
-* **btnProps** Object. Optional. Props passed to the Gutenberg core Button component. Refer to the documentation/code for that component for more info on what is supported. If you don't pass anything here, your button will have no visual appearance - which is useful if you want to make part of your UI clickable and trigger the modal. Otherwise, you should pass `isLarge:true` to give it the appearance of a button.
-* **termFilters** Array. What taxonomy filters are supported in the browse view. If not provided, this defaults to all public taxonomies for this post type, so unless you need to change this, don't worry about seeting this property. Each item in the filters array needs the following data `{ slug: 'publisher', 'label': 'Publishers', rest: 'publisher' }`
-
-The sidebar control accepts slightly different properties.
+[Refer to the wiki for more information on how to use this component.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Modal)
 
 ## Development
 
