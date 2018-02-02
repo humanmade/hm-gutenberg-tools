@@ -4,6 +4,7 @@ import wp from 'wp';
 import _get from 'lodash/get';
 
 import PostSelectButton from '../components/post-select/button';
+import getPostTypeCollection from '../utils/get-post-type-collection';
 
 const {
 	InspectorControls,
@@ -28,11 +29,12 @@ class PostControl extends React.Component {
 
 		// Load current state.
 		if ( value.length > 1 && this.state.posts.length < 1 ) {
-			const Collection = _get( postSelectProps, 'collectionType', 'Posts' );
-			const collection = new wp.api.collections[ Collection ]();
+			const postType   = _get( postSelectProps, 'postType', 'post' );
+			const Collection = getPostTypeCollection( postType );
+			const collection = new Collection();
 
 			this.setState({ isLoading: true });
-			collection.fetch( { hmCache: 120, data: { per_page: value.length, filter: { include: value } } } )
+			collection.fetch( { hmCache: 120, data: { per_page: value.length, include: value } } )
 				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
 		}
 	}
