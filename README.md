@@ -15,14 +15,18 @@ A place to bundle useful reusable Gutenberg components and other tools.
 
 Install as a plugin, mu-plugin, or you can include it in your theme/plugin. 
 
-Note that if you are including in a theme you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
+Note that if you are including in a theme (or anywhere outside of plugins/mu-plugins directories) you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
 
 ```
 	define( 'HM_GB_TOOLS_DIR', get_stylesheet_directory() . '/lib/hm-gutenberg-tools' );
 	define( 'HM_GB_TOOLS_URL', get_stylesheet_directory_uri() . '/lib/hm-gutenberg-tools' );
 ```
 
-HM Gutenberg Tools automatically loads its JS when the Gutenberg editor loads, and then exposes the components globally as `window.hm`. You can then use these in your project in much the the same way that you would use any other components from Gutenberg.
+Then you should specify the script `hm-gb-tools-editor` as a dependency of the script in which you are using it.
+
+HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You can then use reference this in your project in much the the same way that you would use any other components from Gutenberg.
+
+[Refer to the Wiki for usage instructions on individual components](https://github.com/humanmade/hm-gutenberg-tools/wiki)
 
 ## Post Select UI
 
