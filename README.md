@@ -15,6 +15,8 @@ A place to bundle useful reusable Gutenberg components and other tools.
 
 Install as a plugin, mu-plugin, or you can include it in your theme/plugin. 
 
+You will need to run `yarn && yarn build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
+
 Note that if you are including in a theme (or anywhere outside of plugins/mu-plugins directories) you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
 
 ```
