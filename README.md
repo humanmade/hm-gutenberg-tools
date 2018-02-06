@@ -8,9 +8,9 @@ A place to bundle useful reusable Gutenberg components and other tools.
 * [Post Select button](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button). Provides a media modal like user experience for selecting single or multiple posts. It supports searching, filtering, sorting and custom post types (and taxonomies).
 stying to work better in the sidebar.
 * More Sidebar controls. Other components wrapped up in as standardised sidebar control components.
-    * [Link control](https://github.com/humanmade/hm-gutenberg-tools/wiki/Link-Control). A wrapper for the core UrlInput, but with some style improvements.
-    * [Image](https://github.com/humanmade/hm-gutenberg-tools/wiki/Image-Control). These are just wrappers for the core gutenberg controls that make them work/appear a bit nicer in the sidebar.
-    * [Post](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button) A wrapper for the post select button component.
+    * [Link control.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Link-Control) A wrapper for the core UrlInput, but with some style improvements.
+    * [Image.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Image-Control) These are just wrappers for the core gutenberg controls that make them work/appear a bit nicer in the sidebar.
+    * [Post.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button) A wrapper for the post select button component.
 * [EditableHTML](https://github.com/humanmade/hm-gutenberg-tools/wiki/Editable-HTML): a wrapper for the core Gutenberg Editable component that allows you to store data as strings of HTML.
 
 ## Instructions
