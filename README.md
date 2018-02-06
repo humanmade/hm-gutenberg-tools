@@ -28,7 +28,7 @@ HM Gutenberg Tools automatically loads its JS when the Gutenberg editor loads, a
 
 ![image](https://user-images.githubusercontent.com/494927/35505702-d334667e-04de-11e8-8afc-4e21b1f83138.png)
 
-[Refer to the wiki for more information on how to use this component.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Modal)
+[Refer to the wiki for more information on how to use this component.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button)
 
 ## Development
 
