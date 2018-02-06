@@ -22,8 +22,8 @@ You will need to run `yarn && yarn build` in in the hm-gutenberg-tools directory
 Note that if you are including in a theme (or anywhere outside of plugins/mu-plugins directories) you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
 
 ```
-	define( 'HM_GB_TOOLS_DIR', get_stylesheet_directory() . '/lib/hm-gutenberg-tools' );
-	define( 'HM_GB_TOOLS_URL', get_stylesheet_directory_uri() . '/lib/hm-gutenberg-tools' );
+define( 'HM_GB_TOOLS_DIR', get_stylesheet_directory() . '/lib/hm-gutenberg-tools' );
+define( 'HM_GB_TOOLS_URL', get_stylesheet_directory_uri() . '/lib/hm-gutenberg-tools' );
 ```
 
 Then you should specify the script `hm-gb-tools-editor` as a dependency of the script in which you are using it.
