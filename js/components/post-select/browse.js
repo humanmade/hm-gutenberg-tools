@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import PropTypes from 'prop-types';
 import wp from 'wp';
 import _get from 'lodash/get';
 import _extend from 'lodash/extend';
