@@ -1,4 +1,5 @@
 const path = require( 'path' );
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
 	entry: {
@@ -21,16 +22,12 @@ module.exports = {
 						plugins: [
 							[
 								'transform-object-rest-spread',
-								{
-									useBuiltIns: true,
-								},
+								{ useBuiltIns: true },
 							],
 							'transform-class-properties',
 							[
 								'transform-react-jsx',
-								{
-									pragma: 'wp.element.createElement',
-								},
+								{ pragma: 'wp.element.createElement' },
 							],
 						],
 					},
@@ -51,4 +48,11 @@ module.exports = {
 		colors: true,
 	},
 	devtool: 'source-map',
+	plugins: [
+		new BundleAnalyzerPlugin({
+			analyzerMode: 'static',
+			openAnalyzer: false,
+			generateStatsFile: true,
+		})
+	]
 };
