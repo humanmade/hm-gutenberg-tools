@@ -1,5 +1,20 @@
 const path = require( 'path' );
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const isProduction = ( process.env.NODE_ENV === 'production' );
+
+const plugins = [];
+
+if ( ! isProduction ) {
+	plugins.push( new BundleAnalyzerPlugin({
+		analyzerMode: 'static',
+		openAnalyzer: false,
+	}));
+}
+
+if ( isProduction ) {
+	plugins.push( new UglifyJsPlugin() );
+}
 
 module.exports = {
 	entry: {
@@ -47,12 +62,6 @@ module.exports = {
 	stats: {
 		colors: true,
 	},
-	devtool: 'source-map',
-	plugins: [
-		new BundleAnalyzerPlugin({
-			analyzerMode: 'static',
-			openAnalyzer: false,
-			generateStatsFile: true,
-		})
-	]
+	devtool: isProduction ? false : 'source-map',
+	plugins,
 };
