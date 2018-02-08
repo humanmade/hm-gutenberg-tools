@@ -15,9 +15,9 @@ const { Spinner } = wp.components;
 
 class PostSelectBrowse extends React.Component {
 	state = {
-		posts: [],
+		posts:     [],
 		isLoading: false,
-		filters: {},
+		filters:   {},
 	}
 
 	componentWillMount() {
@@ -70,7 +70,7 @@ class PostSelectBrowse extends React.Component {
 
 	postCollectionFetchData() {
 		const args = {
-			page: 1,
+			page:     1,
 			per_page: 25,
 		};
 
@@ -82,7 +82,7 @@ class PostSelectBrowse extends React.Component {
 		this.props.termFilters.forEach( termFilter => {
 			const terms = _get( this.state, `filters.${termFilter.slug}` );
 			if ( terms && terms.length > 0 ) {
-				args[ termFilter.rest ] = terms.join(',');
+				args[ termFilter.rest ] = terms.join( ',' );
 			} else {
 				delete args[ termFilter.rest ];
 			}
@@ -92,16 +92,15 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	initPostsCollection() {
-		this.setState({ isLoading: true });
+		this.setState( { isLoading: true } );
 
 		const Collection = getPostTypeCollection( this.props.postType ) || wp.api.collections.Posts;
 		this.postsCollection = new Collection();
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
-			this.setState({
-				posts: this.postsCollection.toJSON()
-			}
-		)});
+			this.setState( { posts: this.postsCollection.toJSON() }
+		)
+		} );
 
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.postsCollection.on( 'sync', () => this.setState( { isLoading: false } ) );
@@ -114,7 +113,7 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	nextPostsPage( options = {} ) {
-		this.setState( { page: this.state.page += 1 });
+		this.setState( { page: this.state.page + 1 } );
 		options.hmCache = 30;
 		this.postsCollection.more( options );
 	}
@@ -126,7 +125,7 @@ class PostSelectBrowse extends React.Component {
 	 * @returns {*}.
 	 */
 	prevPostsPage( options = {} ) {
-		options.hmCache = 30,
+		options.hmCache = 30;
 		options.data  = options.data || {};
 		_extend( options.data, this.postCollectionFetchData() );
 
@@ -134,7 +133,7 @@ class PostSelectBrowse extends React.Component {
 			return false;
 		}
 
-		if ( null === this.postsCollection.state.currentPage || this.postsCollection.state.currentPage <= 1 ) {
+		if ( this.postsCollection.state.currentPage === null || this.postsCollection.state.currentPage <= 1 ) {
 			options.data.page = 1;
 		} else {
 			options.data.page = this.postsCollection.state.currentPage - 1;
@@ -158,7 +157,7 @@ class PostSelectBrowse extends React.Component {
 	 * @returns null|boolean.
 	 */
 	hasPrev() {
-		if ( null === this.postsCollection.state.currentPage ) {
+		if ( this.postsCollection.state.currentPage === null ) {
 			return null;
 		} else {
 			return ( this.postsCollection.state.currentPage > 1 );

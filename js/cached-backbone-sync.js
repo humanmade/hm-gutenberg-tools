@@ -1,3 +1,4 @@
+import Backbone from 'backbone'
 import _result from 'lodash/result';
 import hash from './utils/hash';
 
@@ -56,8 +57,8 @@ function cachedSync( method, model, options ) {
  * Replace backbone sync with a function that checks for hmCache option,
  * and uses the cachedSync function instead. Otherwise the default Backbone.sync is used.
  */
-Backbone.sync = function( method, model, options ) {
-	if ( 'read' === method && 'hmCache' in options && options.hmCache ) {
+Backbone.sync = function ( method, model, options ) {
+	if ( method === 'read' && 'hmCache' in options && options.hmCache ) {
 		return cachedSync.apply( this, [ method, model, options ] );
 	}
 	return _sync.apply( this, [ method, model, options ] );

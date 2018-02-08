@@ -6,9 +6,7 @@ const {
 	MediaUploadButton,
 } = wp.blocks;
 
-const {
-	Button,
-} = wp.components;
+const { Button } = wp.components;
 
 const { __ } = wp.i18n;
 

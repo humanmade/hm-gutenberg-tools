@@ -4,7 +4,6 @@ import wp from 'wp';
 import _get from 'lodash/get';
 import _uniqueId from 'lodash/uniqueId';
 import _indexOf from 'lodash/indexOf';
-import classNames from 'classnames';
 
 import getPostTypeCollection from '../../utils/get-post-type-collection';
 import getPostTypeTaxFilters from '../../utils/get-post-type-tax-filters';
@@ -26,12 +25,7 @@ class PostSelectModal extends React.Component {
 		minPosts: PropTypes.number,
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
-		onClose: PropTypes.func.isRequired,
-	}
-
-	state = {
-		selectedPosts: [],
-		contentState: 'browse',
+		onClose:  PropTypes.func.isRequired,
 	}
 
 	constructor( props ) {
@@ -39,19 +33,24 @@ class PostSelectModal extends React.Component {
 		this.id = _uniqueId( 'post-select-modal' );
 
 		const Collection = getPostTypeCollection( this.props.postType ) || wp.api.collections.Posts;
-
-		this.state.selectedPosts = new Collection();
+		const selectedPosts = new Collection();
 
 		if ( props.value && props.value.length > 0 ) {
-			this.state.selectedPosts.comparator = post => _indexOf( props.value, post.id );
+			selectedPosts.comparator = post => _indexOf( props.value, post.id );
 
-			this.state.selectedPosts.fetch( {
+			selectedPosts.fetch( {
 				hmCache: 120,
-				data: { per_page: props.value.length, include: props.value }
+				data:    { per_page: props.value.length, include: props.value },
 			} ).then( () => {
 				this.mounted && this.forceUpdate()
 			} );
 		}
+
+		this.state = {
+			selectedPosts: [],
+			contentState:  'browse',
+			selectedPosts,
+		};
 	}
 
 	componentDidMount() {
@@ -64,8 +63,6 @@ class PostSelectModal extends React.Component {
 	}
 
 	render() {
-		const { isLoading } = this.state;
-
 		const {
 			onClose,
 			modalTitle = __( 'Select a post' ),
@@ -78,7 +75,9 @@ class PostSelectModal extends React.Component {
 			<div className="media-modal-backdrop"></div>
 			<div
 				className="modal media-modal wp-core-ui"
-				ref={ el => { this.modalEl = el } }
+				ref={ el => {
+					this.modalEl = el
+				} }
 				tabIndex="0"
 			>
 				<Button
@@ -109,13 +108,13 @@ class PostSelectModal extends React.Component {
 							isPrimary={false}
 							isLarge={true}
 							style={{ marginRight: '15px' }}
-							onClick={ () => this.setState( { contentState: 'selection' }) }
+							onClick={ () => this.setState( { contentState: 'selection' } ) }
 						>View / Edit Selected Posts</Button> }
 						{ ( this.state.contentState !== 'browse' ) && <Button
 							isPrimary={false}
 							isLarge={true}
 							style={{ marginRight: '15px' }}
-							onClick={ () => this.setState( { contentState: 'browse' }) }
+							onClick={ () => this.setState( { contentState: 'browse' } ) }
 						>Browse posts</Button> }
 						<Button
 							isPrimary={true}
@@ -133,7 +132,7 @@ class PostSelectModal extends React.Component {
 		const { maxPosts } = this.props;
 		const newSelectedPosts = selectedPosts.clone();
 
-		if ( selectedPosts.findWhere({ id: post.id  }) ) {
+		if ( selectedPosts.findWhere( { id: post.id  } ) ) {
 			newSelectedPosts.remove( post.id );
 		} else if ( selectedPosts.length < maxPosts ) {
 			newSelectedPosts.push( post );

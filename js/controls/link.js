@@ -20,11 +20,11 @@ const LinkControl = ( { label, id, help, onChange, value } ) => {
 }
 
 LinkControl.propTypes = {
-	label: PropTypes.string.isRequired,
-	help: PropTypes.string,
-	id: PropTypes.string,
+	label:    PropTypes.string.isRequired,
+	help:     PropTypes.string,
+	id:       PropTypes.string,
 	onChange: PropTypes.func.isRequired,
-	value: PropTypes.string,
+	value:    PropTypes.string,
 }
 
 export default LinkControl;

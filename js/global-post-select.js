@@ -11,6 +11,9 @@
 // Its a bit hacky, but actually works OK.
 // I'd love to find a proper solution.
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 import PostSelectModal from './components/post-select/modal';
 
 const el = document.createElement( 'div' );

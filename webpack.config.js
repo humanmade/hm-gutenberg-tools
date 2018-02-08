@@ -1,15 +1,15 @@
 const path = require( 'path' );
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
+const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
 const isProduction = ( process.env.NODE_ENV === 'production' );
 
 const plugins = [];
 
 if ( ! isProduction ) {
-	plugins.push( new BundleAnalyzerPlugin({
+	plugins.push( new BundleAnalyzerPlugin( {
 		analyzerMode: 'static',
 		openAnalyzer: false,
-	}));
+	} ) );
 }
 
 if ( isProduction ) {
@@ -17,20 +17,18 @@ if ( isProduction ) {
 }
 
 module.exports = {
-	entry: {
-		editor: './js/editor.js',
-	},
+	entry: { editor: './js/editor.js', },
 	output: {
-		path: path.resolve( __dirname, 'build' ),
+		path:     path.resolve( __dirname, 'build' ),
 		filename: '[name].bundle.js',
 	},
 	module: {
 		rules: [
 			{
-				test: /\.(js|jsx|mjs)$/,
+				test:    /\.(js|jsx|mjs)$/,
 				exclude: /(node_modules|bower_components)/,
-				use: {
-					loader: 'babel-loader',
+				use:     {
+					loader:  'babel-loader',
 					options: {
 						babelrc: false,
 						presets: [ '@babel/preset-env', '@babel/preset-react' ],
@@ -51,17 +49,16 @@ module.exports = {
 		],
 	},
 	externals: {
-		jquery: 'jQuery',
-		react: 'React',
-		'react-dom': 'ReactDOM',
+		jquery:             'jQuery',
+		react:              'React',
+		'react-dom':        'ReactDOM',
 		'react-dom/server': 'ReactDOMServer',
-		tinymce: 'tinymce',
-		moment: 'moment',
-		wp: 'wp',
+		tinymce:            'tinymce',
+		moment:             'moment',
+		wp:                 'wp',
+		backbone:           'Backbone',
 	},
-	stats: {
-		colors: true,
-	},
+	stats:   { colors: true },
 	devtool: isProduction ? false : 'source-map',
 	plugins,
 };

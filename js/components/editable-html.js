@@ -1,3 +1,4 @@
+import wp from 'wp';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import HtmlToReactParser from 'html-to-react';
@@ -13,18 +14,14 @@ const { Editable } = wp.blocks;
  * It handles converting it to react, and back to a string.
  */
 class EditableHTML extends React.Component {
-	state = {
-		text: [],
-	}
-
-	constructor(props) {
-		super(props);
-		this.state.text = this.toEditableValue( _get( this.props, 'value' ) );
+	constructor( props ) {
+		super( props );
+		this.state = { text: this.toEditableValue( _get( this.props, 'value' ) ) };
 	}
 
 	componentDidUpdate( prevProps, prevState ) {
 		if ( ! _isEqual( _get( prevProps, 'value' ), _get( this.props, 'value' ) ) ) {
-			this.setState({text: this.toEditableValue( _get( this.props, 'value' ) ) });
+			this.setState( { text: this.toEditableValue( _get( this.props, 'value' ) ) } );
 		}
 
 		if ( ! _isEqual( _get( prevState, 'text' ), _get( this.state, 'text' ) ) ) {
@@ -35,7 +32,7 @@ class EditableHTML extends React.Component {
 	render() {
 		const props = {
 			...this.props,
-			value: this.state.text,
+			value:    this.state.text,
 			onChange: value => this.setState( { text: value } ),
 		}
 
@@ -56,8 +53,8 @@ class EditableHTML extends React.Component {
 	// Helper to convert react elements into array of strings.
 	fromEditableValue( value ) {
 		// Strip last item if br or empty.
-		if ( typeof value === 'array' && value.length > 1 ) {
-			let last = value.slice(-1)[0];
+		if ( Array.isArray( value ) && value.length > 1 ) {
+			let last = value.slice( -1 )[0];
 			if (
 				last === '' ||
 				( typeof last === 'object' && 'type' in last && last.type === 'br' )
