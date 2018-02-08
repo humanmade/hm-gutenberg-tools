@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'proptypes';
 import wp from 'wp';
 import _get from 'lodash/get';
 import _extend from 'lodash/extend';
@@ -18,7 +18,7 @@ class PostSelectBrowse extends React.Component {
 		posts:     [],
 		isLoading: false,
 		filters:   {},
-	}
+	};
 
 	componentWillMount() {
 		this.initPostsCollection();
@@ -99,7 +99,7 @@ class PostSelectBrowse extends React.Component {
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
 			this.setState( { posts: this.postsCollection.toJSON() }
-		)
+			)
 		} );
 
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
@@ -165,4 +165,14 @@ class PostSelectBrowse extends React.Component {
 	}
 }
 
+PostSelectBrowse.propTypes = {
+	postType:           PropTypes.string,
+	selectedPosts:      PropTypes.array,
+	togglePostSelected: PropTypes.func.isRequired,
+	termFilters:        PropTypes.arrayOf( PropTypes.shape( {
+		slug:  PropTypes.string.isRequired,
+		label: PropTypes.string.isRequired,
+		rest:  PropTypes.string.isRequired,
+	} ) ).isRequired,
+}
 export default PostSelectBrowse;

@@ -9,7 +9,7 @@ class PostSelectSelection extends React.Component {
 		selectedPosts:     PropTypes.array.isRequired,
 		onUpdateSelection: PropTypes.func.isRequired,
 		onRemoveItem:      PropTypes.func.isRequired,
-	}
+	};
 
 	render() {
 		return <SortablePostList

@@ -13,7 +13,7 @@ class SortablePostList extends Component {
 		posts:        PropTypes.array.isRequired,
 		onSort:       PropTypes.func.isRequired,
 		onRemoveItem: PropTypes.func.isRequired,
-	}
+	};
 
 	moveItem( dragIndex, hoverIndex ) {
 		const { posts, onSort } = this.props;

@@ -10,7 +10,7 @@ const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostSelectButton extends React.Component {
-	state = { modalVisible: false }
+	state = { modalVisible: false };
 
 	render(){
 		const {

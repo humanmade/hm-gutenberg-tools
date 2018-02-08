@@ -19,7 +19,7 @@ class PostControl extends React.Component {
 	state = {
 		isLoading: false,
 		posts:     [],
-	}
+	};
 
 	componentDidMount() {
 		const { value = [], postSelectProps = {} } = this.props;

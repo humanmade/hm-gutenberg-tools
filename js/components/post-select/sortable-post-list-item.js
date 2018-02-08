@@ -18,7 +18,7 @@ class Item extends Component {
 		post:              PropTypes.object.isRequired,
 		moveItem:          PropTypes.func.isRequired,
 		removeItem:        PropTypes.func.isRequired,
-	}
+	};
 
 	render() {
 		const { post, isDragging, connectDragSource, connectDropTarget, removeItem } = this.props;

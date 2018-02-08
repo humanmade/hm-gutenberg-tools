@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import wp from 'wp';
 
 const { Button } = wp.components;
 

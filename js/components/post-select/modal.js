@@ -18,7 +18,7 @@ class PostSelectModal extends React.Component {
 		minPosts: 1,
 		maxPosts: 1,
 		postType: 'post',
-	}
+	};
 
 	static propTypes = {
 		postType: PropTypes.string,
@@ -26,7 +26,7 @@ class PostSelectModal extends React.Component {
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
 		onClose:  PropTypes.func.isRequired,
-	}
+	};
 
 	constructor( props ) {
 		super( props );
@@ -47,8 +47,7 @@ class PostSelectModal extends React.Component {
 		}
 
 		this.state = {
-			selectedPosts: [],
-			contentState:  'browse',
+			contentState: 'browse',
 			selectedPosts,
 		};
 	}
@@ -132,7 +131,7 @@ class PostSelectModal extends React.Component {
 		const { maxPosts } = this.props;
 		const newSelectedPosts = selectedPosts.clone();
 
-		if ( selectedPosts.findWhere( { id: post.id  } ) ) {
+		if ( selectedPosts.findWhere( { id: post.id } ) ) {
 			newSelectedPosts.remove( post.id );
 		} else if ( selectedPosts.length < maxPosts ) {
 			newSelectedPosts.push( post );

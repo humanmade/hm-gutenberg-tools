@@ -9,7 +9,7 @@ const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
-	state = { category: [] }
+	state = { category: [] };
 
 	constructor( props ) {
 		super( props );
