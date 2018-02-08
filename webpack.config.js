@@ -1,4 +1,20 @@
 const path = require( 'path' );
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const isProduction = ( process.env.NODE_ENV === 'production' );
+
+const plugins = [];
+
+if ( ! isProduction ) {
+	plugins.push( new BundleAnalyzerPlugin({
+		analyzerMode: 'static',
+		openAnalyzer: false,
+	}));
+}
+
+if ( isProduction ) {
+	plugins.push( new UglifyJsPlugin() );
+}
 
 module.exports = {
 	entry: {
@@ -21,16 +37,12 @@ module.exports = {
 						plugins: [
 							[
 								'transform-object-rest-spread',
-								{
-									useBuiltIns: true,
-								},
+								{ useBuiltIns: true },
 							],
 							'transform-class-properties',
 							[
 								'transform-react-jsx',
-								{
-									pragma: 'wp.element.createElement',
-								},
+								{ pragma: 'wp.element.createElement' },
 							],
 						],
 					},
@@ -50,5 +62,6 @@ module.exports = {
 	stats: {
 		colors: true,
 	},
-	devtool: 'source-map',
+	devtool: isProduction ? false : 'source-map',
+	plugins,
 };
