@@ -6,10 +6,7 @@ import _get from 'lodash/get';
 import PostSelectButton from '../components/post-select/button';
 import getPostTypeCollection from '../utils/get-post-type-collection';
 
-const {
-	InspectorControls,
-	MediaUploadButton,
-} = wp.blocks;
+const { InspectorControls } = wp.blocks;
 
 const { Spinner } = wp.components;
 
@@ -21,8 +18,8 @@ const { __ } = wp.i18n;
 class PostControl extends React.Component {
 	state = {
 		isLoading: false,
-		posts: [],
-	}
+		posts:     [],
+	};
 
 	componentDidMount() {
 		const { value = [], postSelectProps = {} } = this.props;
@@ -33,7 +30,7 @@ class PostControl extends React.Component {
 			const Collection = getPostTypeCollection( postType );
 			const collection = new Collection();
 
-			this.setState({ isLoading: true });
+			this.setState( { isLoading: true } );
 			collection.fetch( { hmCache: 120, data: { per_page: value.length, include: value } } )
 				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
 		}
@@ -42,7 +39,7 @@ class PostControl extends React.Component {
 	render() {
 		const {
 			posts,
-			isLoading
+			isLoading,
 		} = this.state;
 
 		const {
@@ -83,11 +80,11 @@ class PostControl extends React.Component {
 }
 
 PostControl.propTypes = {
-	label: PropTypes.string.isRequired,
-	help: PropTypes.string,
-	id: PropTypes.string,
+	label:    PropTypes.string.isRequired,
+	help:     PropTypes.string,
+	id:       PropTypes.string,
 	onChange: PropTypes.func.isRequired,
-	value: PropTypes.arrayOf( PropTypes.number ).isRequired,
+	value:    PropTypes.arrayOf( PropTypes.number ).isRequired,
 }
 
 export default PostControl;

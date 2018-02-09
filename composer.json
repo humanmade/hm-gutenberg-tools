@@ -1,5 +1,5 @@
 {
     "require": {
-        "humanmade/coding-standards": "^0.2.2"
+        "humanmade/coding-standards": "^0.3.0"
     }
 }

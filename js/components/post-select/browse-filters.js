@@ -9,9 +9,7 @@ const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
-	state = {
-		category: [],
-	}
+	state = { category: [] };
 
 	constructor( props ) {
 		super( props );
@@ -19,10 +17,7 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	render() {
-		const {
-			onUpdate,
-			termFilters,
-		} = this.props;
+		const { termFilters } = this.props;
 
 		return <form
 			className="post-select-filters"
@@ -74,9 +69,7 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	onUpdate() {
-		const args = {
-			search: this.searchInput.value,
-		}
+		const args = { search: this.searchInput.value }
 
 		this.props.termFilters.forEach( termFilter => {
 			const terms = _get( this.state, termFilter.slug );
@@ -90,13 +83,11 @@ class PostBrowseFilters extends React.Component {
 
 	getTerms( taxSlug, query, callback ) {
 		const Collection = wp.api.getTaxonomyCollection( taxSlug );
-		const taxCollection = new Collection;
+		const taxCollection = new Collection();
 
 		const fetchData = {
 			hmCache: true,
-			data: {
-				search: query
-			}
+			data:    { search: query },
 		};
 
 		return taxCollection.fetch( fetchData )
@@ -109,9 +100,18 @@ class PostBrowseFilters extends React.Component {
 						}
 					} ),
 					complete: ! taxCollection.hasMore(),
-				});
+				} );
 			} );
 	}
+}
+
+PostBrowseFilters.propTypes = {
+	onUpdate:    PropTypes.func.isRequired,
+	termFilters: PropTypes.arrayOf( PropTypes.shape( {
+		slug:  PropTypes.string.isRequired,
+		label: PropTypes.string.isRequired,
+		rest:  PropTypes.string.isRequired,
+	} ) ).isRequired,
 }
 
 export default PostBrowseFilters;

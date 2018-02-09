@@ -1,28 +1,23 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
 import PostSelectModal from './modal';
 
-const {
-	Button,
-} = wp.components;
+const { Button } = wp.components;
 
 const { __ } = wp.i18n;
 
 class PostSelectButton extends React.Component {
-	state = {
-		modalVisible: false,
-	}
+	state = { modalVisible: false };
 
 	render(){
 		const {
 			children,
 			onSelect,
 			value = [],
-			minPosts = 1,
-			maxPosts = 1,
-			btnProps = {}
+			btnProps = {},
 		} = this.props;
 
 		const { modalVisible } = this.state;
@@ -44,7 +39,7 @@ class PostSelectButton extends React.Component {
 						onClose={ onClose }
 						selectedPosts={ value }
 					/>,
-					document.getElementById('wpbody')
+					document.getElementById( 'wpbody' )
 				)
 			) }
 		</div>
@@ -52,9 +47,9 @@ class PostSelectButton extends React.Component {
 }
 
 PostSelectButton.propTypes = {
-	btnText: PropTypes.string,
-	onSelect: PropTypes.func.isRequired,
-	postType: PropTypes.string,
+	btnText:     PropTypes.string,
+	onSelect:    PropTypes.func.isRequired,
+	postType:    PropTypes.string,
 	termFilters: PropTypes.object,
 }
 

@@ -1,0 +1,11 @@
+---
+extends:
+- ./vendor/humanmade/coding-standards/.eslintrc.yml
+plugins:
+- class-property
+rules:
+  jsx-a11y/img-has-alt:
+  - 0
+  class-property/class-property-semicolon:
+  - error
+  - always

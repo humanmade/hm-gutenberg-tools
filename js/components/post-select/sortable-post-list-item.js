@@ -12,13 +12,13 @@ class Item extends Component {
 	static propTypes = {
 		connectDragSource: PropTypes.func.isRequired,
 		connectDropTarget: PropTypes.func.isRequired,
-		index: PropTypes.number.isRequired,
-		isDragging: PropTypes.bool.isRequired,
-		id: PropTypes.any.isRequired,
-		post: PropTypes.object.isRequired,
-		moveItem: PropTypes.func.isRequired,
-		removeItem: PropTypes.func.isRequired,
-	}
+		index:             PropTypes.number.isRequired,
+		isDragging:        PropTypes.bool.isRequired,
+		id:                PropTypes.any.isRequired,
+		post:              PropTypes.object.isRequired,
+		moveItem:          PropTypes.func.isRequired,
+		removeItem:        PropTypes.func.isRequired,
+	};
 
 	render() {
 		const { post, isDragging, connectDragSource, connectDropTarget, removeItem } = this.props;
@@ -42,7 +42,7 @@ const itemSource = {
 	beginDrag( props ) {
 		return {
 			index: props.index,
-			id: props.id,
+			id:    props.id,
 		};
 	},
 };
@@ -82,11 +82,9 @@ const itemTarget = {
 };
 
 export default flow(
-	DropTarget( "ITEM", itemTarget, connect => ( {
-		connectDropTarget: connect.dropTarget(),
-	} ) ),
-	DragSource( "ITEM", itemSource, ( connect, monitor ) => ( {
+	DropTarget( 'ITEM', itemTarget, connect => ( { connectDropTarget: connect.dropTarget() } ) ),
+	DragSource( 'ITEM', itemSource, ( connect, monitor ) => ( {
 		connectDragSource: connect.dragSource(),
-		isDragging: monitor.isDragging()
+		isDragging:        monitor.isDragging(),
 	} ) )
 )( Item );

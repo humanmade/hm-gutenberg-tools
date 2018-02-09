@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-const {
-	Button,
-} = wp.components;
+const { Button } = wp.components;
 
 const PostSelectButton = props => {
 	const { btnProps = {} } = props;
@@ -20,9 +18,9 @@ const PostSelectButton = props => {
 }
 
 PostSelectButton.propTypes = {
-	btnText: PropTypes.string,
-	onSelect: PropTypes.func.isRequired,
-	postType: PropTypes.string,
+	btnText:     PropTypes.string,
+	onSelect:    PropTypes.func.isRequired,
+	postType:    PropTypes.string,
 	termFilters: PropTypes.object,
 }
 
