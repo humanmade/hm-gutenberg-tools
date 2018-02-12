@@ -1,11 +1,14 @@
 ---
 extends:
 - ./vendor/humanmade/coding-standards/.eslintrc.yml
+env:
+  browser: true
+  node: true
+  es6: true
 plugins:
 - class-property
 rules:
-  jsx-a11y/img-has-alt:
-  - 0
+  jsx-a11y/img-has-alt: 'off'
   class-property/class-property-semicolon:
   - error
   - always
