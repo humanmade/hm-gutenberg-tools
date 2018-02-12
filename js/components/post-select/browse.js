@@ -120,9 +120,7 @@ class PostSelectBrowse extends React.Component {
 
 	/**
 	 * Fetches the prev page of objects if a new page exists.
-	 *
-	 * @param {data: {page}} options.
-	 * @returns {*}.
+	 * @param {object} options Options.
 	 */
 	prevPostsPage( options = {} ) {
 		options.hmCache = 30;
@@ -144,7 +142,6 @@ class PostSelectBrowse extends React.Component {
 
 	/**
 	 * Returns true if there are previous pages of objects available.
-	 *
 	 * @returns null|boolean.
 	 */
 	hasMore() {
@@ -153,7 +150,6 @@ class PostSelectBrowse extends React.Component {
 
 	/**
 	 * Returns true if there are previous pages of objects available.
-	 *
 	 * @returns null|boolean.
 	 */
 	hasPrev() {
