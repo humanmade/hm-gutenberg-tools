@@ -1,6 +1,5 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
 const { JSDOM } = require( 'jsdom' );
 
 configure( { adapter: new Adapter() } );
@@ -14,7 +13,7 @@ function copyProps( src, target ) {
 		.reduce( ( result, prop ) => ( {
 			...result,
 			[prop]: Object.getOwnPropertyDescriptor( src, prop ),
-	  } ), {} );
+		} ), {} );
 	Object.defineProperties( target, props );
 }
 

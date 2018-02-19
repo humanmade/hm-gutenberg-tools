@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import wp from 'wp' // eslint-disable-line no-unused-vars
 import PostListItem from './post-list-item';
 
 const PostList = ( { posts = [], selectedPosts = [], onToggleSelectedPosts } ) => {
