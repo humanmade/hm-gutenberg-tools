@@ -1,17 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import wp from 'wp';
+import PostListItem from './post-list-item';
 
-const { Button } = wp.components;
-
-const PostListItem = ( { post, className, onClick } ) => {
-	return <Button id={ `post-list-item-button-${post.id}` } className={ className } onClick={ onClick }>
-		<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
-		<div className="post-list-item--meta">Type, Date, author</div>
-	</Button>
-}
-
-const PostList = ( { posts, selectedPosts, onToggleSelectedPosts } ) => {
+const PostList = ( { posts = [], selectedPosts = [], onToggleSelectedPosts } ) => {
 	return <div className="post-list">
 		{ posts.map( post => {
 			return <PostListItem
@@ -20,11 +12,17 @@ const PostList = ( { posts, selectedPosts, onToggleSelectedPosts } ) => {
 				onClick={ () => onToggleSelectedPosts( post ) }
 				className={ classNames( {
 					'post-list-item': true,
-					'focused':        selectedPosts.findWhere( { id: post.id } ),
+					'focused':        selectedPosts.length && selectedPosts.find( p => p.id === post.id ),
 				} )}
 			/>
 		} ) }
 	</div>
 }
+
+PostList.propTypes = {
+	posts:                 PropTypes.arrayOf( PropTypes.object ),
+	selectedPosts:         PropTypes.arrayOf( PropTypes.object ),
+	onToggleSelectedPosts: PropTypes.func.isRequired,
+};
 
 export default PostList;

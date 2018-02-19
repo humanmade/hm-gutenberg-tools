@@ -1,11 +1,5 @@
 import React from 'react';
 
-class GenericComponent extends React.Component {
-	render() {
-		return null
-	}
-}
-
 class MockCollection {
 	fetch() {
 		return new Promise( ( resolve, reject ) => {
@@ -24,12 +18,9 @@ class MockCollection {
 }
 
 const wp = {
-	components: {
-		Button:  GenericComponent,
-		Spinner: GenericComponent,
-	},
-	i18n: { __: str => str },
-	api:  {
+	components: { Button: props => <button id={ props.id } className={ props.className }>{ props.children }</button> },
+	i18n:       { __: str => str },
+	api:        {
 		collections:             { Posts: { prototype: { route: { index: '/v2/posts' } } } },
 		postTypeRestBaseMapping: { post: 'posts' },
 		getTaxonomyCollection:   () => MockCollection,

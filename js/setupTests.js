@@ -1,5 +1,6 @@
 import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 const { JSDOM } = require( 'jsdom' );
 
 configure( { adapter: new Adapter() } );
@@ -19,5 +20,5 @@ function copyProps( src, target ) {
 
 global.window = window;
 global.document = window.document;
-global.navigator = {userAgent: 'node.js',};
+global.navigator = { userAgent: 'node.js' };
 copyProps( window, global );

@@ -5,7 +5,7 @@ jest.mock( 'wp' );
 
 import React from 'react';
 import { mount, shallow } from 'enzyme';
-import wp from 'wp';
+import wp from 'wp'; // eslint-disable-line no-unused-vars
 import Select from 'react-select';
 import PostBrowseFilters from '../../../components/post-select/browse-filters';
 

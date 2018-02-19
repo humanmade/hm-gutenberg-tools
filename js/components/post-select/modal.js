@@ -90,7 +90,7 @@ class PostSelectModal extends React.Component {
 				</div>
 				<div className="media-modal-content">
 					{ ( this.state.contentState === 'browse' ) && <PostSelectBrowse
-						{ ...this.state }
+						selectedPosts={ this.state.selectedPosts.toJSON() }
 						postType={ postType }
 						togglePostSelected={ post => this.togglePostSelected( post ) }
 						termFilters={ termFilters }
