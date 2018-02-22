@@ -9,11 +9,11 @@ const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
-	state = { category: [] };
+	state = {};
 
 	constructor( props ) {
 		super( props );
-		this.id = _uniqueId( 'post-select-modal-filters' );
+		this.id = _uniqueId( 'post-select-modal-filters-' );
 	}
 
 	render() {
@@ -27,7 +27,9 @@ class PostBrowseFilters extends React.Component {
 			} }
 		>
 			<div className="post-select-filters-row">
-				<label htmlFor={ `${this.id}-search` } className="screen-reader-text">{ __( 'Search posts' ) }</label>
+				<label htmlFor={ `${this.id}-search` } className="screen-reader-text">
+					{ __( 'Search posts' ) }
+				</label>
 				<input
 					id={ `${this.id}-search` }
 					placeholder={ __( 'Search posts...' ) }
@@ -69,7 +71,7 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	onUpdate() {
-		const args = { search: this.searchInput.value }
+		const args = { search: _get( this, 'searchInput.value' ) };
 
 		this.props.termFilters.forEach( termFilter => {
 			const terms = _get( this.state, termFilter.slug );

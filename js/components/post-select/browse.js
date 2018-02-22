@@ -98,8 +98,7 @@ class PostSelectBrowse extends React.Component {
 		this.postsCollection = new Collection();
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
-			this.setState( { posts: this.postsCollection.toJSON() }
-			)
+			this.setState( { posts: this.postsCollection.toJSON() } );
 		} );
 
 		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );

@@ -27,24 +27,7 @@ module.exports = {
 			{
 				test:    /\.(js|jsx|mjs)$/,
 				exclude: /(node_modules|bower_components)/,
-				use:     {
-					loader:  'babel-loader',
-					options: {
-						babelrc: false,
-						presets: [ '@babel/preset-env', '@babel/preset-react' ],
-						plugins: [
-							[
-								'transform-object-rest-spread',
-								{ useBuiltIns: true },
-							],
-							'transform-class-properties',
-							[
-								'transform-react-jsx',
-								{ pragma: 'wp.element.createElement' },
-							],
-						],
-					},
-				},
+				use:     { loader: 'babel-loader' },
 			},
 		],
 	},

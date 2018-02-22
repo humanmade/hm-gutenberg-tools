@@ -10,7 +10,7 @@ const _sync = Backbone.sync;
  */
 function cachedSync( method, model, options ) {
 	const url          = options.url || _result( model, 'url' );
-	const requestHash  = hash( JSON.stringify( [ method, url, options.data ] ) );
+	const requestHash  = hash( [ method, url, options.data ] );
 	const cacheTimeout = Number.isInteger( options.hmCache ) ? parseInt( options.hmCache, 10 ) : 300;
 	const now          = new Date();
 
