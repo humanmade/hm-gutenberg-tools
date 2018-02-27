@@ -103,6 +103,11 @@ class PostSelectModal extends React.Component {
 				</div>
 				<div className="media-frame-toolbar">
 					<div className="media-toolbar">
+						<Button
+							isPrimary={true}
+							isLarge={true}
+							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
+						>Select</Button>
 						{ ( this.state.contentState !== 'selection' ) && <Button
 							isPrimary={false}
 							isLarge={true}
@@ -115,11 +120,6 @@ class PostSelectModal extends React.Component {
 							style={{ marginRight: '15px' }}
 							onClick={ () => this.setState( { contentState: 'browse' } ) }
 						>Browse posts</Button> }
-						<Button
-							isPrimary={true}
-							isLarge={true}
-							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
-						>Select</Button>
 					</div>
 				</div>
 			</div>
