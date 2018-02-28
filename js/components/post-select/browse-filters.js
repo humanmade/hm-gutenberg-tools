@@ -3,21 +3,26 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _get from 'lodash/get';
+import PostTypeFilter from './post-type-filter';
 import TaxonomyFilter from './taxonomy-filter';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
-	state = {};
 
 	constructor( props ) {
 		super( props );
+
 		this.id = _uniqueId( 'post-select-modal-filters-' );
+		this.state = {
+			postType:   props.postType,
+			taxonomies: [],
+		};
 	}
 
 	render() {
-		const { termFilters } = this.props;
+		const { postType, taxonomies } = this.state;
 
 		return <form
 			className="post-select-filters"
@@ -36,16 +41,19 @@ class PostBrowseFilters extends React.Component {
 					type="search"
 					ref={ input => this.searchInput = input } />
 			</div>
-			{ termFilters.map( termFilter => (
+			<PostTypeFilter
+				value={ postType }
+				onChange={ nextType => this.setState( {
+					postType:   nextType.value,
+					taxonomies: nextType.taxonomies,
+				} ) }
+			/>
+			{ taxonomies.map( taxonomy => (
 				<TaxonomyFilter
-					key={ `${this.id}-${termFilter.slug}` }
-					label={ termFilter.label }
-					taxonomy={ termFilter.slug }
-					value={ this.state[ termFilter.slug ] || [] }
-					onChange={ selectedOptions => {
-						const values = selectedOptions.map( option => option.value );
-						this.setState( { [ termFilter.slug ]: values } );
-					} }
+					key={ `${this.id}-${taxonomy}` }
+					taxonomy={ taxonomy }
+					value={ _get( this.state, taxonomy, [] ) }
+					onChange={ value => this.setState( { [ taxonomy ]: value } ) }
 				/>
 			) ) }
 			<Button
@@ -59,12 +67,16 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	onUpdate() {
-		const args = { search: _get( this, 'searchInput.value' ) };
+		let args = { search: _get( this, 'searchInput.value' ) };
 
-		this.props.termFilters.forEach( termFilter => {
-			const terms = _get( this.state, termFilter.slug );
-			if ( terms ) {
-				args[ termFilter.slug ] = terms;
+		this.state.taxonomies.forEach( taxonomy => {
+			const termIds = _get( this.state, taxonomy );
+
+			if ( termIds ) {
+				args = {
+					...args,
+					[ taxonomy ]: termIds,
+				};
 			}
 		} );
 
@@ -72,13 +84,6 @@ class PostBrowseFilters extends React.Component {
 	}
 }
 
-PostBrowseFilters.propTypes = {
-	onUpdate:    PropTypes.func.isRequired,
-	termFilters: PropTypes.arrayOf( PropTypes.shape( {
-		slug:  PropTypes.string.isRequired,
-		label: PropTypes.string.isRequired,
-		rest:  PropTypes.string.isRequired,
-	} ) ).isRequired,
-}
+PostBrowseFilters.propTypes = { onUpdate: PropTypes.func.isRequired };
 
 export default PostBrowseFilters;
