@@ -26,7 +26,8 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	componentDidMount() {
-		this.initPostsCollection( this.props.postType );
+		this.setCollection( this.props.postType );
+		this.fetchPostsCollection();
 	}
 
 	componentDidUpdate( prevProps, prevState ){
@@ -73,6 +74,24 @@ class PostSelectBrowse extends React.Component {
 		</div>
 	}
 
+	createCollection( postType ) {
+		const CollectionClass = getPostTypeCollection( postType ) || wp.api.collections.Posts;
+		const collection = new CollectionClass();
+
+		collection.on( 'add remove update change destroy reset sort', () => {
+			this.setState( { posts: collection.toJSON() } );
+		} );
+
+		collection.on( 'request', () => this.setState( { isLoading: true } ) );
+		collection.on( 'sync', () => this.setState( { isLoading: false } ) );
+
+		return collection;
+	}
+
+	setCollection( postType ) {
+		this.postsCollection = this.collections[ postType ] || this.createCollection( postType );
+	}
+
 	postCollectionFetchData() {
 		const args = {
 			page:     1,
@@ -94,20 +113,6 @@ class PostSelectBrowse extends React.Component {
 		} );
 
 		return args;
-	}
-
-	initPostsCollection( postType ) {
-		const Collection = getPostTypeCollection( postType ) || wp.api.collections.Posts;
-		this.postsCollection = new Collection();
-
-		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
-			this.setState( { posts: this.postsCollection.toJSON() } );
-		} );
-
-		this.postsCollection.on( 'request', () => this.setState( { isLoading: true } ) );
-		this.postsCollection.on( 'sync', () => this.setState( { isLoading: false } ) );
-
-		this.postsCollection.fetch( { hmCache: 30, data: this.postCollectionFetchData() } );
 	}
 
 	fetchPostsCollection() {
