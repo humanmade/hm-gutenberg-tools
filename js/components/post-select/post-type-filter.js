@@ -24,11 +24,11 @@ class PostTypeFilter extends React.Component {
 		// When this the post types have been fetched for the first time, we
 		// need to send back the taxonomies of the selected post type so the
 		// taxonomy filters will be added.
-		if ( value === prevProps.value && types.data && !prevProps.types.data ) {
-			this.props.onChange({
+		if ( value === prevProps.value && types.data && ! prevProps.types.data ) {
+			this.props.onChange( {
 				value,
 				taxonomies: types.data[ value ].taxonomies,
-			});
+			} );
 		}
 	}
 
