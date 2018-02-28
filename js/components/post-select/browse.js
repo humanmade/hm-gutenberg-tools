@@ -20,7 +20,7 @@ class PostSelectBrowse extends React.Component {
 		this.collections = {};
 		this.state = {
 			posts:     [],
-			isLoading: false,
+			isLoading: true,
 			filters:   {},
 		};
 	}
