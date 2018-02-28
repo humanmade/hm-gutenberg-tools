@@ -25,7 +25,7 @@ class PostSelectBrowse extends React.Component {
 		};
 	}
 
-	componentWillMount() {
+	componentDidMount() {
 		this.initPostsCollection();
 	}
 
