@@ -37,12 +37,12 @@ class PostSelectBrowse extends React.Component {
 
 	render() {
 		const { posts, isLoading } = this.state;
-		const { selectedPosts, togglePostSelected, termFilters } = this.props;
+		const { postType, selectedPosts, togglePostSelected } = this.props;
 
 		return <div className="menu-container">
 			<div className="menu">
 				<PostSelectBrowseFilters
-					termFilters={ termFilters }
+					postType={ postType }
 					onUpdate={ filters => this.setState( { filters } ) }
 				/>
 			</div>
