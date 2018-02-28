@@ -8,30 +8,6 @@ const { __ } = wp.i18n;
 const { withAPIData } = wp.components;
 
 class PostTypeFilter extends React.Component {
-	createOption( type ) {
-		const item = this.props.types.data[ type ];
-
-		return {
-			label:      item.name,
-			taxonomies: item.taxonomies,
-			value:      item.slug,
-		}
-	}
-
-	componentDidUpdate( prevProps ) {
-		const { value, types } = this.props;
-
-		// When this the post types have been fetched for the first time, we
-		// need to send back the taxonomies of the selected post type so the
-		// taxonomy filters will be added.
-		if ( value === prevProps.value && types.data && ! prevProps.types.data ) {
-			this.props.onChange( {
-				value,
-				taxonomies: types.data[ value ].taxonomies,
-			} );
-		}
-	}
-
 	render() {
 		const { label, onChange, types, value } = this.props;
 		const id = _uniqueId( 'post-select-post-type-filter' );
