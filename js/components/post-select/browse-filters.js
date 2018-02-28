@@ -68,8 +68,8 @@ class PostBrowseFilters extends React.Component {
 
 	onUpdate() {
 		let args = {
-			type:   this.state.postType,
-			search: _get( this, 'searchInput.value' ),
+			postType: this.state.postType,
+			search:   _get( this, 'searchInput.value' ),
 		};
 
 		this.state.taxonomies.forEach( taxonomy => {

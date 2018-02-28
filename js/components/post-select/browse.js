@@ -22,7 +22,7 @@ class PostSelectBrowse extends React.Component {
 		this.state = {
 			posts:     [],
 			isLoading: true,
-			filters:   { type: props.postType },
+			filters:   { postType: props.postType },
 		};
 	}
 
@@ -32,8 +32,8 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	componentWillUpdate( nextProps, nextState ) {
-		if ( this.state.filters.type !== nextState.filters.type ) {
-			this.setCollection( nextState.filters.type );
+		if ( this.state.filters.postType !== nextState.filters.postType ) {
+			this.setCollection( nextState.filters.postType );
 		}
 	}
 
