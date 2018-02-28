@@ -17,7 +17,7 @@ const TaxonomyFilter = props => {
 		isLoading:        terms.isLoading,
 		multi:            true,
 		backspaceRemoves: true,
-		onChange:         selectedOptions => onChange( selectedOptions ),
+		onChange:         selected => onChange( selected.map( option => option.value ) ),
 	};
 
 	if ( terms.data ) {
