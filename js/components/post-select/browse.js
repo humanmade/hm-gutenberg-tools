@@ -26,7 +26,7 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	componentDidMount() {
-		this.initPostsCollection();
+		this.initPostsCollection( this.props.postType );
 	}
 
 	componentDidUpdate( prevProps, prevState ){
@@ -96,10 +96,10 @@ class PostSelectBrowse extends React.Component {
 		return args;
 	}
 
-	initPostsCollection() {
+	initPostsCollection( postType ) {
 		this.setState( { isLoading: true } );
 
-		const Collection = getPostTypeCollection( this.props.postType ) || wp.api.collections.Posts;
+		const Collection = getPostTypeCollection( postType ) || wp.api.collections.Posts;
 		this.postsCollection = new Collection();
 
 		this.postsCollection.on( 'add remove update change destroy reset sort', () => {
