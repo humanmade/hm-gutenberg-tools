@@ -97,8 +97,6 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	initPostsCollection( postType ) {
-		this.setState( { isLoading: true } );
-
 		const Collection = getPostTypeCollection( postType ) || wp.api.collections.Posts;
 		this.postsCollection = new Collection();
 
