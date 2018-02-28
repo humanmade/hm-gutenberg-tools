@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _get from 'lodash/get';
+
 import PostTypeFilter from './post-type-filter';
 import TaxonomyFilter from './taxonomy-filter';
 
-const { Button } = wp.components;
+const { Button, withAPIData } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
@@ -19,6 +20,14 @@ class PostBrowseFilters extends React.Component {
 			postType:   props.postType,
 			taxonomies: [],
 		};
+	}
+
+	componentWillReceiveProps( nextProps ) {
+		const { data } = nextProps.postTypeObject;
+
+		if ( data && this.state.postType === data.slug ) {
+			this.setState( { taxonomies: data.taxonomies } );
+		}
 	}
 
 	render() {
@@ -89,4 +98,6 @@ class PostBrowseFilters extends React.Component {
 
 PostBrowseFilters.propTypes = { onUpdate: PropTypes.func.isRequired };
 
-export default PostBrowseFilters;
+export default withAPIData( ( { postType } ) => {
+	return { postTypeObject: `/wp/v2/types/${ postType }` };
+} )( PostBrowseFilters );
