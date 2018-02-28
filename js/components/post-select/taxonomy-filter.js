@@ -43,8 +43,6 @@ TaxonomyFilter.propTypes = {
 	value:    PropTypes.array,
 };
 
-// export default TaxonomyFilter;
-
 const TaxonomyFilterWithAPIData = withAPIData( ( props, api ) => {
 	const { taxonomy, search } = props;
 	let termsEndpoint = `/wp/v2/${ api.taxonomy( taxonomy ) }?per_page=100`;
