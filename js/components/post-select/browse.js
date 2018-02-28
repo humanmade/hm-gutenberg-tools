@@ -44,7 +44,8 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	componentWillUnmount() {
-		this.postsCollection.off();
+		Object.entries( this.collections ).forEach( collection => collection.off() );
+		delete this.collections;
 		delete this.postsCollection;
 	}
 
