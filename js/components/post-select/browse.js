@@ -14,11 +14,16 @@ const { __ } = wp.i18n;
 const { Spinner } = wp.components;
 
 class PostSelectBrowse extends React.Component {
-	state = {
-		posts:     [],
-		isLoading: false,
-		filters:   {},
-	};
+	constructor( props ) {
+		super( props );
+
+		this.collections = {};
+		this.state = {
+			posts:     [],
+			isLoading: false,
+			filters:   {},
+		};
+	}
 
 	componentWillMount() {
 		this.initPostsCollection();
