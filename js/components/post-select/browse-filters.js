@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
-import Select from 'react-select';
 import _uniqueId from 'lodash/uniqueId';
 import _get from 'lodash/get';
+import TaxonomyFilter from './taxonomy-filter';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -36,30 +36,18 @@ class PostBrowseFilters extends React.Component {
 					type="search"
 					ref={ input => this.searchInput = input } />
 			</div>
-			{ termFilters.map( termFilter => {
-				return <div
-					key={ termFilter.slug }
-					className="post-select-filters-row"
-				>
-					<label htmlFor={ `${this.id}-${termFilter.slug}` }>
-						{ termFilter.label }
-					</label>
-					<Select.Async
-						id={ `${this.id}-${termFilter.slug}` }
-						multi={ true }
-						backspaceRemoves={ true }
-						value={ _get( this.state, termFilter.slug ) }
-						onChange={ selectedOptions => {
-							const newState = {};
-							newState[ termFilter.slug ] = selectedOptions.map( option => option.value );
-							this.setState( newState );
-						} }
-						loadOptions={ ( query, callback ) => {
-							this.getTerms( termFilter.slug, query, callback )
-						}}
-					/>
-				</div>
-			} ) }
+			{ termFilters.map( termFilter => (
+				<TaxonomyFilter
+					key={ `${this.id}-${termFilter.slug}` }
+					label={ termFilter.label }
+					taxonomy={ termFilter.slug }
+					value={ this.state[ termFilter.slug ] || [] }
+					onChange={ selectedOptions => {
+						const values = selectedOptions.map( option => option.value );
+						this.setState( { [ termFilter.slug ]: values } );
+					} }
+				/>
+			) ) }
 			<Button
 				isPrimary={true}
 				isLarge={true}
@@ -81,29 +69,6 @@ class PostBrowseFilters extends React.Component {
 		} );
 
 		this.props.onUpdate( args );
-	}
-
-	getTerms( taxSlug, query, callback ) {
-		const Collection = wp.api.getTaxonomyCollection( taxSlug );
-		const taxCollection = new Collection();
-
-		const fetchData = {
-			hmCache: true,
-			data:    { search: query },
-		};
-
-		return taxCollection.fetch( fetchData )
-			.then( json => {
-				callback( null, {
-					options: json.map( item => {
-						return {
-							label: item.name,
-							value: item.id,
-						}
-					} ),
-					complete: ! taxCollection.hasMore(),
-				} );
-			} );
 	}
 }
 
