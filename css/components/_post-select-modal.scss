@@ -159,5 +159,9 @@
 	padding: 16px;
 	bottom: -60px;
 	display: flex;
-	justify-content: right;
+	flex-direction: row-reverse;
+}
+
+.post-select .media-frame-toolbar .media-toolbar .button {
+	margin-left: 15px;
 }
