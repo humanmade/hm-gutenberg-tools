@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import _get from 'lodash/get';
 import wp from 'wp';
 
 const { withAPIData } = wp.components;
 
 const TaxonomyFilter = props => {
-	const { label, onChange, taxonomy, terms, value } = props;
+	const { onChange, tax, taxonomy, terms, value } = props;
 	const id = `post-select-${taxonomy}-filter`;
+	const label = _get( tax, 'data.name', '' );
 
 	let selectProps = {
 		id,
@@ -36,7 +38,6 @@ const TaxonomyFilter = props => {
 TaxonomyFilter.defaultProps = { value: [] };
 
 TaxonomyFilter.propTypes = {
-	label:    PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	taxonomy: PropTypes.string.isRequired,
 	value:    PropTypes.array,
