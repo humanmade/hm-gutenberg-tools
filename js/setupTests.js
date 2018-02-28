@@ -20,4 +20,14 @@ function copyProps( src, target ) {
 global.window = window;
 global.document = window.document;
 global.navigator = { userAgent: 'node.js' };
+global.hmGbToolsData = {
+	postTypeLabels: {
+		post: {
+			name:          'Posts',
+			singular_name: 'Post',
+		},
+	},
+	postTypeTaxonomies: { post: [ 'foo', 'bar' ] },
+};
+
 copyProps( window, global );

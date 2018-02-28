@@ -11,6 +11,7 @@ import PostListItem from '../../../components/post-select/post-list-item';
 const post = {
 	id:    123,
 	title: { rendered: 'Hello World' },
+	type:  'post',
 };
 
 test( 'Post List Item', () => {
@@ -21,6 +22,7 @@ test( 'Post List Item', () => {
 	expect( postListItem.childAt( 0 ).hasClass( 'foo' ) ).toBe( true );
 	expect( postListItem.childAt( 0 ).props().id ).toBe( 'post-list-item-button-123' );
 	expect( postListItem.find( '.post-list-item--title' ).text() ).toBe( 'Hello World' );
+	expect( postListItem.find( '.post-list-item--meta' ).text() ).toBe( 'Post, Date, author' );
 	expect( onClick.mock.calls.length ).toBe( 0 );
 
 	postListItem.childAt( 0 ).props().onClick();
