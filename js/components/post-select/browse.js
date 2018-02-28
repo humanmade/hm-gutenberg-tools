@@ -4,6 +4,7 @@ import wp from 'wp';
 import _get from 'lodash/get';
 import _extend from 'lodash/extend';
 import _isEqual from 'lodash/isEqual';
+import _omit from 'lodash/omit';
 
 import getPostTypeCollection from '../../utils/get-post-type-collection';
 import PostSelectBrowseFilters from './browse-filters';
@@ -21,7 +22,7 @@ class PostSelectBrowse extends React.Component {
 		this.state = {
 			posts:     [],
 			isLoading: true,
-			filters:   {},
+			filters:   { type: props.postType },
 		};
 	}
 
@@ -30,7 +31,13 @@ class PostSelectBrowse extends React.Component {
 		this.fetchPostsCollection();
 	}
 
-	componentDidUpdate( prevProps, prevState ){
+	componentWillUpdate( nextProps, nextState ) {
+		if ( this.state.filters.type !== nextState.filters.type ) {
+			this.setCollection( nextState.filters.type );
+		}
+	}
+
+	componentDidUpdate( prevProps, prevState ) {
 		if ( ! _isEqual( prevState.filters, this.state.filters ) ) {
 			this.fetchPostsCollection();
 		}
