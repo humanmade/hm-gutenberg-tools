@@ -96,6 +96,10 @@
 	width: 100%;
 	text-align: left;
 	background: white;
+
+	&--meta {
+		color: #666;
+	}
 }
 
 .post-list-item.is-dragging {
