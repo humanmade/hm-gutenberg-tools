@@ -10,9 +10,11 @@ class TaxonomyFilter extends React.Component {
 	constructor( props ) {
 		super( props );
 
-		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
+		const { taxonomy, value } = props;
+		const CollectionClass = wp.api.getTaxonomyCollection( taxonomy );
 
 		this.state = {
+			value,
 			isLoading: false,
 			page:      1,
 			terms:     [],
@@ -29,7 +31,8 @@ class TaxonomyFilter extends React.Component {
 	}
 
 	render() {
-		const { onChange, tax, taxonomy, value } = this.props;
+		const { tax, taxonomy } = this.props;
+		const { terms, value } = this.state;
 		const id = `post-select-${taxonomy}-filter`;
 		const isLoading = ( tax.isLoading || this.state.isLoading );
 		const label = _get( tax, 'data.name', taxonomy );
@@ -40,8 +43,8 @@ class TaxonomyFilter extends React.Component {
 			value,
 			backspaceRemoves:     true,
 			multi:                true,
-			options:              this.state.terms,
-			onChange:             selected => onChange( selected.map( option => option.value ) ),
+			options:              terms,
+			onChange:             selected => this.updateValue( selected ),
 			onMenuScrollToBottom: () => this.fetchMore(),
 		};
 
@@ -49,6 +52,13 @@ class TaxonomyFilter extends React.Component {
 			<label htmlFor={ id }>{ label }</label>
 			<Select { ...selectProps } />
 		</div>;
+	}
+
+	updateValue( selected ) {
+		const nextValue = selected.map( option => option.value );
+
+		this.setState( { value: nextValue } );
+		this.props.onChange( nextValue );
 	}
 
 	getFetchOptions() {
