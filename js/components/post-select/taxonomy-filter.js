@@ -38,10 +38,11 @@ class TaxonomyFilter extends React.Component {
 			id,
 			isLoading,
 			value,
-			backspaceRemoves: true,
-			multi:            true,
-			options:          this.state.terms,
-			onChange:         selected => onChange( selected.map( option => option.value ) ),
+			backspaceRemoves:     true,
+			multi:                true,
+			options:              this.state.terms,
+			onChange:             selected => onChange( selected.map( option => option.value ) ),
+			onMenuScrollToBottom: () => this.fetchMore(),
 		};
 
 		return <div className="post-select-filters-row">
@@ -74,11 +75,13 @@ class TaxonomyFilter extends React.Component {
 					page:  this.state.page + 1,
 					terms: this.state.terms.concat( terms ),
 				} );
-
-				if ( this.collection.hasMore() ) {
-					this.fetchTerms();
-				}
 			} );
+	}
+
+	fetchMore() {
+		if ( this.collection.hasMore() ) {
+			this.fetchTerms();
+		}
 	}
 }
 
