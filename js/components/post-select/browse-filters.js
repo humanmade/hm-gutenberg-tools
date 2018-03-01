@@ -88,6 +88,9 @@ class PostBrowseFilters extends React.Component {
 	}
 }
 
-PostBrowseFilters.propTypes = { onUpdate: PropTypes.func.isRequired };
+PostBrowseFilters.propTypes = {
+	onUpdate: PropTypes.func.isRequired,
+	postType: PropTypes.string.isRequired,
+};
 
 export default PostBrowseFilters;
