@@ -13,7 +13,6 @@ class TaxonomyFilter extends React.Component {
 		this.state = {
 			isLoading: false,
 			page:      1,
-			search:    '',
 			terms:     [],
 			value:     props.value,
 		};
@@ -40,7 +39,6 @@ class TaxonomyFilter extends React.Component {
 			multi:            true,
 			options:          terms,
 			onChange:         selected => this.updateValue( selected ),
-			onInputChange:    search => this.setState( { search } ),
 		};
 
 		return <div className="post-select-filters-row">
