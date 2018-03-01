@@ -17,15 +17,14 @@ const PostTypeFilter = props => {
 		backspaceRemoves: false,
 		isLoading:        types.isLoading,
 		multi:            false,
-		onChange:         selected => onChange( selected ),
+		onChange:         selected => onChange( selected.value ),
 	};
 
 	if ( types.data ) {
 		selectProps = Object.assign( {}, selectProps, {
 			options: Object.keys( types.data ).map( type => ( {
-				label:      types.data[ type ].name,
-				taxonomies: types.data[ type ].taxonomies,
-				value:      types.data[ type ].slug,
+				label: types.data[ type ].name,
+				value: types.data[ type ].slug,
 			} ) ),
 		} );
 	}

@@ -43,10 +43,7 @@ class PostBrowseFilters extends React.Component {
 			</div>
 			<PostTypeFilter
 				value={ postType }
-				onChange={ nextType => this.setState( {
-					postType:   nextType.value,
-					taxonomies: nextType.taxonomies,
-				} ) }
+				onChange={ nextType => this.setState( { postType: nextType } ) }
 			/>
 			{ taxonomies.map( taxonomy => (
 				<TaxonomyFilter
