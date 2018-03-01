@@ -20,9 +20,6 @@ class PostBrowseFilters extends React.Component {
 		this.state = { postType: props.postType };
 	}
 
-	componentWillReceiveProps( nextProps ) {
-	}
-
 	render() {
 		const { postType } = this.state;
 		const taxonomies = getPostTypeTaxFilters( postType );
