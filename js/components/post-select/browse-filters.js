@@ -17,12 +17,14 @@ class PostBrowseFilters extends React.Component {
 		super( props );
 
 		this.id = _uniqueId( 'post-select-modal-filters-' );
-		this.state = { postType: props.postType };
+		this.state = {
+			postType:   props.postType,
+			taxonomies: getPostTypeTaxFilters( props.postType ),
+		};
 	}
 
 	render() {
-		const { postType } = this.state;
-		const taxonomies = getPostTypeTaxFilters( postType );
+		const { postType, taxonomies } = this.state;
 
 		return <form
 			className="post-select-filters"
@@ -43,7 +45,10 @@ class PostBrowseFilters extends React.Component {
 			</div>
 			<PostTypeFilter
 				value={ postType }
-				onChange={ nextType => this.setState( { postType: nextType } ) }
+				onChange={ nextPostType => this.setState( {
+					postType:   nextPostType,
+					taxonomies: getPostTypeTaxFilters( nextPostType ),
+				} ) }
 			/>
 			{ taxonomies.map( taxonomy => (
 				<TaxonomyFilter
