@@ -36,12 +36,11 @@ class TaxonomyFilter extends React.Component {
 			id,
 			isLoading,
 			value,
-			backspaceRemoves:     true,
-			multi:                true,
-			options:              terms,
-			onChange:             selected => this.updateValue( selected ),
-			onInputChange:        search => this.setState( { search } ),
-			onMenuScrollToBottom: () => this.fetchMore(),
+			backspaceRemoves: true,
+			multi:            true,
+			options:          terms,
+			onChange:         selected => this.updateValue( selected ),
+			onInputChange:    search => this.setState( { search } ),
 		};
 
 		return <div className="post-select-filters-row">
@@ -55,7 +54,9 @@ class TaxonomyFilter extends React.Component {
 		this.collection = new CollectionClass();
 
 		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
-		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
+		this.collection.on( 'error sync', () => this.setState( { isLoading: false } ) );
+		this.collection.on( 'sync', () => this.fetchMore() );
+
 		this.collection.on( 'reset update', () => {
 			const terms = this.collection.map( term => ( {
 				label: term.get( 'name' ),
