@@ -17,6 +17,7 @@ class TaxonomyFilter extends React.Component {
 			value,
 			isLoading: false,
 			page:      1,
+			search:    '',
 			terms:     [],
 		};
 
@@ -45,6 +46,7 @@ class TaxonomyFilter extends React.Component {
 			multi:                true,
 			options:              terms,
 			onChange:             selected => this.updateValue( selected ),
+			onInputChange:        search => this.setState( { search } ),
 			onMenuScrollToBottom: () => this.fetchMore(),
 		};
 
