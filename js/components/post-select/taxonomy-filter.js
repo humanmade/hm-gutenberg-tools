@@ -9,7 +9,7 @@ const { withAPIData } = wp.components;
 const TaxonomyFilter = props => {
 	const { onChange, tax, taxonomy, value } = props;
 	const id = `post-select-${taxonomy}-filter`;
-	const label = _get( tax, 'data.name', '' );
+	const label = _get( tax, 'data.name', taxonomy );
 
 	const selectProps = {
 		id,
