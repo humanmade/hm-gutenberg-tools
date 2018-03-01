@@ -12,12 +12,19 @@ class TaxonomyFilter extends React.Component {
 
 		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
 
-		this.state = { isLoading: false };
+		this.state = {
+			isLoading: false,
+			page:      1,
+		};
 
 		this.collection = new CollectionClass();
 
 		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
+	}
+
+	componentDidMount() {
+		this.fetchTerms();
 	}
 
 	render() {
@@ -30,36 +37,40 @@ class TaxonomyFilter extends React.Component {
 			id,
 			isLoading,
 			value,
-			multi:            true,
 			backspaceRemoves: true,
-			loadOptions:      ( query, callback ) => this.fetchTerms( query, callback ),
+			multi:            true,
+			options:          this.state.terms,
 			onChange:         selected => onChange( selected.map( option => option.value ) ),
 		};
 
 		return <div className="post-select-filters-row">
 			<label htmlFor={ id }>{ label }</label>
-			<Select.Async { ...selectProps } />
+			<Select { ...selectProps } />
 		</div>;
+	}
+
+	getFetchOptions() {
+		return {
+			data: {
+				page:     this.state.page,
+				per_page: 100,
+				terms:    [],
+			},
+		};
 	}
 
 	/**
 	 * Fetch terms
-	 *
-	 * @param {string}   query    Search query.
-	 * @param {Function} callback Function to be called when the fetch is complete.
 	 */
-	fetchTerms( query, callback ) {
-		this.collection.fetch( { data: { per_page: 100 } } )
-			.done( terms => {
-				const options = terms.map( term => ( {
+	fetchTerms() {
+		this.collection.fetch( this.getFetchOptions() )
+			.done( result => {
+				const terms = result.map( term => ( {
 					label: term.name,
 					value: term.id,
 				} ) );
 
-				callback( null, {
-					options,
-					complete: ! this.collection.hasMore(),
-				} );
+				this.setState( { terms } );
 			} );
 	}
 }
