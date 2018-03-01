@@ -10,9 +10,8 @@ import getPostTypeCollection from '../../utils/get-post-type-collection';
 import PostSelectBrowseFilters from './browse-filters';
 import PostList from './post-list';
 
-const { Button } = wp.components;
+const { Button, Spinner } = wp.components;
 const { __ } = wp.i18n;
-const { Spinner } = wp.components;
 
 class PostSelectBrowse extends React.Component {
 	constructor( props ) {
