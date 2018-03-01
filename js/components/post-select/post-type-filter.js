@@ -21,6 +21,7 @@ const PostTypeFilter = props => {
 		options,
 		value,
 		backspaceRemoves: false,
+		clearable:        false,
 		multi:            false,
 		onChange:         selected => onChange( selected.value ),
 	};
