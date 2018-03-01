@@ -1,3 +1,5 @@
+/* global hmGbToolsData */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
@@ -5,41 +7,39 @@ import _uniqueId from 'lodash/uniqueId';
 import wp from 'wp';
 
 const { __ } = wp.i18n;
-const { withAPIData } = wp.components;
 
 const PostTypeFilter = props => {
-	const { label, onChange, types, value } = props;
+	const { label, onChange, value } = props;
 	const id = _uniqueId( 'post-select-post-type-filter' );
+	const options = Object.keys( hmGbToolsData.postTypeLabels ).map( type => ( {
+		label: hmGbToolsData.postTypeLabels[ type ].singular_name,
+		value: type,
+	} ) );
 
-	let selectProps = {
+	const selectProps = {
 		id,
+		options,
 		value,
 		backspaceRemoves: false,
-		isLoading:        types.isLoading,
 		multi:            false,
 		onChange:         selected => onChange( selected.value ),
 	};
 
-	if ( types.data ) {
-		selectProps = Object.assign( {}, selectProps, {
-			options: Object.keys( types.data ).map( type => ( {
-				label: types.data[ type ].name,
-				value: types.data[ type ].slug,
-			} ) ),
-		} );
-	}
-
 	return <div className="post-select-filters-row">
-		<label htmlFor={ id }>{ __( 'Type' ) }</label>
+		<label htmlFor={ id }>{ label }</label>
 		<Select { ...selectProps } />
 	</div>;
 }
 
-PostTypeFilter.defaultProps = { value: 'post' };
+PostTypeFilter.defaultProps = {
+	label: __( 'Type' ),
+	value: 'post',
+};
 
 PostTypeFilter.propTypes = {
+	label:    PropTypes.string,
 	value:    PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 };
 
-export default withAPIData( () => ( { types: '/wp/v2/types' } ) )( PostTypeFilter );
+export default PostTypeFilter;
