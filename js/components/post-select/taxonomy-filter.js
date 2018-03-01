@@ -15,6 +15,7 @@ class TaxonomyFilter extends React.Component {
 		this.state = {
 			isLoading: false,
 			page:      1,
+			terms:     [],
 		};
 
 		this.collection = new CollectionClass();
@@ -54,7 +55,6 @@ class TaxonomyFilter extends React.Component {
 			data: {
 				page:     this.state.page,
 				per_page: 100,
-				terms:    [],
 			},
 		};
 	}
@@ -70,7 +70,14 @@ class TaxonomyFilter extends React.Component {
 					value: term.id,
 				} ) );
 
-				this.setState( { terms } );
+				this.setState( {
+					page:  this.state.page + 1,
+					terms: this.state.terms.concat( terms ),
+				} );
+
+				if ( this.collection.hasMore() ) {
+					this.fetchTerms();
+				}
 			} );
 	}
 }
