@@ -74,12 +74,12 @@ class PostBrowseFilters extends React.Component {
 		};
 
 		this.state.taxonomies.forEach( taxonomy => {
-			const termIds = _get( this.state, taxonomy );
+			const termIds = _get( this.state, taxonomy.slug );
 
-			if ( termIds ) {
+			if ( termIds && termIds.length ) {
 				args = {
 					...args,
-					[ taxonomy ]: termIds,
+					[ taxonomy.slug ]: termIds,
 				};
 			}
 		} );
