@@ -80,6 +80,7 @@ class TaxonomyFilter extends React.Component {
 				page:     this.state.page,
 				per_page: 100,
 			},
+			remove: false,
 		};
 	}
 
