@@ -10,32 +10,15 @@ class TaxonomyFilter extends React.Component {
 	constructor( props ) {
 		super( props );
 
-		const { taxonomy, value } = props;
-		const CollectionClass = wp.api.getTaxonomyCollection( taxonomy );
-
 		this.state = {
-			value,
 			isLoading: false,
 			page:      1,
 			search:    '',
 			terms:     [],
+			value:     props.value,
 		};
 
-		this.collection = new CollectionClass();
-
-		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
-		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
-		this.collection.on( 'reset update', () => {
-			const terms = this.collection.map( term => ( {
-				label: term.get( 'name' ),
-				value: term.id,
-			} ) );
-
-			this.setState( {
-				terms,
-				page: this.state.page + 1,
-			} );
-		} );
+		this.createCollection();
 	}
 
 	componentDidMount() {
@@ -65,6 +48,25 @@ class TaxonomyFilter extends React.Component {
 			<label htmlFor={ id }>{ label }</label>
 			<Select { ...selectProps } />
 		</div>;
+	}
+
+	createCollection() {
+		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
+		this.collection = new CollectionClass();
+
+		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
+		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
+		this.collection.on( 'reset update', () => {
+			const terms = this.collection.map( term => ( {
+				label: term.get( 'name' ),
+				value: term.id,
+			} ) );
+
+			this.setState( {
+				terms,
+				page: this.state.page + 1,
+			} );
+		} );
 	}
 
 	updateValue( selected ) {
