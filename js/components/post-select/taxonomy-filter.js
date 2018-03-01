@@ -11,16 +11,24 @@ class TaxonomyFilter extends React.Component {
 		super( props );
 
 		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
+
+		this.state = { isLoading: false };
+
 		this.collection = new CollectionClass();
+
+		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
+		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
 	}
 
 	render() {
 		const { onChange, tax, taxonomy, value } = this.props;
 		const id = `post-select-${taxonomy}-filter`;
+		const isLoading = ( tax.isLoading || this.state.isLoading );
 		const label = _get( tax, 'data.name', taxonomy );
 
 		const selectProps = {
 			id,
+			isLoading,
 			value,
 			multi:            true,
 			backspaceRemoves: true,
