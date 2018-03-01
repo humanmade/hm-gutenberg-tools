@@ -32,11 +32,11 @@ class PostBrowseFilters extends React.Component {
 			} }
 		>
 			<div className="post-select-filters-row">
-				<label htmlFor={ `${this.id}-search` } className="screen-reader-text">
+				<label htmlFor={ `${ this.id }-search` } className="screen-reader-text">
 					{ __( 'Search posts' ) }
 				</label>
 				<input
-					id={ `${this.id}-search` }
+					id={ `${ this.id }-search` }
 					placeholder={ __( 'Search posts...' ) }
 					type="search"
 					ref={ input => this.searchInput = input } />
@@ -58,12 +58,10 @@ class PostBrowseFilters extends React.Component {
 				/>
 			) ) }
 			<Button
-				isPrimary={true}
-				isLarge={true}
+				isPrimary={ true }
+				isLarge={ true }
 				type="submit"
-			>
-				Filter Posts
-			</Button>
+			>{ __( 'Filter Posts' ) }</Button>
 		</form>
 	}
 
