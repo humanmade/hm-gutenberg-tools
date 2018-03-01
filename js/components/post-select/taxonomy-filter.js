@@ -69,7 +69,7 @@ TaxonomyFilter.defaultProps = { value: [] };
 TaxonomyFilter.propTypes = {
 	onChange: PropTypes.func.isRequired,
 	taxonomy: PropTypes.string.isRequired,
-	value:    PropTypes.array,
+	value:    PropTypes.arrayOf( PropTypes.number ),
 };
 
 const TaxonomyFilterWithAPIData = withAPIData( ( { taxonomy } ) => {
