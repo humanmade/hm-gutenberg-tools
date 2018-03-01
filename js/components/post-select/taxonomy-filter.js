@@ -29,6 +29,11 @@ class TaxonomyFilter extends React.Component {
 		}
 	}
 
+	componentWillUnmount() {
+		this.collection.off();
+		delete this.collection;
+	}
+
 	render() {
 		const { label, onChange, taxonomy } = this.props;
 		const { isLoading, terms, value } = this.state;
