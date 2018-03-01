@@ -7,27 +7,18 @@ import wp from 'wp';
 const { withAPIData } = wp.components;
 
 const TaxonomyFilter = props => {
-	const { onChange, tax, taxonomy, terms, value } = props;
+	const { onChange, tax, taxonomy, value } = props;
 	const id = `post-select-${taxonomy}-filter`;
 	const label = _get( tax, 'data.name', '' );
 
-	let selectProps = {
+	const selectProps = {
 		id,
 		value,
-		isLoading:        terms.isLoading,
+		isLoading:        true,
 		multi:            true,
 		backspaceRemoves: true,
 		onChange:         selected => onChange( selected.map( option => option.value ) ),
 	};
-
-	if ( terms.data ) {
-		selectProps = Object.assign( {}, selectProps, {
-			options: terms.data.map( term => ( {
-				label: term.name,
-				value: term.id,
-			} ) ),
-		} );
-	}
 
 	return <div className="post-select-filters-row">
 		<label htmlFor={ id }>{ label }</label>
@@ -43,18 +34,8 @@ TaxonomyFilter.propTypes = {
 	value:    PropTypes.array,
 };
 
-const TaxonomyFilterWithAPIData = withAPIData( ( props, api ) => {
-	const { taxonomy, search } = props;
-	let termsEndpoint = `/wp/v2/${ api.taxonomy( taxonomy ) }?per_page=100`;
-
-	if ( search ) {
-		termsEndpoint = `${ termsEndpoint }&search=${ search }`;
-	}
-
-	return {
-		tax:   `/wp/v2/taxonomies/${ taxonomy }`,
-		terms: termsEndpoint,
-	};
+const TaxonomyFilterWithAPIData = withAPIData( ( { taxonomy } ) => {
+	return { tax: `/wp/v2/taxonomies/${ taxonomy }` };
 } )( TaxonomyFilter );
 
 export default TaxonomyFilterWithAPIData;
