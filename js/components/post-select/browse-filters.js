@@ -45,10 +45,7 @@ class PostBrowseFilters extends React.Component {
 			</div>
 			<PostTypeFilter
 				value={ postType }
-				onChange={ nextPostType => this.setState( {
-					postType:   nextPostType,
-					taxonomies: getPostTypeTaxFilters( nextPostType ),
-				} ) }
+				onChange={ nextPostType => this.onChangePostType( nextPostType ) }
 			/>
 			{ taxonomies.map( taxonomy => (
 				<TaxonomyFilter
@@ -65,6 +62,19 @@ class PostBrowseFilters extends React.Component {
 				type="submit"
 			>{ __( 'Filter Posts' ) }</Button>
 		</form>
+	}
+
+	onChangePostType( postType ) {
+		let nextState = {
+			postType:   postType,
+			taxonomies: getPostTypeTaxFilters( postType ),
+		};
+
+		this.state.taxonomies.forEach( taxonomy => {
+			nextState = { ...nextState, [ taxonomy ]: [] };
+		} );
+
+		this.setState( nextState );
 	}
 
 	onUpdate() {
