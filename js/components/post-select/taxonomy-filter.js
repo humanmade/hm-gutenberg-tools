@@ -1,10 +1,9 @@
+/* global hmGbToolsData */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import _get from 'lodash/get';
 import wp from 'wp';
-
-const { withAPIData } = wp.components;
 
 class TaxonomyFilter extends React.Component {
 	constructor( props ) {
@@ -31,11 +30,9 @@ class TaxonomyFilter extends React.Component {
 	}
 
 	render() {
-		const { onChange, tax, taxonomy } = this.props;
-		const { terms, value } = this.state;
+		const { label, onChange, taxonomy } = this.props;
+		const { isLoading, terms, value } = this.state;
 		const id = `post-select-${taxonomy}-filter`;
-		const isLoading = ( tax.isLoading || this.state.isLoading );
-		const label = _get( tax, 'data.name', taxonomy );
 
 		const selectProps = {
 			id,
@@ -98,13 +95,10 @@ class TaxonomyFilter extends React.Component {
 TaxonomyFilter.defaultProps = { value: [] };
 
 TaxonomyFilter.propTypes = {
+	label:    PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	taxonomy: PropTypes.string.isRequired,
 	value:    PropTypes.arrayOf( PropTypes.number ),
 };
 
-const TaxonomyFilterWithAPIData = withAPIData( ( { taxonomy } ) => {
-	return { tax: `/wp/v2/taxonomies/${ taxonomy }` };
-} )( TaxonomyFilter );
-
-export default TaxonomyFilterWithAPIData;
+export default TaxonomyFilter;
