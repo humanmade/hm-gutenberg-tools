@@ -4,10 +4,11 @@ import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _get from 'lodash/get';
 
+import getPostTypeTaxFilters from '../../utils/get-post-type-tax-filters';
 import PostTypeFilter from './post-type-filter';
 import TaxonomyFilter from './taxonomy-filter';
 
-const { Button, withAPIData } = wp.components;
+const { Button } = wp.components;
 const { __ } = wp.i18n;
 
 class PostBrowseFilters extends React.Component {
@@ -16,22 +17,15 @@ class PostBrowseFilters extends React.Component {
 		super( props );
 
 		this.id = _uniqueId( 'post-select-modal-filters-' );
-		this.state = {
-			postType:   props.postType,
-			taxonomies: [],
-		};
+		this.state = { postType: props.postType };
 	}
 
 	componentWillReceiveProps( nextProps ) {
-		const { data } = nextProps.postTypeObject;
-
-		if ( data && this.state.postType === data.slug ) {
-			this.setState( { taxonomies: data.taxonomies } );
-		}
 	}
 
 	render() {
-		const { postType, taxonomies } = this.state;
+		const { postType } = this.state;
+		const taxonomies = getPostTypeTaxFilters( postType );
 
 		return <form
 			className="post-select-filters"
@@ -59,10 +53,11 @@ class PostBrowseFilters extends React.Component {
 			/>
 			{ taxonomies.map( taxonomy => (
 				<TaxonomyFilter
-					key={ `${this.id}-${taxonomy}` }
-					taxonomy={ taxonomy }
-					value={ _get( this.state, taxonomy, [] ) }
-					onChange={ value => this.setState( { [ taxonomy ]: value } ) }
+					key={ `${ this.id }-${ taxonomy.slug }` }
+					label={ taxonomy.label }
+					taxonomy={ taxonomy.slug }
+					value={ _get( this.state, taxonomy.slug, [] ) }
+					onChange={ value => this.setState( { [ taxonomy.slug ]: value } ) }
 				/>
 			) ) }
 			<Button
@@ -98,6 +93,4 @@ class PostBrowseFilters extends React.Component {
 
 PostBrowseFilters.propTypes = { onUpdate: PropTypes.func.isRequired };
 
-export default withAPIData( ( { postType } ) => {
-	return { postTypeObject: `/wp/v2/types/${ postType }` };
-} )( PostBrowseFilters );
+export default PostBrowseFilters;
