@@ -24,8 +24,14 @@ class TaxonomyFilter extends React.Component {
 		this.fetchTerms();
 	}
 
+	componentWillReceiveProps( nextProps ) {
+		if ( nextProps.value !== this.props.value ) {
+			this.setState( { value: nextProps.value } );
+		}
+	}
+
 	render() {
-		const { tax, taxonomy } = this.props;
+		const { onChange, tax, taxonomy } = this.props;
 		const { terms, value } = this.state;
 		const id = `post-select-${taxonomy}-filter`;
 		const isLoading = ( tax.isLoading || this.state.isLoading );
@@ -38,7 +44,7 @@ class TaxonomyFilter extends React.Component {
 			backspaceRemoves: true,
 			multi:            true,
 			options:          terms,
-			onChange:         selected => this.updateValue( selected ),
+			onChange:         selected => onChange( selected.map( option => option.value ) ),
 		};
 
 		return <div className="post-select-filters-row">
@@ -68,13 +74,6 @@ class TaxonomyFilter extends React.Component {
 		} );
 	}
 
-	updateValue( selected ) {
-		const nextValue = selected.map( option => option.value );
-
-		this.setState( { value: nextValue } );
-		this.props.onChange( nextValue );
-	}
-
 	getFetchOptions() {
 		return {
 			data: {
@@ -85,9 +84,6 @@ class TaxonomyFilter extends React.Component {
 		};
 	}
 
-	/**
-	 * Fetch terms
-	 */
 	fetchTerms() {
 		this.collection.fetch( this.getFetchOptions() );
 	}
