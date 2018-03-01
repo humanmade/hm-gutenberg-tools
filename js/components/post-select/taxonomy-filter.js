@@ -6,25 +6,55 @@ import wp from 'wp';
 
 const { withAPIData } = wp.components;
 
-const TaxonomyFilter = props => {
-	const { onChange, tax, taxonomy, value } = props;
-	const id = `post-select-${taxonomy}-filter`;
-	const label = _get( tax, 'data.name', taxonomy );
+class TaxonomyFilter extends React.Component {
+	constructor( props ) {
+		super( props );
 
-	const selectProps = {
-		id,
-		value,
-		isLoading:        true,
-		multi:            true,
-		backspaceRemoves: true,
-		onChange:         selected => onChange( selected.map( option => option.value ) ),
-	};
+		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
+		this.collection = new CollectionClass();
+	}
 
-	return <div className="post-select-filters-row">
-		<label htmlFor={ id }>{ label }</label>
-		<Select { ...selectProps } />
-	</div>;
-};
+	render() {
+		const { onChange, tax, taxonomy, value } = this.props;
+		const id = `post-select-${taxonomy}-filter`;
+		const label = _get( tax, 'data.name', taxonomy );
+
+		const selectProps = {
+			id,
+			value,
+			multi:            true,
+			backspaceRemoves: true,
+			loadOptions:      ( query, callback ) => this.fetchTerms( query, callback ),
+			onChange:         selected => onChange( selected.map( option => option.value ) ),
+		};
+
+		return <div className="post-select-filters-row">
+			<label htmlFor={ id }>{ label }</label>
+			<Select.Async { ...selectProps } />
+		</div>;
+	}
+
+	/**
+	 * Fetch terms
+	 *
+	 * @param {string}   query    Search query.
+	 * @param {Function} callback Function to be called when the fetch is complete.
+	 */
+	fetchTerms( query, callback ) {
+		this.collection.fetch( { data: { per_page: 100 } } )
+			.done( terms => {
+				const options = terms.map( term => ( {
+					label: term.name,
+					value: term.id,
+				} ) );
+
+				callback( null, {
+					options,
+					complete: ! this.collection.hasMore(),
+				} );
+			} );
+	}
+}
 
 TaxonomyFilter.defaultProps = { value: [] };
 
