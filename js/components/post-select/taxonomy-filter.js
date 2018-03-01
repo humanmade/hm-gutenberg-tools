@@ -25,6 +25,17 @@ class TaxonomyFilter extends React.Component {
 
 		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.collection.on( 'sync error', () => this.setState( { isLoading: false } ) );
+		this.collection.on( 'reset update', () => {
+			const terms = this.collection.map( term => ( {
+				label: term.get( 'name' ),
+				value: term.id,
+			} ) );
+
+			this.setState( {
+				terms,
+				page: this.state.page + 1,
+			} );
+		} );
 	}
 
 	componentDidMount() {
@@ -76,18 +87,7 @@ class TaxonomyFilter extends React.Component {
 	 * Fetch terms
 	 */
 	fetchTerms() {
-		this.collection.fetch( this.getFetchOptions() )
-			.done( result => {
-				const terms = result.map( term => ( {
-					label: term.name,
-					value: term.id,
-				} ) );
-
-				this.setState( {
-					page:  this.state.page + 1,
-					terms: this.state.terms.concat( terms ),
-				} );
-			} );
+		this.collection.fetch( this.getFetchOptions() );
 	}
 
 	fetchMore() {
