@@ -35,7 +35,7 @@ class TaxonomyFilter extends React.Component {
 	}
 
 	render() {
-		const { label, onChange, taxonomy } = this.props;
+		const { className, label, onChange, taxonomy } = this.props;
 		const { isLoading, terms, value } = this.state;
 		const id = `post-select-${taxonomy}-filter`;
 
@@ -49,7 +49,7 @@ class TaxonomyFilter extends React.Component {
 			onChange:         selected => onChange( selected.map( option => option.value ) ),
 		};
 
-		return <div className="post-select-filters-row">
+		return <div className={ className }>
 			<label htmlFor={ id }>{ label }</label>
 			<Select { ...selectProps } />
 		</div>;
@@ -97,13 +97,17 @@ class TaxonomyFilter extends React.Component {
 	}
 }
 
-TaxonomyFilter.defaultProps = { value: [] };
+TaxonomyFilter.defaultProps = {
+	className: 'post-select-filters-row',
+	value:     [],
+};
 
 TaxonomyFilter.propTypes = {
-	label:    PropTypes.string.isRequired,
-	onChange: PropTypes.func.isRequired,
-	taxonomy: PropTypes.string.isRequired,
-	value:    PropTypes.arrayOf( PropTypes.number ),
+	className: PropTypes.string,
+	label:     PropTypes.string.isRequired,
+	onChange:  PropTypes.func.isRequired,
+	taxonomy:  PropTypes.string.isRequired,
+	value:     PropTypes.arrayOf( PropTypes.number ),
 };
 
 export default TaxonomyFilter;
