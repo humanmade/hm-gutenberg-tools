@@ -56,7 +56,8 @@ class TaxonomyFilter extends React.Component {
 	}
 
 	createCollection() {
-		const CollectionClass = wp.api.getTaxonomyCollection( this.props.taxonomy );
+		const route = '/' + wp.api.versionString + wp.api.getTaxonomyRoute( this.props.taxonomy );
+		const CollectionClass = wp.api.getCollectionByRoute( route );
 		this.collection = new CollectionClass();
 
 		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
