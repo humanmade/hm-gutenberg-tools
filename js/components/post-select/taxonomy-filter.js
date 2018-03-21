@@ -62,7 +62,6 @@ class TaxonomyFilter extends React.Component {
 
 		this.collection.on( 'request', () => this.setState( { isLoading: true } ) );
 		this.collection.on( 'error sync', () => this.setState( { isLoading: false } ) );
-		this.collection.on( 'sync', () => this.fetchMore() );
 
 		this.collection.on( 'reset update', () => {
 			const terms = this.collection.map( term => ( {
