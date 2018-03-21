@@ -43,10 +43,11 @@ class TaxonomyFilter extends React.Component {
 			id,
 			isLoading,
 			value,
-			backspaceRemoves: true,
-			multi:            true,
-			options:          terms,
-			onChange:         selected => onChange( selected.map( option => option.value ) ),
+			backspaceRemoves:     true,
+			multi:                true,
+			options:              terms,
+			onChange:             selected => onChange( selected.map( option => option.value ) ),
+			onMenuScrollToBottom: () => this.fetchMore(),
 		};
 
 		return <div className={ className }>
