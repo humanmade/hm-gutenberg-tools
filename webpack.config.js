@@ -35,7 +35,6 @@ module.exports = {
 		jquery:             'jQuery',
 		react:              'React',
 		'react-dom':        'ReactDOM',
-		'react-dom/server': 'ReactDOMServer',
 		tinymce:            'tinymce',
 		moment:             'moment',
 		wp:                 'wp',
