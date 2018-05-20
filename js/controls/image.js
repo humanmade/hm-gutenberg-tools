@@ -2,11 +2,13 @@ import React from 'react';
 import wp from 'wp';
 
 const {
-	InspectorControls,
 	MediaUploadButton,
-} = wp.blocks;
+} = wp.editor;
 
-const { Button } = wp.components;
+const {
+	Button,
+	BaseControl,
+} = wp.components;
 
 const { __ } = wp.i18n;
 
@@ -25,7 +27,7 @@ const ImageControl = props => {
 	const uploadButtonProps = { isLarge: true };
 	const removeButtonProps = { isLarge: true, style: { marginLeft: '8px' } };
 
-	return <InspectorControls.BaseControl label={ label } id={ id } help={ help }>
+	return <BaseControl label={ label } id={ id } help={ help }>
 		{ value.src && <img
 			src={ value.src }
 			data-id={ value.id }
@@ -48,7 +50,7 @@ const ImageControl = props => {
 		>
 			{ __( 'Remove' ) }
 		</Button> }
-	</InspectorControls.BaseControl>
+	</BaseControl>
 }
 
 export default ImageControl;
