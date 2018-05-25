@@ -84,7 +84,7 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	getTerms( taxSlug, query, callback ) {
-		const Collection = wp.api.getTaxonomyCollection( taxSlug );
+		const Collection = hm.utils.api.getTaxonomyCollection( taxSlug );
 		const taxCollection = new Collection();
 
 		const fetchData = {
