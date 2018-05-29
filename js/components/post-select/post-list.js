@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import wp from 'wp' // eslint-disable-line no-unused-vars
 import PostListItem from './post-list-item';
 
-const PostList = ( { posts = [], selectedPosts = [], onToggleSelectedPost } ) => (
+const PostList = ( { posts, selectedPosts, onToggleSelectedPost } ) => (
 	<ol className="post-list">
 		{ posts.map( post => (
 			<PostListItem
@@ -22,5 +22,10 @@ PostList.propTypes = {
 	selectedPosts:         PropTypes.arrayOf( PropTypes.object ),
 	onToggleSelectedPosts: PropTypes.func.isRequired,
 };
+
+PostList.defaultProps = {
+	posts: [],
+	selectedPosts: [],
+}
 
 export default PostList;

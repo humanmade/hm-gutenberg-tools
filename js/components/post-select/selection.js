@@ -39,11 +39,10 @@ const PostSelectSelection = ( { selectedPosts, onRemoveItem, onMoveItemUp, onMov
 );
 
 PostSelectSelection.propTypes = {
-	selectedPosts:     PropTypes.array.isRequired,
-	onRemoveItem:      PropTypes.func.isRequired,
-	onRemoveItem: PropTypes.array.isRequired,
-	onMoveItemUp: PropTypes.func.isRequired,
-	onMoveItemDown:  PropTypes.func.isRequired,
+	selectedPosts:  PropTypes.array.isRequired,
+	onRemoveItem:   PropTypes.func.isRequired,
+	onMoveItemUp:   PropTypes.func.isRequired,
+	onMoveItemDown: PropTypes.func.isRequired,
 };
 
 export default PostSelectSelection;
