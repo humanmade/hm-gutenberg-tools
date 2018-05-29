@@ -46,8 +46,8 @@ class PostBrowseFilters extends React.Component {
 					</label>
 					<Select.Async
 						id={ `${this.id}-${termFilter.slug}` }
-						multi={ true }
-						backspaceRemoves={ true }
+						multi
+						backspaceRemoves
 						value={ _get( this.state, termFilter.slug ) }
 						onChange={ selectedOptions => {
 							const newState = {};
@@ -61,8 +61,8 @@ class PostBrowseFilters extends React.Component {
 				</div>
 			} ) }
 			<Button
-				isPrimary={true}
-				isLarge={true}
+				isPrimary
+				isLarge
 				type="submit"
 			>
 				Filter Posts

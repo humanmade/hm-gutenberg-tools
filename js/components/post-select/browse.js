@@ -50,19 +50,19 @@ class PostSelectBrowse extends React.Component {
 				{ isLoading && <Spinner /> }
 				{ ! isLoading && this.hasPrev() && <Button
 					className="prev-page"
-					isLarge={ true }
+					isLarge
 					onClick={ () => this.prevPostsPage() }
 					disabled={ isLoading }
 				>Previous page</Button> }
 				{ ! isLoading && <PostList
 					posts={ posts }
 					selectedPosts={ selectedPosts }
-					onToggleSelectedPosts={ post => togglePostSelected( post ) }
+					onToggleSelectedPost={ post => togglePostSelected( post ) }
 				/> }
 				{ ! isLoading && this.hasMore() && <Button
 					className="next-page"
-					isLarge={true}
 					onClick={ () => this.nextPostsPage() }
+					isLarge
 				>Next page</Button> }
 			</div>
 		</div>
