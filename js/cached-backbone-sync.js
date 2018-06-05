@@ -31,7 +31,7 @@ function cachedSync( method, model, options ) {
 		}
 
 		if ( options && options.complete ) {
-			options.complete( cache.data );
+			options.complete( cache.jqXHR );
 		}
 
 		return syncDfd && syncDfd.promise();
