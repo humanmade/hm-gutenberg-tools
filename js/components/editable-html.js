@@ -63,8 +63,6 @@ class EditableHTML extends React.Component {
 			}
 		}
 
-		console.log( 'renderToStaticmarkup', renderToStaticMarkup, value );
-
 		return renderToStaticMarkup( value );
 	}
 }
