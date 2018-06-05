@@ -1,6 +1,6 @@
 import wp from 'wp';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server'
 import HtmlToReactParser from 'html-to-react';
 import _get from 'lodash/get';
 import _flatten from 'lodash/flatten';
@@ -63,7 +63,9 @@ class EditableHTML extends React.Component {
 			}
 		}
 
-		return ReactDOMServer.renderToStaticMarkup( value );
+		console.log( 'renderToStaticmarkup', renderToStaticMarkup, value );
+
+		return renderToStaticMarkup( value );
 	}
 }
 
