@@ -34,6 +34,8 @@ module.exports = {
 		jquery:      'jQuery',
 		tinymce:     'tinymce',
 		moment:      'moment',
+		react:       'React',
+		'react-dom': 'ReactDOM',
 		wp:          'wp',
 		backbone:    'Backbone',
 	},
