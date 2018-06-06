@@ -97,6 +97,10 @@
 	text-align: left;
 	background: white;
 	position: relative;
+
+	&--meta {
+		color: #666;
+	}
 }
 
 .post-list-item:nth-child(odd) {
