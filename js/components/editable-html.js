@@ -1,12 +1,12 @@
 import wp from 'wp';
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { renderToStaticMarkup } from 'react-dom/server'
 import HtmlToReactParser from 'html-to-react';
 import _get from 'lodash/get';
 import _flatten from 'lodash/flatten';
 import _isEqual from 'lodash/isEqual';
 
-const { Editable } = wp.blocks;
+const { RichText } = wp.editor;
 
 /**
  * The Editable component doesn't really work if you're data is not stored in markup.
@@ -36,7 +36,7 @@ class EditableHTML extends React.Component {
 			onChange: value => this.setState( { text: value } ),
 		}
 
-		return <Editable { ...props } />
+		return <RichText { ...props } />
 	}
 
 	// Helper to convert multiline editable into an array of react elements.
@@ -63,7 +63,7 @@ class EditableHTML extends React.Component {
 			}
 		}
 
-		return ReactDOMServer.renderToStaticMarkup( value );
+		return renderToStaticMarkup( value );
 	}
 }
 

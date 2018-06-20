@@ -1,19 +1,18 @@
 const path = require( 'path' );
+const webpack = require( 'webpack' );
 const BundleAnalyzerPlugin = require( 'webpack-bundle-analyzer' ).BundleAnalyzerPlugin;
-const UglifyJsPlugin = require( 'uglifyjs-webpack-plugin' )
 const isProduction = ( process.env.NODE_ENV === 'production' );
 
-const plugins = [];
-
-if ( ! isProduction ) {
-	plugins.push( new BundleAnalyzerPlugin( {
+const plugins = [
+	new BundleAnalyzerPlugin( {
 		analyzerMode: 'static',
 		openAnalyzer: false,
-	} ) );
-}
+	} ),
+]
 
 if ( isProduction ) {
-	plugins.push( new UglifyJsPlugin() );
+	plugins.push( new webpack.DefinePlugin( { 'process.env.NODE_ENV': JSON.stringify('production') } ) );
+	plugins.push( new webpack.optimize.UglifyJsPlugin() );
 }
 
 module.exports = {
@@ -33,10 +32,10 @@ module.exports = {
 	},
 	externals: {
 		jquery:      'jQuery',
-		react:       'React',
-		'react-dom': 'ReactDOM',
 		tinymce:     'tinymce',
 		moment:      'moment',
+		react:       'React',
+		'react-dom': 'ReactDOM',
 		wp:          'wp',
 		backbone:    'Backbone',
 	},

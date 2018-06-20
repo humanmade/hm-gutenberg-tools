@@ -99,23 +99,25 @@ class PostSelectModal extends React.Component {
 						selectedPosts={ this.state.selectedPosts.toJSON() }
 						onUpdateSelection={ newSelectionOrder => this.updateSelectionOrder( newSelectionOrder ) }
 						onRemoveItem={ post => this.togglePostSelected( post ) }
+						onMoveItemUp={ post => this.moveItemUp( post ) }
+						onMoveItemDown={ post => this.moveItemDown( post ) }
 					/> }
 				</div>
 				<div className="media-frame-toolbar">
 					<div className="media-toolbar">
 						<Button
 							isPrimary={true}
-							isLarge={true}
+							isLarge
 							onClick={ () => onSelect( this.state.selectedPosts.toJSON() ) }
 						>Select</Button>
 						{ ( this.state.contentState !== 'selection' ) && <Button
 							isPrimary={false}
-							isLarge={true}
+							isLarge
 							onClick={ () => this.setState( { contentState: 'selection' } ) }
 						>View / Edit Selected Posts</Button> }
 						{ ( this.state.contentState !== 'browse' ) && <Button
 							isPrimary={false}
-							isLarge={true}
+							isLarge
 							onClick={ () => this.setState( { contentState: 'browse' } ) }
 						>Browse posts</Button> }
 					</div>
@@ -134,6 +136,42 @@ class PostSelectModal extends React.Component {
 		} else if ( selectedPosts.length < maxPosts ) {
 			newSelectedPosts.push( post );
 		}
+
+		this.setState( { selectedPosts: newSelectedPosts } );
+	}
+
+	moveItemUp( post ) {
+		const { selectedPosts } = this.state;
+		const newSelectedPosts = selectedPosts.clone();
+		const item = selectedPosts.find( _post => post.id === _post.id );
+		const index = selectedPosts.findIndex( _post => post.id === _post.id );
+
+		if ( ! item || index < 1 ) {
+			return;
+		}
+
+		const insertAfterItem = selectedPosts.at( index - 1 );
+
+		newSelectedPosts.remove( item );
+		newSelectedPosts.add( item, { at: newSelectedPosts.indexOf( insertAfterItem ) } );
+
+		this.setState( { selectedPosts: newSelectedPosts } );
+	}
+
+	moveItemDown( post ) {
+		const { selectedPosts } = this.state;
+		const newSelectedPosts = selectedPosts.clone();
+		const item = selectedPosts.find( _post => post.id === _post.id );
+		const index = selectedPosts.indexOf( item );
+
+		if ( ! item || index > selectedPosts.length - 1 ) {
+			return;
+		}
+
+		const insertAfterItem = selectedPosts.at( index + 1 );
+
+		newSelectedPosts.remove( item );
+		newSelectedPosts.add( item, { at: newSelectedPosts.indexOf( insertAfterItem ) + 1 } );
 
 		this.setState( { selectedPosts: newSelectedPosts } );
 	}

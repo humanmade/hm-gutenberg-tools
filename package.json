@@ -59,14 +59,11 @@
     "postcss-clean": "^1.1.0",
     "postcss-cli": "^4.1.1",
     "prop-types": "^15.6.0",
-    "react": "^16.2.0",
-    "react-dnd": "^2.5.4",
-    "react-dnd-html5-backend": "^2.5.4",
-    "react-dom": "^16.2.0",
+    "react": "16.3.0",
+    "react-dom": "16.3.0",
     "react-select": "^1.2.1",
-    "react-test-renderer": "^16.2.0",
+    "react-test-renderer": "^16.3.0",
     "react-wp-scripts": "^0.1.1",
-    "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.10.0"
   }

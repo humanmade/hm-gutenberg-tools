@@ -6,9 +6,10 @@ import _get from 'lodash/get';
 import PostSelectButton from '../components/post-select/button';
 import getPostTypeCollection from '../utils/get-post-type-collection';
 
-const { InspectorControls } = wp.blocks;
-
-const { Spinner } = wp.components;
+const {
+	Spinner,
+	BaseControl,
+} = wp.components;
 
 const { __ } = wp.i18n;
 
@@ -55,7 +56,7 @@ class PostControl extends React.Component {
 		postSelectProps.btnProps = postSelectProps.btnProps || {};
 		postSelectProps.btnProps.isLarge = true;
 
-		return <InspectorControls.BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
+		return <BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
 			<PostSelectButton
 				{ ...postSelectProps }
 				value={ value }
@@ -75,7 +76,7 @@ class PostControl extends React.Component {
 					</ul>
 				) }
 			</div> }
-		</InspectorControls.BaseControl>
+		</BaseControl>
 	}
 }
 

@@ -5,18 +5,22 @@ import wp from 'wp';
 const {
 	InspectorControls,
 	UrlInput,
-} = wp.blocks;
+} = wp.editor;
+
+const {
+	BaseControl
+} = wp.components;
 
 /**
  * InspectorControl for image upload.
  */
 const LinkControl = ( { label, id, help, onChange, value } ) => {
-	return <InspectorControls.BaseControl label={ label } id={ id } help={ help } className="hm-link-control">
+	return <BaseControl label={ label } id={ id } help={ help } className="hm-link-control">
 		<UrlInput
 			value={ value }
 			onChange={ onChange }
 		/>
-	</InspectorControls.BaseControl>
+	</BaseControl>
 }
 
 LinkControl.propTypes = {
