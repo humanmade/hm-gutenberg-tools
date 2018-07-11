@@ -63,6 +63,13 @@ class EditableHTML extends React.Component {
 			}
 		}
 
+		// Strip empty children.
+		if ( this.props.multiline ) {
+			value = value.filter( child => (
+				( child.type !== this.props.multiline ) || child.props.children && child.props.children.length > 0
+			) );
+		}
+
 		return renderToStaticMarkup( value );
 	}
 }
