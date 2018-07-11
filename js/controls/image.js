@@ -2,7 +2,7 @@ import React from 'react';
 import wp from 'wp';
 
 const {
-	MediaUploadButton,
+	MediaUpload,
 } = wp.editor;
 
 const {
@@ -36,13 +36,16 @@ const ImageControl = props => {
 			style={ { display: 'block', marginBottom: '8px' } }
 		/> }
 
-		<MediaUploadButton
-			buttonProps={ uploadButtonProps }
+		<MediaUpload
 			onSelect={ onChange }
 			type="image"
-		>
-			{ value.src ? __( 'Change' ) : __( 'Select' ) }
-		</MediaUploadButton>
+			value={ value.id }
+			render={ ( { open } ) => (
+				<Button { ...uploadButtonProps } onClick={ open }>
+					{ value.src ? __( 'Change' ) : __( 'Select' ) }
+				</Button>
+			) }
+		/>
 
 		{ value.src && <Button
 			{ ...removeButtonProps }
