@@ -3,7 +3,6 @@ import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server'
 import HtmlToReactParser from 'html-to-react';
 import _get from 'lodash/get';
-import _flatten from 'lodash/flatten';
 import _isEqual from 'lodash/isEqual';
 
 const { RichText } = wp.editor;
@@ -62,15 +61,13 @@ class EditableHTML extends React.Component {
 		// Strip all empty items.
 		// Strip last item if br.
 		const filteredValue = value.filter( ( child, i ) => {
-			if ( ! child || ! child.type ) {
+			const type =_get( child, 'type' );
+
+			if ( type && type === multiline && ! ( child.props.children && child.props.children.length > 0 ) ) {
 				return false;
 			}
 
-			if ( child.type === multiline && ! ( child.props.children && child.props.children.length > 0 ) ) {
-				return false;
-			}
-
-			if ( child.type === 'br' && ( i + 1 ) === value.length ) {
+			if ( type && type === 'br' && ( i + 1 ) === value.length ) {
 				return false;
 			}
 
