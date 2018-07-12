@@ -33,7 +33,7 @@ class EditableHTML extends React.Component {
 		const props = {
 			...this.props,
 			value:    this.state.text,
-			onChange: value => this.setState( { text: value } ),
+			onChange: text => this.setState( { text } ),
 		}
 
 		return <RichText { ...props } />
@@ -47,30 +47,37 @@ class EditableHTML extends React.Component {
 
 		const parser = new HtmlToReactParser.Parser();
 		const parsed = parser.parse( '<div>' + value + '</div>' );
+
 		return React.Children.toArray( parsed.props.children );
 	}
 
 	// Helper to convert react elements into array of strings.
 	fromEditableValue( value ) {
-		// Strip last item if br or empty.
-		if ( Array.isArray( value ) && value.length > 1 ) {
-			let last = value.slice( -1 )[0];
-			if (
-				last === '' ||
-				( typeof last === 'object' && 'type' in last && last.type === 'br' )
-			) {
-				value.pop();
+		const { multiline } = this.props;
+
+		if ( ! Array.isArray( value ) ) {
+			return value;
+		}
+
+		// Strip all empty items.
+		// Strip last item if br.
+		const filteredValue = value.filter( ( child, i ) => {
+			if ( ! child || ! child.type ) {
+				return false;
 			}
-		}
 
-		// Strip empty children.
-		if ( this.props.multiline ) {
-			value = value.filter( child => (
-				( child.type !== this.props.multiline ) || child.props.children && child.props.children.length > 0
-			) );
-		}
+			if ( child.type === multiline && ! ( child.props.children && child.props.children.length > 0 ) ) {
+				return false;
+			}
 
-		return renderToStaticMarkup( value );
+			if ( child.type === 'br' && ( i + 1 ) === value.length ) {
+				return false;
+			}
+
+			return true;
+		} );
+
+		return renderToStaticMarkup( filteredValue );
 	}
 }
 
