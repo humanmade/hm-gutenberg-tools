@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 
 const {
-	InspectorControls,
-	UrlInput,
+	URLInput,
 } = wp.editor;
 
 const {
@@ -16,7 +15,7 @@ const {
  */
 const LinkControl = ( { label, id, help, onChange, value } ) => {
 	return <BaseControl label={ label } id={ id } help={ help } className="hm-link-control">
-		<UrlInput
+		<URLInput
 			value={ value }
 			onChange={ onChange }
 		/>
