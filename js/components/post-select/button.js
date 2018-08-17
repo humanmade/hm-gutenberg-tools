@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-import PostSelectModal from './modal';
+import PostSelectModal from './modal-container';
 
 const { Button } = wp.components;
 
@@ -21,9 +21,7 @@ class PostSelectButton extends React.Component {
 		} = this.props;
 
 		const { modalVisible } = this.state;
-
 		const onClose = () => this.setState( { modalVisible: false } );
-
 		btnProps.onClick = () => this.setState( { modalVisible: true } );
 
 		return <div className="post-select">
@@ -31,13 +29,13 @@ class PostSelectButton extends React.Component {
 			{ modalVisible && (
 				ReactDOM.createPortal(
 					<PostSelectModal
-						{ ...this.props }
+						{ ...this.props.postSelectProps }
 						onSelect={ posts => {
 							onSelect( posts );
 							onClose();
 						} }
 						onClose={ onClose }
-						selectedPosts={ value }
+						selectedPostIds={ value }
 					/>,
 					document.getElementById( 'wpbody' )
 				)
@@ -47,10 +45,13 @@ class PostSelectButton extends React.Component {
 }
 
 PostSelectButton.propTypes = {
-	btnText:     PropTypes.string,
-	onSelect:    PropTypes.func.isRequired,
-	postType:    PropTypes.string,
-	termFilters: PropTypes.object,
+	onSelect: PropTypes.func.isRequired,
+	value: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+		PropTypes.array,
+	]),
+	btnProps: PropTypes.object,
 }
 
 export default PostSelectButton;

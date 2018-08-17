@@ -1,11 +1,23 @@
 import React from 'react';
-import wp from 'wp';
+import PropTypes from 'prop-types';
 import _get from 'lodash/get';
 
-const { withAPIData } = wp.components;
+const { withSelect } = wp.data;
 
-const PostListItemAuthor = ( { user } ) => {
-	return <span><b>Author:</b> { user.isLoading ? ' loading...' : _get( user, 'data.name', '' ) }</span>;
+const PostListItemAuthor = ( { author } ) => (
+	<span><b>Author:</b> { author ? _get( author, 'name', '' ) : ' loading...' }</span>
+);
+
+PostListItemAuthor.propTypes = {
+	id: PropTypes.number.isRequired,
+	author: PropTypes.object,
 }
 
-export default withAPIData( ( { id } ) => ( { user: `/wp/v2/users/${ id }` } ) )( PostListItemAuthor );
+/**
+ * Core seems to only support fetching all users at once.
+ * But since this data is probably available already, lets use it.
+ */
+export default withSelect( ( select, ownProps ) => ({
+	...ownProps,
+	author: select( 'core' ).getAuthors().find( a => ownProps.id === a.id ),
+}))( PostListItemAuthor );

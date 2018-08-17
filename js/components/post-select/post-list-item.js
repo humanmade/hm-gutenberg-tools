@@ -7,9 +7,7 @@ import getPostTypeLabel from '../../utils/get-post-type-label';
 import PostListItemAuthor from './post-list-item-author';
 import PostListItemActions from './post-list-item-actions';
 
-const { Button } = wp.components;
-
-const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) => {
+const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 	const meta =[
 		<span><b>Type:</b> { getPostTypeLabel( post.type ) }</span>,
 		<span><b>Published:</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>,
@@ -22,23 +20,22 @@ const PostListItem = ( { post, onClick, isSelected, onSelectItem, actions } ) =>
 	return (
 		<li
 			className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }
-			onClick={ () => onSelectItem() }
+			onClick={ () => onToggleSelected() }
 		>
 			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
 			<div className="post-list-item--meta">
 				{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
 			</div>
-			<PostListItemActions actions={ actions }/>
+			<PostListItemActions actions={ actions } />
 		</li>
 	);
 }
 
 PostListItem.propTypes = {
 	post:         PropTypes.object.isRequired,
-	onClick:      PropTypes.func.isRequired,
 	isSelected:   PropTypes.bool,
 	actions:      PropTypes.array,
-	onSelectItem: PropTypes.func,
+	onToggleSelected: PropTypes.func,
 }
 
 PostListItem.defaultProps = {
