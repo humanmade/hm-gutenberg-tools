@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
-import _get from 'lodash/get';
 import _uniqueId from 'lodash/uniqueId';
-import _indexOf from 'lodash/indexOf';
 import _isEqual from 'lodash/isEqual';
 
 import getPostTypeCollection from '../../utils/get-post-type-collection';
@@ -11,14 +9,13 @@ import getPostTypeTaxFilters from '../../utils/get-post-type-tax-filters';
 import Modal from './modal';
 
 const { __ } = wp.i18n;
-const { withSelect } = wp.data;
 
 class PostSelectModal extends React.Component {
 	static defaultProps = {
 		minPosts: 1,
 		maxPosts: 1,
 		postType: 'post',
-		selectedPosts: [],
+		value: [],
 	};
 
 	static propTypes = {
@@ -31,19 +28,11 @@ class PostSelectModal extends React.Component {
 
 	constructor( props ) {
 		super( props );
-		this.id = _uniqueId( 'post-select-modal' );
 
 		this.state = {
 			contentState: 'browse',
-			selectedPosts: this.props.selectedPosts,
+			selection: this.props.value,
 		};
-	}
-
-	componentDidUpdate() {
-		if ( ! _isEqual( this.props.selectedPosts, this.state.selectedPosts ) ) {
-			console.log( 'Updating selected posts' );
-			this.setState({ selectedPosts: this.props.selectedPosts });
-		}
 	}
 
 	render() {
@@ -56,107 +45,70 @@ class PostSelectModal extends React.Component {
 		} = this.props;
 
 		const {
-			selectedPosts,
+			selection,
 			contentState,
 		} = this.state;
 
 		return <Modal
 			modalTitle={ modalTitle }
 			postType={ postType }
-			onSelect={ onSelect }
+			onSelect={ () => onSelect( selection ) }
 			onClose={ onClose }
-			onUpdateSelectionOrder={ newSelection => this.updateSelection( newSelection ) }
 			onToggleSelected={ id => this.toggleSelected( id ) }
 			onMoveItemDown={ id => this.moveItemDown(id) }
 			onMoveItemUp={ id => this.moveItemUp(id) }
 			onChangeContentState={ contentState => this.setState( { contentState } ) }
 			termFilters={ termFilters }
 			contentState={ contentState }
-			selectedPosts={ selectedPosts }
-
+			selection={ selection }
 		/>
 	}
 
 	toggleSelected( id ) {
-		console.log( 'toggleSelected', id );
-		// const { selectedPosts } = this.state;
-		// const { maxPosts } = this.props;
-		// const newSelectedPosts = selectedPosts.clone();
+		const newSelection = [ ...this.state.selection ];
+		const index = newSelection.indexOf( id );
 
-		// if ( selectedPosts.findWhere( { id: post.id } ) ) {
-		// 	newSelectedPosts.remove( post.id );
-		// } else if ( selectedPosts.length < maxPosts ) {
-		// 	newSelectedPosts.push( post );
-		// }
+		if ( index >= 0 ) {
+			newSelection.splice( index, 1 );
+		} else {
+			newSelection.push( id );
+		}
 
-		// this.setState( { selectedPosts: newSelectedPosts } );
+		this.setState( { selection: newSelection } );
 	}
 
 	moveItemUp( id ) {
-		console.log( 'moveItemUp', id );
-		// const { selectedPosts } = this.state;
-		// const newSelectedPosts = selectedPosts.clone();
-		// const item = selectedPosts.find( _post => post.id === _post.id );
-		// const index = selectedPosts.findIndex( _post => post.id === _post.id );
+		const { selection } = this.state;
+		const newSelection = [ ...selection ];
+		const index = selection.indexOf( id );
 
-		// if ( ! item || index < 1 ) {
-		// 	return;
-		// }
+		if ( index < 1 ) {
+			return;
+		}
 
-		// const insertAfterItem = selectedPosts.at( index - 1 );
+		const insertAfterItem = selection[ index - 1 ];
+		newSelection.splice( index, 1 );
+		newSelection.splice( newSelection.indexOf( insertAfterItem ), 0, id );
 
-		// newSelectedPosts.remove( item );
-		// newSelectedPosts.add( item, { at: newSelectedPosts.indexOf( insertAfterItem ) } );
-
-		// this.setState( { selectedPosts: newSelectedPosts } );
+		this.setState( { selection: newSelection } );
 	}
 
 	moveItemDown( id ) {
 		console.log( 'moveItemDown', id );
-		// const { selectedPosts } = this.state;
-		// const newSelectedPosts = selectedPosts.clone();
-		// const item = selectedPosts.find( _post => post.id === _post.id );
-		// const index = selectedPosts.indexOf( item );
+		const { selection } = this.state;
+		const newSelection = [ ...selection ];
+		const index = selection.indexOf( id );
 
-		// if ( ! item || index > selectedPosts.length - 1 ) {
-		// 	return;
-		// }
+		if ( index > selection.length - 1 ) {
+			return;
+		}
 
-		// const insertAfterItem = selectedPosts.at( index + 1 );
+		const insertAfterItem = selection[ index + 1 ];
+		newSelection.splice( index, 1 );
 
-		// newSelectedPosts.remove( item );
-		// newSelectedPosts.add( item, { at: newSelectedPosts.indexOf( insertAfterItem ) + 1 } );
-
-		// this.setState( { selectedPosts: newSelectedPosts } );
-	}
-
-	updateSelection( newSelection ) {
-		console.log( 'updateSelection', newSelection );
-		// const newSelectedPosts = this.state.selectedPosts.clone();
-
-		// newSelectedPosts.comparator = post => _indexOf( newSelectionOrder, post.id );
-		// newSelectedPosts.sort();
-
-		// this.setState( { selectedPosts: newSelectedPosts } );
+		newSelection.splice( newSelection.indexOf( insertAfterItem ) + 1, 0, id );
+		this.setState( { selection: newSelection } );
 	}
 }
 
-
-const applyWithSelect = withSelect( ( select, ownProps ) => {
-	const { getEntityRecords } = select( 'core' );
-
-	const {
-		postType = 'post',
-		selectedPostIds = [],
-	} = ownProps;
-
-	const selectedPosts = getEntityRecords( 'postType', postType, { include: selectedPostIds } )
-
-	return {
-		...ownProps,
-		selectedPosts: selectedPosts || [],
-	}
-})
-
-
-export default applyWithSelect( PostSelectModal );
+export default PostSelectModal;

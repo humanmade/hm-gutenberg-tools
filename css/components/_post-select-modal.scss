@@ -63,6 +63,10 @@
 	border-right-color: #ccc;
 }
 
+.post-select .no-selection {
+	padding: 16px;
+}
+
 .post-list {
 	overflow: auto;
 	list-style: none;
@@ -70,8 +74,9 @@
 	padding: 0;
 }
 
+
 .post-select .media-modal-content .components-spinner {
-	float: left;
+	float: none;
 	margin: 16px;
 }
 
@@ -100,6 +105,12 @@
 
 	&--meta {
 		color: #666;
+	}
+
+	.components-spinner {
+		float: none;
+		display: block;
+		margin: 16px;
 	}
 }
 

@@ -5,7 +5,6 @@ import moment from 'moment';
 import classNames from 'classnames';
 import getPostTypeLabel from '../../utils/get-post-type-label';
 import PostListItemAuthor from './post-list-item-author';
-import PostListItemActions from './post-list-item-actions';
 
 const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 	const meta =[
@@ -20,13 +19,12 @@ const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 	return (
 		<li
 			className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }
-			onClick={ () => onToggleSelected() }
+			onClick={ () => onToggleSelected ? onToggleSelected() : null }
 		>
 			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
 			<div className="post-list-item--meta">
 				{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
 			</div>
-			<PostListItemActions actions={ actions } />
 		</li>
 	);
 }

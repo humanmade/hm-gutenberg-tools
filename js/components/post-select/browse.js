@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 
 import PostSelectBrowseFilters from './browse-filters';
-import PostList from './post-list';
+import PostListItem from './post-list-item';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -13,7 +13,7 @@ const PostSelectBrowse = props => {
 	const {
 		posts,
 		isLoading,
-		selectedPosts,
+		selection,
 		onToggleSelected,
 		termFilters,
 		hasPrev,
@@ -39,11 +39,18 @@ const PostSelectBrowse = props => {
 					onClick={ () => onPrevPostsPage() }
 					disabled={ isLoading }
 				>Previous page</Button> }
-				{ ! isLoading && <PostList
-					posts={ posts }
-					selectedPosts={ selectedPosts }
-					onToggleSelected={ onToggleSelected }
-				/> }
+				{ ! isLoading && (
+					<ol className="post-list">
+						{ posts.map( post => (
+							<PostListItem
+								key={ post.id }
+								post={ post }
+								onToggleSelected={ () => onToggleSelected( post.id ) }
+								isSelected={ selection.length ? selection.indexOf( post.id ) >= 0 : false }
+							/>
+						) ) }
+					</ol>
+				) }
 				{ ! isLoading && hasMore && <Button
 					className="next-page"
 					onClick={ () => onNextPostsPage() }
@@ -56,7 +63,7 @@ const PostSelectBrowse = props => {
 
 PostSelectBrowse.propTypes = {
 	postType:           PropTypes.string,
-	selectedPosts:      PropTypes.array,
+	selection:      PropTypes.array,
 	onToggleSelected: PropTypes.func.isRequired,
 	termFilters:        PropTypes.arrayOf( PropTypes.shape( {
 		slug:  PropTypes.string.isRequired,

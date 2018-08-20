@@ -35,7 +35,7 @@ class PostSelectButton extends React.Component {
 							onClose();
 						} }
 						onClose={ onClose }
-						selectedPostIds={ value }
+						value={ value }
 					/>,
 					document.getElementById( 'wpbody' )
 				)

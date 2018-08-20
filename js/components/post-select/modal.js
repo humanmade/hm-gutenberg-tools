@@ -15,14 +15,13 @@ const PostSelectModal = props => {
 		postType,
 		onSelect,
 		onClose,
-		onUpdateSelectionOrder,
 		onToggleSelected,
 		onMoveItemUp,
 		onMoveItemDown,
 		onChangeContentState,
 		contentState,
 		termFilters,
-		selectedPosts,
+		selection,
 	} = props;
 
 	return <div className="post-select post-select-modal">
@@ -39,15 +38,15 @@ const PostSelectModal = props => {
 			</div>
 			<div className="media-modal-content">
 				{ ( contentState === 'browse' ) && <PostSelectBrowse
-					selectedPosts={ selectedPosts }
+					selection={ selection }
 					postType={ postType }
 					onToggleSelected={ onToggleSelected }
 					termFilters={ termFilters }
 				/> }
 				{ ( contentState === 'selection' ) && <PostSelectSelection
-					selectedPosts={ selectedPosts }
-					onUpdateSelection={ newSelectionOrder => onUpdateSelectionOrder( newSelectionOrder ) }
-					onRemoveItem={ post => onToggleSelected( post ) }
+					selection={ selection }
+					postType={ postType }
+					onRemoveItem={ post => onToggleSelected( id ) }
 					onMoveItemUp={ post => onMoveItemUp( post ) }
 					onMoveItemDown={ post => onMoveItemDown( post ) }
 				/> }
@@ -83,21 +82,20 @@ PostSelectModal.defaultProps = {
 	postType: 'post',
 	modalTitle: __( 'Select a post' ),
 	contentState: 'browse',
-	selectedPosts: [],
+	selection: [],
 };
 
 PostSelectModal.propTypes = {
 	postType: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
 	onClose:  PropTypes.func.isRequired,
-	onUpdateSelectionOrder: PropTypes.func.isRequired,
 	onToggleSelected: PropTypes.func.isRequired,
 	onMoveItemUp: PropTypes.func.isRequired,
 	onMoveItemDown: PropTypes.func.isRequired,
 	onChangeContentState: PropTypes.func.isRequired,
 	contentState: PropTypes.string.isRequired,
 	termFilters: PropTypes.array.isRequired,
-	selectedPosts: PropTypes.array,
+	selection: PropTypes.array,
 };
 
 export default PostSelectModal;
