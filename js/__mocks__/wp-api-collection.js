@@ -3,7 +3,7 @@ class MockCollection {
 		return new Promise( ( resolve, reject ) => {
 			process.nextTick( () => resolve( [
 				{
-					id:   1,
+					id: 1,
 					name: 'sport',
 				},
 			] ) );

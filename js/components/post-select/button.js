@@ -24,7 +24,7 @@ class PostSelectButton extends React.Component {
 		const onClose = () => this.setState( { modalVisible: false } );
 		btnProps.onClick = () => this.setState( { modalVisible: true } );
 
-		return <div className="post-select">
+		return ( <div className="post-select">
 			<Button { ...btnProps }>{ children }</Button>
 			{ modalVisible && (
 				ReactDOM.createPortal(
@@ -40,17 +40,17 @@ class PostSelectButton extends React.Component {
 					document.getElementById( 'wpbody' )
 				)
 			) }
-		</div>
+		</div> )
 	}
 }
 
 PostSelectButton.propTypes = {
 	onSelect: PropTypes.func.isRequired,
-	value: PropTypes.oneOfType([
+	value: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.number,
 		PropTypes.array,
-	]),
+	] ),
 	btnProps: PropTypes.object,
 }
 

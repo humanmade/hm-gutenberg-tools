@@ -11,17 +11,17 @@ import PostBrowseFilters from '../../../components/post-select/browse-filters';
 
 test( 'Browse Filters ', () => {
 	const props = {
-		onUpdate:    jest.fn(),
+		onUpdate: jest.fn(),
 		termFilters: [
 			{
-				slug:  'foo',
+				slug: 'foo',
 				label: 'Foo',
-				rest:  'foo/foo',
+				rest: 'foo/foo',
 			},
 			{
-				slug:  'bar',
+				slug: 'bar',
 				label: 'Bar',
-				rest:  'bar/bar',
+				rest: 'bar/bar',
 			},
 		],
 	};
@@ -47,17 +47,17 @@ it( 'Browse filters load options', done => {
 	expect.assertions( 1 );
 
 	const props = {
-		onUpdate:    jest.fn(),
+		onUpdate: jest.fn(),
 		termFilters: [
 			{
-				slug:  'foo',
+				slug: 'foo',
 				label: 'Foo',
-				rest:  'foo/foo',
+				rest: 'foo/foo',
 			},
 			{
-				slug:  'bar',
+				slug: 'bar',
 				label: 'Bar',
-				rest:  'bar/bar',
+				rest: 'bar/bar',
 			},
 		],
 	};

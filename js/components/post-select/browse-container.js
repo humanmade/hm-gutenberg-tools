@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
-import _get from 'lodash/get';
-import _extend from 'lodash/extend';
-import _isEqual from 'lodash/isEqual';
 
 import Browse from './browse';
 
@@ -13,10 +10,9 @@ const { addQueryArgs } = wp.url;
 
 class PostSelectBrowse extends React.Component {
 	state = {
-		posts:     [],
-		isLoading: false,
-		filters:   {},
-		page:      1,
+		posts: [],
+		filters: {},
+		page: 1,
 		isLoading: false,
 		hasPrev: false,
 		hasMore: true,
@@ -34,7 +30,7 @@ class PostSelectBrowse extends React.Component {
 		const { posts, isLoading, hasPrev, hasMore } = this.state;
 		const { selection, onToggleSelected, termFilters } = this.props;
 
-		return <Browse
+		return ( <Browse
 			posts={ posts }
 			isLoading={ isLoading }
 			selection={ selection }
@@ -45,7 +41,7 @@ class PostSelectBrowse extends React.Component {
 			onPrevPostsPage={ () => this.prevPage() }
 			onNextPostsPage={ () => this.nextPage() }
 			onUpdateFilters={ filters => this.updateFilters( filters ) }
-		/>
+		/> )
 	}
 
 	fetchPosts() {
@@ -67,7 +63,7 @@ class PostSelectBrowse extends React.Component {
 			path: addQueryArgs( 'wp/v2/pages/', query ),
 			parse: false,
 			signal: this.fetchPostAbortController.signal,
-		} ).then( response => Promise.all([
+		} ).then( response => Promise.all( [
 			response.json ? response.json() : [],
 			parseInt( response.headers.get( 'x-wp-totalpages' ), 10 ),
 		] ) ).then( ( [ posts, totalPages ] ) => {
@@ -103,18 +99,18 @@ class PostSelectBrowse extends React.Component {
 }
 
 PostSelectBrowse.propTypes = {
-	postType:           PropTypes.string,
-	selection:          PropTypes.array,
+	postType: PropTypes.string,
+	selection: PropTypes.array,
 	onToggleSelected: PropTypes.func.isRequired,
-	termFilters:        PropTypes.arrayOf( PropTypes.shape( {
-		slug:  PropTypes.string.isRequired,
+	termFilters: PropTypes.arrayOf( PropTypes.shape( {
+		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
-		rest:  PropTypes.string.isRequired,
+		rest: PropTypes.string.isRequired,
 	} ) ).isRequired,
 }
 
 const PostSelectBrowseContainer = withDispatch( ( dispatch, ownProps ) => {
-	const { receiveEntityRecords } = dispatch('core');
+	const { receiveEntityRecords } = dispatch( 'core' );
 
 	return {
 		storePost: post => receiveEntityRecords( 'postType', ownProps.postType, post ),

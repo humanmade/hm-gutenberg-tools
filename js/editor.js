@@ -26,7 +26,7 @@ window.hm = {
 			getPostTypeModel,
 			getPostTypeCollection,
 			getTaxonomyCollection,
-		}
-	}
+		},
+	},
 };
 

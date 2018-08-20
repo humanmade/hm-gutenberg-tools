@@ -26,7 +26,7 @@ const SelectionListItem = ( { post, isSelected, actions } ) => {
 
 	return (
 		<li className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }>
-			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered }} />
+			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 			<div className="post-list-item--meta">
 				{ meta.map( ( metaItem, i ) => (
 					<Fragment key={ i }>{ metaItem }</Fragment>
@@ -64,7 +64,7 @@ const SelectionListItemContainer = withSelect( ( select, ownProps ) => {
 		...ownProps,
 		post: getEntityRecord( 'postType', postType, postId ),
 	}
-})( SelectionListItem );
+} )( SelectionListItem );
 
 SelectionListItemContainer.propTypes = {
 	postId: PropTypes.number.isRequired,

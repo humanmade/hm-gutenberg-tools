@@ -1,6 +1,6 @@
 ---
 extends:
-- ./vendor/humanmade/coding-standards/.eslintrc.yml
+- ./vendor/humanmade/coding-standards/packages/eslint-config-humanmade/.eslintrc
 env:
   browser: true
   node: true

@@ -19,7 +19,7 @@ const { __ } = wp.i18n;
 class PostControl extends React.Component {
 	state = {
 		isLoading: false,
-		posts:     [],
+		posts: [],
 	};
 
 	componentDidMount() {
@@ -32,8 +32,17 @@ class PostControl extends React.Component {
 			const collection = new Collection();
 
 			this.setState( { isLoading: true } );
-			collection.fetch( { hmCache: 120, data: { per_page: value.length, include: value } } )
-				.then( () => this.setState( { posts: collection.toJSON(), isLoading: false } ) );
+			collection.fetch( {
+				hmCache: 120,
+				data: {
+					per_page: value.length,
+					include: value,
+				},
+			} )
+				.then( () => this.setState( {
+					posts: collection.toJSON(),
+					isLoading: false,
+				} ) );
 		}
 	}
 
@@ -56,7 +65,7 @@ class PostControl extends React.Component {
 		postSelectProps.btnProps = postSelectProps.btnProps || {};
 		postSelectProps.btnProps.isLarge = true;
 
-		return <BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
+		return ( <BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
 			<PostSelectButton
 				{ ...postSelectProps }
 				value={ value }
@@ -76,16 +85,16 @@ class PostControl extends React.Component {
 					</ul>
 				) }
 			</div> }
-		</BaseControl>
+		</BaseControl> )
 	}
 }
 
 PostControl.propTypes = {
-	label:    PropTypes.string.isRequired,
-	help:     PropTypes.string,
-	id:       PropTypes.string,
+	label: PropTypes.string.isRequired,
+	help: PropTypes.string,
+	id: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
-	value:    PropTypes.arrayOf( PropTypes.number ).isRequired,
+	value: PropTypes.arrayOf( PropTypes.number ).isRequired,
 }
 
 export default PostControl;

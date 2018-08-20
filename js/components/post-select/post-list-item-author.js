@@ -17,7 +17,7 @@ PostListItemAuthor.propTypes = {
  * Core seems to only support fetching all users at once.
  * But since this data is probably available already, lets use it.
  */
-export default withSelect( ( select, ownProps ) => ({
+export default withSelect( ( select, ownProps ) => ( {
 	...ownProps,
 	author: select( 'core' ).getAuthors().find( a => ownProps.id === a.id ),
-}))( PostListItemAuthor );
+} ) )( PostListItemAuthor );

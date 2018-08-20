@@ -21,19 +21,28 @@ const ImageControl = props => {
 		id,
 		help,
 		onChange,
-		value = { id: null, src: null },
+		value = {
+			id: null,
+			src: null,
+		},
 	} = props;
 
 	const uploadButtonProps = { isLarge: true };
-	const removeButtonProps = { isLarge: true, style: { marginLeft: '8px' } };
+	const removeButtonProps = {
+		isLarge: true,
+		style: { marginLeft: '8px' },
+	};
 
-	return <BaseControl label={ label } id={ id } help={ help }>
+	return ( <BaseControl label={ label } id={ id } help={ help }>
 		{ value.src && <img
 			src={ value.src }
 			data-id={ value.id }
 			width="100"
 			height="100"
-			style={ { display: 'block', marginBottom: '8px' } }
+			style={ {
+				display: 'block',
+				marginBottom: '8px',
+			} }
 		/> }
 
 		<MediaUpload
@@ -53,7 +62,7 @@ const ImageControl = props => {
 		>
 			{ __( 'Remove' ) }
 		</Button> }
-	</BaseControl>
+	</BaseControl> )
 }
 
 export default ImageControl;

@@ -62,13 +62,13 @@ const PostSelectBrowse = props => {
 }
 
 PostSelectBrowse.propTypes = {
-	postType:           PropTypes.string,
-	selection:      PropTypes.array,
+	postType: PropTypes.string,
+	selection: PropTypes.array,
 	onToggleSelected: PropTypes.func.isRequired,
-	termFilters:        PropTypes.arrayOf( PropTypes.shape( {
-		slug:  PropTypes.string.isRequired,
+	termFilters: PropTypes.arrayOf( PropTypes.shape( {
+		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
-		rest:  PropTypes.string.isRequired,
+		rest: PropTypes.string.isRequired,
 	} ) ).isRequired,
 	hasPrev: PropTypes.bool.isRequired,
 	hasMore: PropTypes.bool.isRequired,

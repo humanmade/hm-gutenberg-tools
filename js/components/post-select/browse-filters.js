@@ -19,7 +19,7 @@ class PostBrowseFilters extends React.Component {
 	render() {
 		const { termFilters } = this.props;
 
-		return <form
+		return ( <form
 			className="post-select-filters"
 			onSubmit={ event => {
 				event.preventDefault();
@@ -37,7 +37,7 @@ class PostBrowseFilters extends React.Component {
 					ref={ input => this.searchInput = input } />
 			</div>
 			{ termFilters.map( termFilter => {
-				return <div
+				return ( <div
 					key={ termFilter.slug }
 					className="post-select-filters-row"
 				>
@@ -56,9 +56,9 @@ class PostBrowseFilters extends React.Component {
 						} }
 						loadOptions={ ( query, callback ) => {
 							this.getTerms( termFilter.slug, query, callback )
-						}}
+						} }
 					/>
-				</div>
+				</div> )
 			} ) }
 			<Button
 				isPrimary
@@ -67,7 +67,7 @@ class PostBrowseFilters extends React.Component {
 			>
 				Filter Posts
 			</Button>
-		</form>
+		</form> )
 	}
 
 	onUpdate() {
@@ -84,12 +84,12 @@ class PostBrowseFilters extends React.Component {
 	}
 
 	getTerms( taxSlug, query, callback ) {
-		const Collection = hm.utils.api.getTaxonomyCollection( taxSlug );
+		const Collection = window.hm.utils.api.getTaxonomyCollection( taxSlug );
 		const taxCollection = new Collection();
 
 		const fetchData = {
 			hmCache: true,
-			data:    { search: query },
+			data: { search: query },
 		};
 
 		return taxCollection.fetch( fetchData )
@@ -108,11 +108,11 @@ class PostBrowseFilters extends React.Component {
 }
 
 PostBrowseFilters.propTypes = {
-	onUpdate:    PropTypes.func.isRequired,
+	onUpdate: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.shape( {
-		slug:  PropTypes.string.isRequired,
+		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
-		rest:  PropTypes.string.isRequired,
+		rest: PropTypes.string.isRequired,
 	} ) ).isRequired,
 }
 

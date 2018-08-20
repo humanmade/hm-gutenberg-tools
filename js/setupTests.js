@@ -23,7 +23,7 @@ global.navigator = { userAgent: 'node.js' };
 global.hmGbToolsData = {
 	postTypeLabels: {
 		post: {
-			name:          'Posts',
+			name: 'Posts',
 			singular_name: 'Post',
 		},
 	},

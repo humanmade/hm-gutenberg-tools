@@ -16,7 +16,7 @@ const Selection = ( {
 		) }
 		{ selection.length > 0 && (
 			<ol className="post-list">
-				{ selection.map( ( postId ) => (
+				{ selection.map( postId => (
 					<SelectionListItem
 						key={ postId }
 						postType={ postType }
@@ -51,9 +51,9 @@ const Selection = ( {
 );
 
 Selection.propTypes = {
-	selection:  PropTypes.array.isRequired,
-	onRemoveItem:   PropTypes.func.isRequired,
-	onMoveItemUp:   PropTypes.func.isRequired,
+	selection: PropTypes.array.isRequired,
+	onRemoveItem: PropTypes.func.isRequired,
+	onMoveItemUp: PropTypes.func.isRequired,
 	onMoveItemDown: PropTypes.func.isRequired,
 };
 

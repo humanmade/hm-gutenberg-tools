@@ -4,8 +4,6 @@ import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _isEqual from 'lodash/isEqual';
 
-import getPostTypeCollection from '../../utils/get-post-type-collection';
-import getPostTypeTaxFilters from '../../utils/get-post-type-tax-filters';
 import Modal from './modal';
 
 const { __ } = wp.i18n;
@@ -23,7 +21,7 @@ class PostSelectModal extends React.Component {
 		minPosts: PropTypes.number,
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
-		onClose:  PropTypes.func.isRequired,
+		onClose: PropTypes.func.isRequired,
 	};
 
 	constructor( props ) {
@@ -38,10 +36,10 @@ class PostSelectModal extends React.Component {
 	render() {
 		const {
 			onClose,
-			modalTitle = __( 'Select a post' ),
+			modalTitle,
 			onSelect,
 			postType,
-			termFilters = getPostTypeTaxFilters( this.props.postType ),
+			termFilters,
 		} = this.props;
 
 		const {
@@ -49,19 +47,19 @@ class PostSelectModal extends React.Component {
 			contentState,
 		} = this.state;
 
-		return <Modal
+		return ( <Modal
 			modalTitle={ modalTitle }
 			postType={ postType }
 			onSelect={ () => onSelect( selection ) }
 			onClose={ onClose }
 			onToggleSelected={ id => this.toggleSelected( id ) }
-			onMoveItemDown={ id => this.moveItemDown(id) }
-			onMoveItemUp={ id => this.moveItemUp(id) }
+			onMoveItemDown={ id => this.moveItemDown( id ) }
+			onMoveItemUp={ id => this.moveItemUp( id ) }
 			onChangeContentState={ contentState => this.setState( { contentState } ) }
 			termFilters={ termFilters }
 			contentState={ contentState }
 			selection={ selection }
-		/>
+		/> )
 	}
 
 	toggleSelected( id ) {
@@ -94,7 +92,6 @@ class PostSelectModal extends React.Component {
 	}
 
 	moveItemDown( id ) {
-		console.log( 'moveItemDown', id );
 		const { selection } = this.state;
 		const newSelection = [ ...selection ];
 		const index = selection.indexOf( id );
@@ -109,6 +106,20 @@ class PostSelectModal extends React.Component {
 		newSelection.splice( newSelection.indexOf( insertAfterItem ) + 1, 0, id );
 		this.setState( { selection: newSelection } );
 	}
+}
+
+PostSelectModal.defaultProps = {
+	modalTitle: __( 'Select a post' ),
+	termFilters: [],
+	postType: 'post',
+}
+
+PostSelectModal.propTypes = {
+	onClose: PropTypes.func.isRequired,
+	modalTitle: PropTypes.func,
+	onSelect: PropTypes.func.isRequired,
+	postType: PropTypes.string,
+	termFilters: PropTypes.array,
 }
 
 export default PostSelectModal;

@@ -9,9 +9,9 @@ import wp from 'wp'; // eslint-disable-line no-unused-vars
 import PostListItem from '../../../components/post-select/post-list-item';
 
 const post = {
-	id:    123,
+	id: 123,
 	title: { rendered: 'Hello World' },
-	type:  'post',
+	type: 'post',
 };
 
 test( 'Post List Item', () => {

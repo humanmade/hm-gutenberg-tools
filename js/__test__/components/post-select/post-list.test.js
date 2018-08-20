@@ -16,18 +16,18 @@ test( 'Post List with defaults', () => {
 test( 'Post List with posts ', () => {
 	const posts = [
 		{
-			id:    1,
+			id: 1,
 			title: { rendered: 'Foo' },
 		},
 		{
-			id:    2,
+			id: 2,
 			title: { rendered: 'Bar' },
 		},
 	];
 
 	const selectedPosts = [
 		{
-			id:    2,
+			id: 2,
 			title: { rendered: 'Bar' },
 		},
 	];
@@ -47,18 +47,18 @@ test( 'Post List select post', () => {
 
 	const posts = [
 		{
-			id:    1,
+			id: 1,
 			title: { rendered: 'Foo' },
 		},
 		{
-			id:    2,
+			id: 2,
 			title: { rendered: 'Bar' },
 		},
 	];
 
 	const selectedPosts = [
 		{
-			id:    2,
+			id: 2,
 			title: { rendered: 'Bar' },
 		},
 	];
