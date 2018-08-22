@@ -90,6 +90,7 @@ PostSelectModal.defaultProps = {
 
 PostSelectModal.propTypes = {
 	postType: PropTypes.string,
+	modalTitle: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,
 	onToggleSelected: PropTypes.func.isRequired,

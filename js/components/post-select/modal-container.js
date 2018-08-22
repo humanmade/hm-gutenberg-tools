@@ -14,6 +14,8 @@ class PostSelectModal extends React.Component {
 		maxPosts: 1,
 		postType: 'post',
 		value: [],
+		modalTitle: __( 'Select a post' ),
+		termFilters: [],
 	};
 
 	static propTypes = {
@@ -22,6 +24,8 @@ class PostSelectModal extends React.Component {
 		maxPosts: PropTypes.number,
 		onSelect: PropTypes.func.isRequired,
 		onClose: PropTypes.func.isRequired,
+		modalTitle: PropTypes.string,
+		termFilters: PropTypes.array,
 	};
 
 	constructor( props ) {
@@ -66,10 +70,19 @@ class PostSelectModal extends React.Component {
 		const newSelection = [ ...this.state.selection ];
 		const index = newSelection.indexOf( id );
 
+		const { maxPosts } = this.props;
+
 		if ( index >= 0 ) {
 			newSelection.splice( index, 1 );
 		} else {
-			newSelection.push( id );
+
+			if ( maxPosts && newSelection.length >= maxPosts ) {
+				alert( `Max number (${maxPosts}) reached.` );
+				return;
+			} else {
+				newSelection.push( id );
+			}
+
 		}
 
 		this.setState( { selection: newSelection } );
@@ -106,20 +119,6 @@ class PostSelectModal extends React.Component {
 		newSelection.splice( newSelection.indexOf( insertAfterItem ) + 1, 0, id );
 		this.setState( { selection: newSelection } );
 	}
-}
-
-PostSelectModal.defaultProps = {
-	modalTitle: __( 'Select a post' ),
-	termFilters: [],
-	postType: 'post',
-}
-
-PostSelectModal.propTypes = {
-	onClose: PropTypes.func.isRequired,
-	modalTitle: PropTypes.func,
-	onSelect: PropTypes.func.isRequired,
-	postType: PropTypes.string,
-	termFilters: PropTypes.array,
 }
 
 export default PostSelectModal;

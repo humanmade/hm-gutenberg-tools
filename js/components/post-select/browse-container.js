@@ -94,7 +94,7 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	updateFilters( filters ) {
-		console.log( filters );
+		this.setState( { filters }, () => this.fetchPosts() );
 	}
 }
 
