@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SelectionListItem from './selection-post-list-item';
+import SelectionListItem from './../../containers/post-select/selection-post-list-item';
 
 const Selection = ( {
 	selection,

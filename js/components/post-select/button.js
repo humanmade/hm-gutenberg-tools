@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-import PostSelectModal from './modal-container';
+import PostSelectModal from './../../containers/post-select/modal';
 
 const { Button } = wp.components;
 

@@ -7,7 +7,6 @@ import getPostTypeLabel from '../../utils/get-post-type-label';
 import PostListItemAuthor from './post-list-item-author';
 import SelectionListItemAction from './selection-post-list-item-action';
 
-const { withSelect } = wp.data;
 const { Spinner } = wp.components;
 
 const SelectionListItem = ( { post, isSelected, actions } ) => {
@@ -52,22 +51,4 @@ SelectionListItem.defaultProps = {
 	onSelectItem: () => {},
 }
 
-const SelectionListItemContainer = withSelect( ( select, ownProps ) => {
-	const { getEntityRecord } = select( 'core' );
-
-	const {
-		postType,
-		postId,
-	} = ownProps;
-
-	return {
-		...ownProps,
-		post: getEntityRecord( 'postType', postType, postId ),
-	}
-} )( SelectionListItem );
-
-SelectionListItemContainer.propTypes = {
-	postId: PropTypes.number.isRequired,
-}
-
-export default SelectionListItemContainer;
+export default SelectionListItem;

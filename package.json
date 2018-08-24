@@ -60,10 +60,12 @@
     "prop-types": "^15.6.0",
     "react": "16.3.0",
     "react-dom": "16.3.0",
-    "react-select": "^1.2.1",
+    "react-select": "^2.0.0",
+    "react-select-async-paginate": "^0.2.0",
     "react-test-renderer": "^16.3.0",
     "react-wp-scripts": "^0.1.1",
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^2.10.0"
-  }
+  },
+  "dependencies": {}
 }

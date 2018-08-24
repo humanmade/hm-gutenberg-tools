@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-import PostSelectBrowseFilters from './browse-filters';
+import PostSelectBrowseFilters from './../../containers/post-select/browse-filters';
 import PostListItem from './post-list-item';
 
 const { Button } = wp.components;
-const { __ } = wp.i18n;
 const { Spinner } = wp.components;
 
 const PostSelectBrowse = props => {
@@ -28,7 +27,7 @@ const PostSelectBrowse = props => {
 			<div className="menu">
 				<PostSelectBrowseFilters
 					termFilters={ termFilters }
-					onUpdate={ filters => onUpdateFilters( { filters } ) }
+					onChangeFilters={ filters => onUpdateFilters( filters ) }
 				/>
 			</div>
 			<div>
@@ -68,7 +67,7 @@ PostSelectBrowse.propTypes = {
 	termFilters: PropTypes.arrayOf( PropTypes.shape( {
 		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
-		rest: PropTypes.string.isRequired,
+		restBase: PropTypes.string.isRequired,
 	} ) ).isRequired,
 	hasPrev: PropTypes.bool.isRequired,
 	hasMore: PropTypes.bool.isRequired,

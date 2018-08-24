@@ -4,7 +4,7 @@ import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _isEqual from 'lodash/isEqual';
 
-import Modal from './modal';
+import Modal from '../../components/post-select/modal';
 
 const { __ } = wp.i18n;
 
@@ -51,19 +51,21 @@ class PostSelectModal extends React.Component {
 			contentState,
 		} = this.state;
 
-		return ( <Modal
-			modalTitle={ modalTitle }
-			postType={ postType }
-			onSelect={ () => onSelect( selection ) }
-			onClose={ onClose }
-			onToggleSelected={ id => this.toggleSelected( id ) }
-			onMoveItemDown={ id => this.moveItemDown( id ) }
-			onMoveItemUp={ id => this.moveItemUp( id ) }
-			onChangeContentState={ contentState => this.setState( { contentState } ) }
-			termFilters={ termFilters }
-			contentState={ contentState }
-			selection={ selection }
-		/> )
+		return (
+			<Modal
+				modalTitle={ modalTitle }
+				postType={ postType }
+				onSelect={ () => onSelect( selection ) }
+				onClose={ onClose }
+				onToggleSelected={ id => this.toggleSelected( id ) }
+				onMoveItemDown={ id => this.moveItemDown( id ) }
+				onMoveItemUp={ id => this.moveItemUp( id ) }
+				onChangeContentState={ contentState => this.setState( { contentState } ) }
+				termFilters={ termFilters }
+				contentState={ contentState }
+				selection={ selection }
+			/>
+		)
 	}
 
 	toggleSelected( id ) {
@@ -121,4 +123,15 @@ class PostSelectModal extends React.Component {
 	}
 }
 
+// const applyWithSelect = withSelect( ( select, ownProps ) => {
+// 	const { getPostType, getTaxonomies } = select( 'core' );
+// 	const postTypeObject = getPostType( ownProps.postType );
+
+// 	return {
+// 		postTypeObject,
+// 		isLoading: ! postTypeObject,
+// 	};
+// } );
+
+// export default applyWithSelect( PostSelectModal );
 export default PostSelectModal;

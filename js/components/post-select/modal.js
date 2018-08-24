@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-import PostSelectBrowse from './browse-container';
+import PostSelectBrowse from '../../containers/post-select/browse';
 import PostSelectSelection from './selection';
 
 const { Button } = wp.components;
