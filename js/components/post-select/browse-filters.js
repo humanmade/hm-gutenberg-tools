@@ -1,53 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
-import AsyncPaginate from 'react-select-async-paginate';
-import _uniqueId from 'lodash/uniqueId';
-import _get from 'lodash/get';
+
+import FormFieldSearch from './form-field-search';
+import TermSelect from '../../containers/post-select/term-select';
 
 const { Button } = wp.components;
-const { apiFetch } = wp;
 const { __ } = wp.i18n;
-
-const FiltersRow = ( { label, labelFor, children } ) => (
-	<div className="post-select-filters-row">
-		<label htmlFor={ labelFor } className="screen-reader-text">
-			x { label }
-		</label>
-		{ children }
-	</div>
-);
-
-const FilterSearch = ( { formId, value, onChange } ) => (
-	<FiltersRow
-		label={ __( 'Search posts' )}
-		labelFor={ `${formId}-search` }
-	>
-		<input
-			id={ `${formId}-search` }
-			placeholder={ __( 'Search posts...' ) }
-			type="search"
-			value={ value || '' }
-			onChange={ e => onChange( e.target.value ) }
-		/>
-	</FiltersRow>
-);
-
-const TermFilter = ( { formId, value, slug, restBase, label, onChange } ) => (
-	<FiltersRow
-		labelFor={ `${formId}-${slug}` }
-		label={ label }
-	>
-		<AsyncPaginate
-			id={ `${formId}-${slug}` }
-			onChange={ val => console.log( val ) }
-			loadOptions={ ( s, loadedOptions ) => {
-				const response = apiFetch(`/wp/v2/${restBase}/?search=${s}` );
-				console.log( response );
-			} }
-		/>
-	</FiltersRow>
-);
 
 const PostBrowseFilters = ( { formId, value, termFilters, onSubmitFilters, onUpdateFilters } ) => (
 	<form
@@ -57,13 +16,36 @@ const PostBrowseFilters = ( { formId, value, termFilters, onSubmitFilters, onUpd
 			onSubmitFilters();
 		} }
 	>
-		<FilterSearch
-			formId={ formId }
-			value={ value.search }
-			onChange={ search => onUpdateFilters( { search } ) }
+		<FormFieldSearch
+			label={ __( 'Search Posts…' ) }
+			placeholder={ __( 'Search posts…' ) }
+			fieldId={ `${formId}-search` }
+			value={ value.search || '' }
+			onChange={ search => onUpdateFilters( {
+				...value,
+				search,
+			} ) }
 		/>
 
-		<Button isPrimary isLarge type="submit">
+		{ termFilters.map( termFilter => (
+			<TermSelect
+				{ ...termFilter }
+				formId={ `${formId}-${termFilter.slug}` }
+				value={ value[ termFilter.restBase ] }
+				onChange={ filterValue => {
+					const filters = { ...value };
+					filters[ termFilter.restBase ] = filterValue;
+					onUpdateFilters( filters );
+				} }
+				key={ `term-filter-${ termFilter.slug }` }
+			/>
+		) ) }
+
+		<Button
+			isPrimary
+			isLarge
+			type="submit"
+		>
 			Filter Posts
 		</Button>
 	</form>

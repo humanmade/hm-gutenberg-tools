@@ -19,6 +19,7 @@ class PostSelectBrowse extends React.Component {
 	};
 
 	componentDidMount() {
+		this.fetchPostAbortController = new AbortController();
 		this.fetchPosts();
 	}
 
@@ -37,12 +38,12 @@ class PostSelectBrowse extends React.Component {
 			isLoading={ isLoading }
 			selection={ selection }
 			onToggleSelected={ onToggleSelected }
-			termFilters={ defaultTermFilters }
+			termFilters={ termFilters || defaultTermFilters }
 			hasPrev={ hasPrev }
 			hasMore={ hasMore }
 			onPrevPostsPage={ () => this.prevPage() }
 			onNextPostsPage={ () => this.nextPage() }
-			onUpdateFilters={ filters => this.updateFilters( filters ) }
+			onApplyFilters={ filters => this.applyFilters( filters ) }
 		/> )
 	}
 
@@ -60,7 +61,6 @@ class PostSelectBrowse extends React.Component {
 		}
 
 		this.setState( { isLoading: true } );
-		this.fetchPostAbortController = new AbortController();
 
 		const postTypeRestBase = window.hmGbToolsData.postTypes[ postType ].rest_base;
 
@@ -98,7 +98,7 @@ class PostSelectBrowse extends React.Component {
 		);
 	}
 
-	updateFilters( filters ) {
+	applyFilters( filters ) {
 		this.setState( { filters }, () => this.fetchPosts() );
 	}
 }

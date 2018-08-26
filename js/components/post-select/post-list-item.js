@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import wp from 'wp';
 import moment from 'moment';
 import classNames from 'classnames';
 import getPostTypeLabel from '../../utils/get-post-type-label';
@@ -37,7 +36,6 @@ PostListItem.propTypes = {
 }
 
 PostListItem.defaultProps = {
-	actions: [],
 	actions: [],
 	onSelectItem: () => {},
 }

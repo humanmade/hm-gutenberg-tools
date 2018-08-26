@@ -5,6 +5,7 @@ import wp from 'wp';
 import PostSelectBrowseFilters from './../../containers/post-select/browse-filters';
 import PostListItem from './post-list-item';
 
+const { __ } = wp.i18n;
 const { Button } = wp.components;
 const { Spinner } = wp.components;
 
@@ -19,7 +20,7 @@ const PostSelectBrowse = props => {
 		hasMore,
 		onPrevPostsPage,
 		onNextPostsPage,
-		onUpdateFilters,
+		onApplyFilters,
 	} = props;
 
 	return (
@@ -27,7 +28,7 @@ const PostSelectBrowse = props => {
 			<div className="menu">
 				<PostSelectBrowseFilters
 					termFilters={ termFilters }
-					onChangeFilters={ filters => onUpdateFilters( filters ) }
+					onApplyFilters={ filters => onApplyFilters( filters ) }
 				/>
 			</div>
 			<div>
@@ -38,7 +39,7 @@ const PostSelectBrowse = props => {
 					onClick={ () => onPrevPostsPage() }
 					disabled={ isLoading }
 				>Previous page</Button> }
-				{ ! isLoading && (
+				{ ! isLoading && posts.length > 0 && (
 					<ol className="post-list">
 						{ posts.map( post => (
 							<PostListItem
@@ -49,6 +50,9 @@ const PostSelectBrowse = props => {
 							/>
 						) ) }
 					</ol>
+				) }
+				{ ! isLoading && posts.length < 1 && (
+					<p>{ __( 'No results' ) }</p>
 				) }
 				{ ! isLoading && hasMore && <Button
 					className="next-page"
@@ -73,7 +77,7 @@ PostSelectBrowse.propTypes = {
 	hasMore: PropTypes.bool.isRequired,
 	onPrevPostsPage: PropTypes.func.isRequired,
 	onNextPostsPage: PropTypes.func.isRequired,
-	onUpdateFilters: PropTypes.func.isRequired,
+	onApplyFilters: PropTypes.func.isRequired,
 }
 
 export default PostSelectBrowse;

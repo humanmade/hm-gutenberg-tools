@@ -15,7 +15,6 @@ class PostSelectModal extends React.Component {
 		postType: 'post',
 		value: [],
 		modalTitle: __( 'Select a post' ),
-		termFilters: [],
 	};
 
 	static propTypes = {

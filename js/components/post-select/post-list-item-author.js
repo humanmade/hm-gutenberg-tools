@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _get from 'lodash/get';
+import wp from 'wp';
 
 const { withSelect } = wp.data;
 
 const PostListItemAuthor = ( { author } ) => (
-	<span><b>Author:</b> { author ? _get( author, 'name', '' ) : ' loading...' }</span>
+	<span><b>Author:</b> { author ? _get( author, 'name', '' ) : ' loading…' }</span>
 );
 
 PostListItemAuthor.propTypes = {

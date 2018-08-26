@@ -5,7 +5,9 @@ import _uniqueId from 'lodash/uniqueId';
 import PostBrowseFilters from '../../components/post-select/browse-filters';
 
 class PostBrowseFiltersContainer extends React.Component {
-	state = {};
+	state = {
+		filters: {},
+	};
 
 	constructor( props ) {
 		super( props );
@@ -14,24 +16,24 @@ class PostBrowseFiltersContainer extends React.Component {
 
 	render() {
 		const {
-			onChangeFilters,
+			onApplyFilters,
 			termFilters,
 		} = this.props;
 
 		return (
 			<PostBrowseFilters
 				formId={ this.id }
-				value={ this.state }
+				value={ this.state.filters }
 				termFilters={ termFilters }
-				onUpdateFilters={ filters => this.setState( filters ) }
-				onSubmitFilters={ () => onChangeFilters( this.state ) }
+				onUpdateFilters={ filters => this.setState( { filters } ) }
+				onSubmitFilters={ () => onApplyFilters( this.state.filters ) }
 			/>
 		);
 	}
 }
 
 PostBrowseFiltersContainer.propTypes = {
-	onChangeFilters: PropTypes.func.isRequired,
+	onApplyFilters: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.shape( {
 		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,

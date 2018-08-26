@@ -98,7 +98,7 @@ PostSelectModal.propTypes = {
 	onMoveItemDown: PropTypes.func.isRequired,
 	onChangeContentState: PropTypes.func.isRequired,
 	contentState: PropTypes.string.isRequired,
-	termFilters: PropTypes.array.isRequired,
+	termFilters: PropTypes.array,
 	selection: PropTypes.array,
 };
 
