@@ -101,7 +101,7 @@ class TermSelect extends React.Component {
 	}
 }
 
-TermSelect.PropTypes = {
+TermSelect.propTypes = {
 	slug: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	restBase: PropTypes.string.isRequired,

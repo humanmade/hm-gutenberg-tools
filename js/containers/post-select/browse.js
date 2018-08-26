@@ -33,6 +33,7 @@ class PostSelectBrowse extends React.Component {
 
 		const defaultTermFilters = window.hmGbToolsData.postTypeTaxonomies[ postType ];
 
+		console.log( { termFilters, defaultTermFilters } );
 		return ( <Browse
 			posts={ posts }
 			isLoading={ isLoading }

@@ -13,13 +13,26 @@ const {
 /**
  * InspectorControl for image upload.
  */
-const LinkControl = ( { label, id, help, onChange, value } ) => {
-	return ( <BaseControl label={ label } id={ id } help={ help } className="hm-link-control">
-		<URLInput
-			value={ value }
-			onChange={ onChange }
-		/>
-	</BaseControl> )
+const LinkControl = ( {
+	label,
+	id,
+	help,
+	onChange,
+	value,
+} ) => {
+	return (
+		<BaseControl
+			label={ label }
+			id={ id }
+			help={ help }
+			className="hm-link-control"
+		>
+			<URLInput
+				value={ value }
+				onChange={ onChange }
+			/>
+		</BaseControl>
+	)
 }
 
 LinkControl.propTypes = {

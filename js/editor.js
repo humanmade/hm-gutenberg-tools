@@ -1,8 +1,8 @@
 import PostSelectButton from './components/post-select/button';
 import EditableHTML from './components/editable-html';
-import ImageControl from './controls/image';
-import PostControl from './controls/post';
-import LinkControl from './controls/link';
+import ImageControl from './components/controls/image';
+import PostControl from './components/controls/post';
+import LinkControl from './components/controls/link';
 
 window.hm = {
 	// Sidebar controls.

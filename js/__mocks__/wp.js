@@ -1,5 +1,4 @@
 import React from 'react';
-import MockCollection from './wp-api-collection';
 
 const wp = {
 	components: { Button: props => <button id={ props.id } className={ props.className }>{ props.children }</button> },
