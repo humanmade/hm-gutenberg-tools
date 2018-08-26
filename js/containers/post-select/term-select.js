@@ -7,6 +7,7 @@ import FormFieldSelect from '../../components/post-select/form-field-select';
 
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
+const { __ } = wp.i18n;
 
 class TermSelect extends React.Component {
 	state = {
@@ -90,6 +91,7 @@ class TermSelect extends React.Component {
 			<FormFieldSelect
 				{ ...this.state }
 				{ ...this.props }
+				label={ __( `Filter by ${this.props.label}` )  }
 				placeholder={ __( `Filter by ${this.props.label}` )  }
 				onChange={ value => this.handleChange( value ) }
 				onFetchMoreTerms={ () => this.fetchMoreTerms() }
