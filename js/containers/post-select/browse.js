@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
+import getDefaultTermFilters from '../../utils/get-default-term-filters';
 import Browse from '../../components/post-select/browse';
 
 const { apiFetch } = wp;
@@ -31,15 +32,12 @@ class PostSelectBrowse extends React.Component {
 		const { posts, isLoading, hasPrev, hasMore } = this.state;
 		const { selection, onToggleSelected, termFilters, postType } = this.props;
 
-		const defaultTermFilters = window.hmGbToolsData.postTypeTaxonomies[ postType ];
-
-		console.log( { termFilters, defaultTermFilters } );
 		return ( <Browse
 			posts={ posts }
 			isLoading={ isLoading }
 			selection={ selection }
 			onToggleSelected={ onToggleSelected }
-			termFilters={ termFilters || defaultTermFilters }
+			termFilters={ termFilters || getDefaultTermFilters( postType ) }
 			hasPrev={ hasPrev }
 			hasMore={ hasMore }
 			onPrevPostsPage={ () => this.prevPage() }
