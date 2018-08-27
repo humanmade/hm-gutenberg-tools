@@ -10,7 +10,7 @@ export default withSelect( ( select, ownProps ) => {
 	const posts = getEntityRecords( 'postType', postType, { include: postIds } )
 
 	return {
-		posts,
+		posts: posts || [],
 		isLoading: ! posts,
 	}
 } )( CurrentSelection );

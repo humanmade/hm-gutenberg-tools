@@ -110,7 +110,7 @@ PostSelectBrowse.propTypes = {
 		slug: PropTypes.string.isRequired,
 		label: PropTypes.string.isRequired,
 		restBase: PropTypes.string.isRequired,
-	} ) ).isRequired,
+	} ) ),
 }
 
 const applyWithDispatch = withDispatch( ( dispatch, ownProps ) => {

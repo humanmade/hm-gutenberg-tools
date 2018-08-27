@@ -26,14 +26,13 @@ const CurrentSelection = ( {
 );
 
 CurrentSelection.defaultProps = {
-	posts: [],
 	isLoading: false,
 	title: __( 'Current Selection' ),
 }
 
 CurrentSelection.propTypes = {
-	posts: PropTypes.arrayOf( PropTypes.object ),
-	isLoading: PropTypes.boolean,
+	posts: PropTypes.arrayOf( PropTypes.object ).isRequired,
+	isLoading: PropTypes.bool,
 	title: PropTypes.string,
 }
 

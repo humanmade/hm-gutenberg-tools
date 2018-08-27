@@ -2,7 +2,7 @@
 @import 'components/post-select-modal';
 
 .hm-post-control {
-	.spinner {
+	.components-spinner {
 		float: none;
 	}
 
@@ -12,15 +12,16 @@
 		margin: 1.5em auto 8px;
 		padding: 8px;
 
-		> p {
+		> h4 {
 			font-weight: bold;
 			margin: 0;
 		}
 
 		.hm-post-select-control-list {
 			margin-top: 8px;
-			margin-left: 1em;
-			list-style: bullet;
+			margin-left: 1.4em;
+			list-style: disc outside;
+			margin-bottom: 0;
 
 			li:last-child {
 				margin-bottom: 0;
@@ -45,7 +46,7 @@
 		}
 	}
 
-	.spinner {
+	.components-spinner {
 		right: 8px;
 		top: 6px;
 	}

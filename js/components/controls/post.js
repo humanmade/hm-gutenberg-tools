@@ -28,10 +28,7 @@ const PostControl = ( {
 			<PostSelectButton
 				{ ...postSelectProps }
 				value={ value }
-				onSelect={ posts => {
-					this.setState( { posts } );
-					onChange( posts );
-				} }
+				onSelect={ posts => onChange( posts ) }
 			>{ btnText }</PostSelectButton>
 
 			{ value.length > 0 && (
