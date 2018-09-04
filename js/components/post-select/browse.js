@@ -52,7 +52,7 @@ const PostSelectBrowse = props => {
 					</ol>
 				) }
 				{ ! isLoading && posts.length < 1 && (
-					<p>{ __( 'No results' ) }</p>
+					<p class="no-results">{ __( 'No results found.' ) }</p>
 				) }
 				{ ! isLoading && hasMore && <Button
 					className="next-page"

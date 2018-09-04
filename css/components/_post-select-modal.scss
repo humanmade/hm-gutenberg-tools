@@ -63,10 +63,6 @@
 	border-right-color: #ccc;
 }
 
-.post-select .no-selection {
-	padding: 16px;
-}
-
 .post-list {
 	overflow: auto;
 	list-style: none;
@@ -81,6 +77,7 @@
 }
 
 .post-select .media-modal-content .no-results,
+.post-select .media-modal-content .no-selection,
 .post-select .media-modal-content .prev-page,
 .post-select .media-modal-content .next-page {
 	margin: 16px;
