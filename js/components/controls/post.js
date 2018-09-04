@@ -16,9 +16,9 @@ const PostControl = ( {
 	id,
 	help,
 	onChange,
-	value = [],
-	postSelectProps = { btnProps: {} },
-	btnText = __( 'Select post' ),
+	value,
+	postSelectProps,
+	btnText,
 } ) => {
 	postSelectProps.btnProps = postSelectProps.btnProps || {};
 	postSelectProps.btnProps.isLarge = true;
@@ -39,6 +39,11 @@ const PostControl = ( {
 			) }
 		</BaseControl>
 	)
+}
+
+PostControl.defaultProps = {
+	btnText: __( 'Select post' ),
+	postSelectProps: { btnProps: {} },
 }
 
 PostControl.propTypes = {
