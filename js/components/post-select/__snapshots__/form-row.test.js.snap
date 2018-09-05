@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Row 1`] = `
+<FormRow
+  label="Foo"
+  labelFor="bar"
+>
+  test
+</FormRow>
+`;

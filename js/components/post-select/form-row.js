@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import PropTypes from 'prop-types';
 
-const FiltersRow = ( { label, labelFor, children } ) => (
+const FormRow = ( { label, labelFor, children } ) => (
 	<div className="post-select-form-row">
 		<label htmlFor={ labelFor } className="screen-reader-text">
 			{ label }
@@ -10,7 +10,7 @@ const FiltersRow = ( { label, labelFor, children } ) => (
 	</div>
 );
 
-FiltersRow.propTypes = {
+FormRow.propTypes = {
 	label: PropTypes.string.isRequired,
 	labelFor: PropTypes.string.isRequired,
 	children: PropTypes.oneOfType( [
@@ -19,4 +19,4 @@ FiltersRow.propTypes = {
 	] ).isRequired,
 }
 
-export default FiltersRow;
+export default FormRow;
