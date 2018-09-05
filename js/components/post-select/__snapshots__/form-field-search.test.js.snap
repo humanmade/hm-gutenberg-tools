@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Form Row 1`] = `
+<div
+  className="post-select-form-row"
+>
+  <label
+    className="screen-reader-text"
+    htmlFor="id-123"
+  >
+    Search Field
+  </label>
+  <input
+    id="id-123"
+    onChange={[Function]}
+    placeholder={undefined}
+    type="search"
+    value="test value"
+  />
+</div>
+`;
