@@ -1,10 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Form Row 1`] = `
-<FormRow
-  label="Foo"
-  labelFor="bar"
+<div
+  className="post-select-form-row"
 >
+  <label
+    className="screen-reader-text"
+    htmlFor="bar"
+  >
+    Foo
+  </label>
   test
-</FormRow>
+</div>
 `;
