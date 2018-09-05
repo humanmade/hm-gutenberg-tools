@@ -12,7 +12,7 @@ const FormFieldSearch = ( { fieldId, label, placeholder, value, onChange } ) => 
 			id={ fieldId }
 			placeholder={ placeholder }
 			type="search"
-			value={ value || '' }
+			value={ value }
 			onChange={ e => onChange( e.target.value ) }
 		/>
 	</FormRow>
