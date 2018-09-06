@@ -1,6 +1,6 @@
 {
   "name": "hm-gutenberg-tools",
-  "version": "0.2.0",
+  "version": "1.0.0-beta",
   "private": true,
   "scripts": {
     "build": "yarn clean:build && concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"yarn js:build\" \"yarn css:build\"",
