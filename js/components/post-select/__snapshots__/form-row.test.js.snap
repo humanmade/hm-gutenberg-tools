@@ -10,6 +10,6 @@ exports[`Form Row 1`] = `
   >
     Foo
   </label>
-  test
+  Test
 </div>
 `;

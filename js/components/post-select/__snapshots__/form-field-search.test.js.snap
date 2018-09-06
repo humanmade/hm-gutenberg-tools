@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Form Row 1`] = `
+exports[`Form Search Field 1`] = `
 <div
   className="post-select-form-row"
 >

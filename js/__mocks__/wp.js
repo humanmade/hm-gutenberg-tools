@@ -1,7 +1,11 @@
 import React from 'react';
+import * as wpData from '@wordpress/data';
 
 const wp = {
-	components: { Button: props => <button id={ props.id } className={ props.className }>{ props.children }</button> },
+	data: wpData,
+	components: {
+		Button: props => <button id={ props.id } className={ props.className }>{ props.children }</button>
+	},
 	i18n: { __: str => str },
 	element: { createElement: React.createElement },
 };

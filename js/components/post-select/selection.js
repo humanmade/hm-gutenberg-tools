@@ -51,6 +51,7 @@ const Selection = ( {
 );
 
 Selection.propTypes = {
+	postType: PropTypes.string.isRequired,
 	selection: PropTypes.array.isRequired,
 	onRemoveItem: PropTypes.func.isRequired,
 	onMoveItemUp: PropTypes.func.isRequired,

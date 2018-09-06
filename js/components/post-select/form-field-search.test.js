@@ -4,7 +4,7 @@ import TestRenderer from 'react-test-renderer';
 
 import FormFieldSearch from './form-field-search';
 
-test( 'Form Row', () => {
+test( 'Form Search Field', () => {
 	const onChangeHandler = jest.fn();
 
 	const testRenderer = TestRenderer.create(
