@@ -64,7 +64,6 @@
 }
 
 .post-list {
-	overflow: auto;
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -106,6 +105,22 @@
 		float: none;
 		display: block;
 		margin: 16px;
+	}
+
+	> label {
+		font-size: inherit;
+		display: block;
+		margin: -10px -20px;
+		padding: 10px 20px;
+		position: relative;
+
+		&:focus,
+		&:focus-within {
+			box-shadow: 0 0 0 1px #0071a1;
+			outline: none;
+			z-index: 1;
+			background: rgba(0,0,0,0.05);
+		}
 	}
 }
 

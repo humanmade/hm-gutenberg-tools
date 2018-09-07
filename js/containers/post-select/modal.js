@@ -36,6 +36,10 @@ class PostSelectModal extends React.Component {
 		};
 	}
 
+	componentDidMount() {
+		this.modalElement.focus();
+	}
+
 	render() {
 		const {
 			onClose,
@@ -63,6 +67,7 @@ class PostSelectModal extends React.Component {
 				termFilters={ termFilters }
 				contentState={ contentState }
 				selection={ selection }
+				modalRef={ el => this.modalElement = el }
 			/>
 		)
 	}

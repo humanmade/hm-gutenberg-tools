@@ -21,11 +21,19 @@ const PostSelectModal = props => {
 		contentState,
 		termFilters,
 		selection,
+		modalRef,
 	} = props;
 
 	return ( <div className="post-select post-select-modal">
 		<div className="media-modal-backdrop"></div>
-		<div className="modal media-modal wp-core-ui" tabIndex="0">
+		<div
+			className="modal media-modal wp-core-ui"
+			tabIndex="-1"
+			role="dialog"
+			aria-modal="true"
+			aria-labelledby="media-modal-title"
+			ref={ modalRef }
+		>
 			<Button
 				className="media-modal-close"
 				onClick={ () => onClose() }
@@ -33,7 +41,7 @@ const PostSelectModal = props => {
 				<span className="media-modal-icon"><span className="screen-reader-text">{ __( 'Close media panel' ) }</span></span>
 			</Button>
 			<div className="media-frame-title">
-				<h1>{ modalTitle }</h1>
+				<h1 id="media-modal-title">{ modalTitle }</h1>
 			</div>
 			<div className="media-modal-content">
 				{ ( contentState === 'browse' ) && (
@@ -100,6 +108,7 @@ PostSelectModal.propTypes = {
 	contentState: PropTypes.string.isRequired,
 	termFilters: PropTypes.array,
 	selection: PropTypes.array,
+	modalRef: PropTypes.func.isRequired,
 };
 
 export default PostSelectModal;

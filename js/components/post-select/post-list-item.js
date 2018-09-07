@@ -16,14 +16,20 @@ const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 	}
 
 	return (
-		<li
-			className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }
-			onClick={ () => onToggleSelected ? onToggleSelected() : null }
-		>
-			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
-			<div className="post-list-item--meta">
-				{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
-			</div>
+		<li className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }>
+			<label htmlFor={ `select-post-${post.id}` }>
+				<input
+					className="screen-reader-text"
+					type="checkbox"
+					checked={ isSelected }
+					id={ `select-post-${post.id}` }
+					onChange={ () => onToggleSelected ? onToggleSelected() : null }
+				/>
+				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
+				<div className="post-list-item--meta">
+					{ meta.map( ( metaItem, i ) => <Fragment key={ i }>{ metaItem } </Fragment> ) }
+				</div>
+			</label>
 		</li>
 	);
 }
