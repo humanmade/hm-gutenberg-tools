@@ -33,6 +33,7 @@ const PostSelectModal = props => {
 			aria-modal="true"
 			aria-labelledby="media-modal-title"
 			ref={ modalRef }
+			onKeyDown={ e => e.keyCode === 27 && onClose() }
 		>
 			<Button
 				className="media-modal-close"
