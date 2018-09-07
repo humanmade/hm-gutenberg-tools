@@ -40,6 +40,12 @@ class PostSelectModal extends React.Component {
 		this.modalElement.focus();
 	}
 
+	componentDidUpdate( prevProps, prevState ) {
+		if ( this.modalElement && this.state.contentState !== prevState.contentState ) {
+			this.modalElement.focus();
+		}
+	}
+
 	render() {
 		const {
 			onClose,
