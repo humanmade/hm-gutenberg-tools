@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Selection Post List Item - Loading 1`] = `
+<li
+  className="post-list-item"
+>
+  <span>
+    Spinner
+  </span>
+</li>
+`;
+
+exports[`Selection Post List Item - With Post 1`] = `
+<li
+  className="post-list-item"
+>
+  <h2
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "Test Post",
+      }
+    }
+  />
+  <div
+    className="post-list-item--meta"
+  >
+    <UNDEFINED>
+      <span>
+        <b>
+          Type:
+        </b>
+         
+        foo
+      </span>
+    </UNDEFINED>
+    <UNDEFINED>
+      <span>
+        <b>
+          Published:
+        </b>
+         
+        Formatted date: Do MMM, YYYY - 2018-09-03T12:20:32
+      </span>
+    </UNDEFINED>
+    <UNDEFINED>
+      <WithSelect(PostListItemAuthor)
+        id={456}
+      />
+    </UNDEFINED>
+  </div>
+  <div
+    className="post-list-item-actions"
+  />
+</li>
+`;

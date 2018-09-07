@@ -17,8 +17,8 @@ test( 'Selection Post List Item - Loading', () => {
 	expect( testRenderer.toJSON() ).toMatchSnapshot();
 } );
 
-// test( 'Selection Post List Item - With Post', () => {
-// 	const renderer = new ShallowRenderer();
-// 	renderer.render( <SelectionListItem post={ post } /> );
-// 	expect( renderer.getRenderOutput() ).toMatchSnapshot();
-// } );
+test( 'Selection Post List Item - With Post', () => {
+	const renderer = new ShallowRenderer();
+	renderer.render( <SelectionListItem post={ post } /> );
+	expect( renderer.getRenderOutput() ).toMatchSnapshot();
+} );
