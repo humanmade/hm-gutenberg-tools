@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 import getPostTypeLabel from '../../utils/get-post-type-label';
-import PostListItemAuthor from './post-list-item-author';
+import PostListItemAuthor from './../../containers/post-select/post-list-item-author';
 
-const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
+const PostListItem = ( { post, isSelected, onToggleSelected } ) => {
 	const meta =[
 		<span><b>Type:</b> { getPostTypeLabel( post.type ) }</span>,
 		<span><b>Published:</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>,
@@ -23,7 +23,10 @@ const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 					type="checkbox"
 					checked={ isSelected }
 					id={ `select-post-${post.id}` }
-					onChange={ () => onToggleSelected ? onToggleSelected() : null }
+					onChange={ e => {
+						onToggleSelected();
+						console.log( e );
+					} }
 				/>
 				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 				<div className="post-list-item--meta">
@@ -37,8 +40,7 @@ const PostListItem = ( { post, isSelected, onToggleSelected, actions } ) => {
 PostListItem.propTypes = {
 	post: PropTypes.object.isRequired,
 	isSelected: PropTypes.bool,
-	actions: PropTypes.array,
-	onToggleSelected: PropTypes.func,
+	onToggleSelected: PropTypes.func.isRequired,
 }
 
 PostListItem.defaultProps = {

@@ -43,7 +43,7 @@ exports[`Selection Post List Item - With Post 1`] = `
       </span>
     </UNDEFINED>
     <UNDEFINED>
-      <WithSelect(PostListItemAuthor)
+      <PostListItemAuthor
         id={456}
       />
     </UNDEFINED>

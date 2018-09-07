@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Post List Item Author 1`] = `
+<span>
+  <b>
+    Author:
+  </b>
+   
+  Matt Mullenweg
+</span>
+`;
