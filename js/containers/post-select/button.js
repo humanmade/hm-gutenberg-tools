@@ -7,8 +7,6 @@ import PostSelectModal from './../../containers/post-select/modal';
 
 const { Button } = wp.components;
 
-const { __ } = wp.i18n;
-
 class PostSelectButton extends React.Component {
 	state = { modalVisible: false };
 
@@ -16,13 +14,16 @@ class PostSelectButton extends React.Component {
 		const {
 			children,
 			onSelect,
-			value = [],
-			btnProps = {},
+			value,
 		} = this.props;
 
 		const { modalVisible } = this.state;
 		const onClose = () => this.setState( { modalVisible: false } );
-		btnProps.onClick = () => this.setState( { modalVisible: true } );
+
+		const btnProps = {
+			...this.props.btnProps,
+			onClick: () => this.setState( { modalVisible: true } ),
+		};
 
 		return ( <div className="post-select">
 			<Button { ...btnProps }>{ children }</Button>
@@ -42,6 +43,11 @@ class PostSelectButton extends React.Component {
 			) }
 		</div> )
 	}
+}
+
+PostSelectButton.defaultProps = {
+	value: [],
+	btnProps: {},
 }
 
 PostSelectButton.propTypes = {

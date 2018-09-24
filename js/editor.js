@@ -1,4 +1,4 @@
-import PostSelectButton from './components/post-select/button';
+import PostSelectButton from './containers/post-select/button';
 import EditableHTML from './components/editable-html';
 import ImageControl from './components/controls/image';
 import PostControl from './components/controls/post';

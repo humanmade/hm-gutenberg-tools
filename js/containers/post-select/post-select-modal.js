@@ -4,7 +4,7 @@ import wp from 'wp';
 import _uniqueId from 'lodash/uniqueId';
 import _isEqual from 'lodash/isEqual';
 
-import Modal from '../../components/post-select/modal';
+import Modal from '../../components/post-select/post-select-modal';
 
 const { __ } = wp.i18n;
 
