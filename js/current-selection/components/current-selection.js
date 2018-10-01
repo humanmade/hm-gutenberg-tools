@@ -12,13 +12,15 @@ const CurrentSelection = ( {
 } ) => (
 	<div className="hm-post-control-current-selection">
 		<h4>{ title }</h4>
-		{ isLoading && (
+		{ isLoading ? (
 			<Spinner style={ { float: 'none' } } />
-		) }
-		{ posts.length > 0 && ! isLoading && (
+		) : (
 			<ul className="hm-post-select-control-list">
 				{ posts.map( post => (
-					<li key={ post.id }>{ post.title.rendered }</li>
+					<li
+						key={ post.id }
+						dangerouslySetInnerHTML={ { __html: post.title.rendered } }
+					/>
 				) ) }
 			</ul>
 		) }

@@ -1,9 +1,11 @@
+/* global wp */
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import wp from 'wp';
+
 import _uniqBy from 'lodash/uniqBy';
 
-import FormFieldSelect from '../../components/post-select/form-field-select';
+import FormFieldSelect from '../components/form-field-select';
 
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
@@ -91,6 +93,7 @@ class TermSelect extends React.Component {
 			<FormFieldSelect
 				{ ...this.state }
 				{ ...this.props }
+				fieldId={ this.props.fieldId }
 				label={ __( `Filter by ${this.props.label}` )  }
 				placeholder={ __( `Filter by ${this.props.label}` )  }
 				onChange={ value => this.handleChange( value ) }
@@ -102,7 +105,7 @@ class TermSelect extends React.Component {
 }
 
 TermSelect.propTypes = {
-	slug: PropTypes.string.isRequired,
+	fieldId: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	restBase: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,

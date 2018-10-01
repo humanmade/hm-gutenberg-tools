@@ -1,6 +1,6 @@
 import wp from 'wp';
 
-import PostListItemAuthor from '../../components/post-select/post-list-item-author';
+import PostListItemAuthor from '../components/post-list-item-author';
 
 const { withSelect } = wp.data;
 

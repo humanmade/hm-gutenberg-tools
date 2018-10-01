@@ -54,7 +54,7 @@ Modal.propTypes = {
 	modalTitle: PropTypes.string.isRequired,
 	modalContent: PropTypes.node.isRequired,
 	modalToolbar: PropTypes.node.isRequired,
-	modalRef: PropTypes.node,
+	// modalRef: PropTypes.node.isRequired,
 }
 
 export default Modal;

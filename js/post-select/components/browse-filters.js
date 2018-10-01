@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 
 import FormFieldSearch from './form-field-search';
-import TermSelect from '../../containers/post-select/term-select';
+import FormFieldSelectTerm from '../containers/term-select-form-field';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
 
-const PostBrowseFilters = ( { formId, value, termFilters, onSubmitFilters, onUpdateFilters } ) => (
+const PostBrowseFilters = ( {
+	formId,
+	value,
+	terms,
+	onSubmitFilters,
+	onUpdateFilters,
+} ) => (
 	<form
 		className="post-select-filters"
 		onSubmit={ event => {
@@ -27,17 +33,19 @@ const PostBrowseFilters = ( { formId, value, termFilters, onSubmitFilters, onUpd
 			} ) }
 		/>
 
-		{ termFilters.map( termFilter => (
-			<TermSelect
-				{ ...termFilter }
-				formId={ `${formId}-${termFilter.slug}` }
-				value={ value[ termFilter.restBase ] }
+		{ terms.map( term => (
+			<FormFieldSelectTerm
+				key={ `term-filter-${ term.slug }` }
+				label={ term.labels.name }
+				restBase={ term.rest_base }
+				fieldId={ `${formId}-${term.slug}` }
+				value={ value[ term.rest_base ] }
 				onChange={ filterValue => {
-					const filters = { ...value };
-					filters[ termFilter.restBase ] = filterValue;
-					onUpdateFilters( filters );
+					onUpdateFilters( {
+						...value,
+						[term.rest_base]: filterValue,
+					} );
 				} }
-				key={ `term-filter-${ termFilter.slug }` }
 			/>
 		) ) }
 
@@ -53,16 +61,13 @@ const PostBrowseFilters = ( { formId, value, termFilters, onSubmitFilters, onUpd
 
 PostBrowseFilters.defaultProps = {
 	value: {},
+	terms: [],
 }
 
 PostBrowseFilters.propTypes = {
 	value: PropTypes.object,
 	onUpdateFilters: PropTypes.func.isRequired,
-	termFilters: PropTypes.arrayOf( PropTypes.shape( {
-		slug: PropTypes.string.isRequired,
-		label: PropTypes.string.isRequired,
-		restBase: PropTypes.string.isRequired,
-	} ) ).isRequired,
+	terms: PropTypes.arrayOf( PropTypes.object ),
 }
 
 export default PostBrowseFilters;

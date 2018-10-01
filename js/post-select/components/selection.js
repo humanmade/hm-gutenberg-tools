@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import SelectionListItem from './../../containers/post-select/selection-post-list-item';
+import SelectionListItem from '../containers/selection-item';
 
 const Selection = ( {
 	selection,
@@ -10,11 +10,8 @@ const Selection = ( {
 	onMoveItemDown,
 	postType,
 } ) => (
-	<React.Fragment>
-		{ ! selection.length && (
-			<p className="no-selection">Nothing selected</p>
-		) }
-		{ selection.length > 0 && (
+	<Fragment>
+		{ selection.length > 0 ? (
 			<ol className="post-list">
 				{ selection.map( postId => (
 					<SelectionListItem
@@ -46,8 +43,10 @@ const Selection = ( {
 					/>
 				) ) }
 			</ol>
+		) : (
+			<p className="no-selection">Nothing selected</p>
 		) }
-	</React.Fragment>
+	</Fragment>
 );
 
 Selection.propTypes = {

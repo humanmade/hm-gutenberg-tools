@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
-import PostSelectButton from '../post-select/button';
-import CurrentSelection from '../../containers/current-selection';
+import PostSelectButton from '../post-select';
+import CurrentSelection from '../current-selection';
 
 const { BaseControl } = wp.components;
 const { __ } = wp.i18n;
@@ -52,6 +52,8 @@ PostControl.propTypes = {
 	id: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.arrayOf( PropTypes.number ).isRequired,
+	postSelectProps: PropTypes.object,
+	btnText: PropTypes.string,
 }
 
 export default PostControl;

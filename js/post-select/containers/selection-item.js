@@ -1,4 +1,4 @@
-import SelectionListItem from '../../components/post-select/selection-post-list-item';
+import SelectionListItem from '../components/selection-item';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
@@ -15,6 +15,7 @@ const SelectionListItemContainer = withSelect( ( select, ownProps ) => {
 	return {
 		...ownProps,
 		post: getEntityRecord( 'postType', postType, postId ),
+		postTypeObject: getEntityRecord( 'root', 'postType', postType ),
 	}
 } )( SelectionListItem );
 
