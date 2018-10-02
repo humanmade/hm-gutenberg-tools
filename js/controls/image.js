@@ -27,9 +27,9 @@ const ImageControl = ( {
 	image,
 	isLoading = false,
 } ) => (
-	<BaseControl label={ label } id={ id } help={ help }>
-		{ isLoading && <Spinner style={ { float: 'none' } } /> }
-		{ image && (
+	<BaseControl label={ label } id={ id } help={ help } className="hm-image-control">
+
+		{ image && ( <div className="hm-image-control__img-container">
 			<img
 				src={ image.media_details.sizes.thumbnail.source_url }
 				data-id={ value }
@@ -40,24 +40,30 @@ const ImageControl = ( {
 					marginBottom: '8px',
 				} }
 			/>
-		) }
-		<MediaUpload
-			onSelect={ i => onChange( i.id ) }
-			type="image"
-			value={ value }
-			render={ ( { open } ) => (
-				<Button isLarge onClick={ open }>
-					{ value ? __( 'Change' ) : __( 'Select' ) }
-				</Button>
+		</div> ) }
+
+		<div className="hm-image-control__actions">
+			<MediaUpload
+				onSelect={ i => onChange( i.id ) }
+				type="image"
+				value={ value }
+				render={ ( { open } ) => (
+					<Button isLarge onClick={ open }>
+						{ value ? __( 'Change' ) : __( 'Select' ) }
+					</Button>
+				) }
+			/>
+
+			{ !! value && (
+				<Button
+					isLarge
+					style={ { marginLeft: '8px' } }
+					onClick={ () => onChange() }
+				>{ __( 'Remove' ) }</Button>
 			) }
-		/>
-		{ !! value && (
-			<Button
-				isLarge
-				style={ { marginLeft: '8px' } }
-				onClick={ () => onChange() }
-			>{ __( 'Remove' ) }</Button>
-		) }
+
+			{ isLoading && <Spinner /> }
+		</div>
 	</BaseControl>
 );
 
