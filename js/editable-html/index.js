@@ -1,7 +1,7 @@
 import React from 'react';
 import wp from 'wp';
 
-const { RichText } = wp.editor;
+const { RichText } = wp.components;
 
 /**
  * EditableHTML component - Deprecated.
