@@ -32,8 +32,8 @@ function enqueue_block_editor_assets() {
 	);
 
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
-		'postTypes'          => get_post_types(),
-		'postTypeTaxonomies' => get_post_type_taxonomies(),
+		'restBase' => esc_url_raw( get_rest_url() ),
+		'postSelectEndpoint' => '/rbmh/v1/post-select',
 	] );
 }
 

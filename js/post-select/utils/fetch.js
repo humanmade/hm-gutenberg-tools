@@ -1,9 +1,9 @@
 import wp from 'wp';
-import config from '../config';
 import _zipObject from 'lodash/zipObject';
 
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
+const { postSelectEndpoint } = window.hmGbToolsData;
 
 /**
  * Fetch JSON.
@@ -40,7 +40,7 @@ export const fetchPostsById = ( ids, postTypes ) => {
 	return new Promise( resolve => {
 		fetchJson( {
 			path: addQueryArgs(
-				config.endpoint,
+				postSelectEndpoint,
 				{
 					include: ids,
 					per_page: ids.length,

@@ -4,10 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Browse from '../components/browse';
-import config from '../config';
 import { fetchJson } from '../utils/fetch';
 
 const { addQueryArgs } = wp.url;
+const { postSelectEndpoint } = window.hmGbToolsData;
 
 class PostSelectBrowse extends React.Component {
 	state = {
@@ -56,7 +56,7 @@ class PostSelectBrowse extends React.Component {
 		this.setState( { isLoading: true } );
 
 		fetchJson( {
-			path: addQueryArgs( config.endpoint, query ),
+			path: addQueryArgs( postSelectEndpoint, query ),
 			signal: this.fetchPostAbortController.signal || null,
 		} ).then( ( [ posts, headers ] ) => this.setState( {
 			posts,
