@@ -4,13 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Browse from '../components/browse';
-
-const { apiFetch } = wp;
-
-const {
-	withDispatch,
-	withSelect,
-} = wp.data;
+import config from '../config';
+import { fetchJson } from '../utils/fetch';
 
 const { addQueryArgs } = wp.url;
 
@@ -25,9 +20,6 @@ class PostSelectBrowse extends React.Component {
 	};
 
 	componentDidMount() {
-		if ( window.AbortController ) {
-			this.fetchPostAbortController = new AbortController();
-		}
 		this.fetchPosts();
 	}
 
@@ -35,15 +27,13 @@ class PostSelectBrowse extends React.Component {
 		this.fetchPostAbortController && this.fetchPostAbortController.abort();
 	}
 
-	componentDidUpdate( prevProps ) {
-		if ( prevProps.postTypeObject !== this.props.postTypeObject ) {
-			this.fetchPosts();
-		}
-	}
-
 	fetchPosts() {
 		const { page, isLoading, filters } = this.state;
-		const { storePosts, postTypeObject } = this.props;
+		const { postType } = this.props;
+
+		if ( isLoading ) {
+			return;
+		}
 
 		const query = {
 			...filters,
@@ -51,49 +41,43 @@ class PostSelectBrowse extends React.Component {
 			per_page: 25,
 		};
 
-		if ( isLoading || ! postTypeObject ) {
-			return;
+		if ( ! query.type ) {
+			query.type = Array.isArray( postType ) ? postType : [ postType ];
 		}
 
-		if ( this.fetchPostAbortController ) {
-			this.fetchPostAbortController.abort();
+		// Abort current pending requests.
+		if ( window.AbortController ) {
+			if ( this.fetchPostAbortController ) {
+				this.fetchPostAbortController.abort();
+			}
 			this.fetchPostAbortController = new AbortController();
 		}
 
 		this.setState( { isLoading: true } );
 
-		apiFetch( {
-			path: addQueryArgs( `wp/v2/${ postTypeObject.rest_base }/`, query ),
-			parse: false,
-			signal: this.fetchPostAbortController.signal,
-		} ).then( response => Promise.all( [
-			response.json ? response.json() : [],
-			parseInt( response.headers.get( 'x-wp-totalpages' ), 10 ),
-		] ) ).then( ( [ posts, totalPages ] ) => {
-			this.setState( {
-				posts,
-				hasMore: page < totalPages,
-				hasPrev: page > 1,
-				isLoading: false,
-			} );
-
-			// Store posts in core data store, so they're available to use elsewhere.
-			storePosts( posts, query );
-		} ).catch( e => {} );
+		fetchJson( {
+			path: addQueryArgs( config.endpoint, query ),
+			signal: this.fetchPostAbortController.signal || null,
+		} ).then( ( [ posts, headers ] ) => this.setState( {
+			posts,
+			hasMore: page < parseInt( headers['x-wp-totalpages'], 10 ),
+			hasPrev: page > 1,
+			isLoading: false,
+		} ) ).catch( () => {} );
 	}
 
 	render() {
-		const { posts, isLoading, hasPrev, hasMore } = this.state;
-		const { selection, onToggleSelected, termFilters, postTypeObject } = this.props;
-		const defaultTermFilters = postTypeObject ? postTypeObject.taxonomies : [];
+		const { posts, hasPrev, hasMore, isLoading } = this.state;
+		const { selection, onToggleSelected, termFilters, postType } = this.props;
 
 		return (
 			<Browse
+				isLoading={ isLoading }
 				posts={ posts }
-				isLoading={ isLoading || ! postTypeObject }
 				selection={ selection }
 				onToggleSelected={ onToggleSelected }
-				termFilters={ termFilters || defaultTermFilters }
+				termFilters={ termFilters }
+				postTypes={ Array.isArray( postType ) ? postType : [ postType ] }
 				hasPrev={ hasPrev }
 				hasMore={ hasMore }
 				onPrevPostsPage={ () => this.prevPage() }
@@ -123,32 +107,10 @@ class PostSelectBrowse extends React.Component {
 }
 
 PostSelectBrowse.propTypes = {
-	postType: PropTypes.string,
-	selection: PropTypes.array,
+	postType: PropTypes.arrayOf( PropTypes.string ).isRequired,
+	selection: PropTypes.arrayOf( PropTypes.object ).isRequired,
 	onToggleSelected: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.string ),
 }
 
-const applyWithSelect = withSelect( ( select, ownProps ) => {
-	const { getEntityRecord } = select( 'core' );
-	const { postType } = ownProps;
-
-	const postTypeObject = getEntityRecord( 'root', 'postType', postType );
-
-	return {
-		isPropsLoading: ! postTypeObject,
-		postTypeObject,
-	}
-} );
-
-const applyWithDispatch = withDispatch( ( dispatch, ownProps ) => {
-	const { receiveEntityRecords } = dispatch( 'core' );
-	const { postType } = ownProps;
-
-	return {
-		storePost: post => receiveEntityRecords( 'postType', postType, post ),
-		storePosts: ( posts, query ) => receiveEntityRecords( 'postType', postType, posts, query ),
-	};
-} );
-
-export default applyWithSelect( applyWithDispatch( PostSelectBrowse ) );
+export default PostSelectBrowse;

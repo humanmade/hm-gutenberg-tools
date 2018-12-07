@@ -1,6 +1,6 @@
 import wp from 'wp';
 
-import SelectionItem from '../components/selection-item';
+import PostListItem from '../components/post-list-item';
 
 const { withSelect } = wp.data;
 
@@ -12,4 +12,4 @@ export default withSelect( ( select, ownProps ) => ( {
 	...ownProps,
 	author: select( 'core' ).getAuthors().find( a => ownProps.post.author.id === a.id ),
 	postTypeObject: select( 'core' ).getEntityRecord( 'root', 'postType', ownProps.post.type ),
-} ) )( SelectionItem );
+} ) )( PostListItem );

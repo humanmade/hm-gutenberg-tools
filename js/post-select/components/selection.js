@@ -8,36 +8,35 @@ const Selection = ( {
 	onRemoveItem,
 	onMoveItemUp,
 	onMoveItemDown,
-	postType,
 } ) => (
 	<Fragment>
 		{ selection.length > 0 ? (
 			<ol className="post-list">
-				{ selection.map( postId => (
+				{ selection.map( post => (
 					<SelectionListItem
-						key={ postId }
-						postType={ postType }
-						postId={ postId }
+						key={ post.id }
+						postType={ post.type }
+						post={ post }
 						actions={ [
 							{
 								id: 'move-post-up',
 								text: 'Move post up',
 								icon: 'arrow-up-alt2',
-								disabled: postId === selection[0],
-								onClick: () => onMoveItemUp( postId ),
+								disabled: post.id === selection[0].id,
+								onClick: () => onMoveItemUp( post ),
 							},
 							{
 								id: 'move-post-down',
 								text: 'Move post down',
 								icon: 'arrow-down-alt2',
-								disabled: postId === selection[ selection.length - 1 ],
-								onClick: () => onMoveItemDown( postId ),
+								disabled: post.id === selection[ selection.length - 1 ].id,
+								onClick: () => onMoveItemDown( post ),
 							},
 							{
 								id: 'remove-post',
 								text: 'Remove post from selections',
 								icon: 'dismiss',
-								onClick: () => onRemoveItem( postId ),
+								onClick: () => onRemoveItem( post ),
 							},
 						] }
 					/>
@@ -50,8 +49,7 @@ const Selection = ( {
 );
 
 Selection.propTypes = {
-	postType: PropTypes.string.isRequired,
-	selection: PropTypes.array.isRequired,
+	selection: PropTypes.arrayOf( PropTypes.object ).isRequired,
 	onRemoveItem: PropTypes.func.isRequired,
 	onMoveItemUp: PropTypes.func.isRequired,
 	onMoveItemDown: PropTypes.func.isRequired,

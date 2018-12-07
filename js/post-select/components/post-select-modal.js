@@ -84,14 +84,13 @@ const PostSelectModal = props => {
 }
 
 PostSelectModal.defaultProps = {
-	postType: 'post',
 	modalTitle: __( 'Select a post' ),
 	contentState: 'browse',
 	selection: [],
 };
 
 PostSelectModal.propTypes = {
-	postType: PropTypes.string,
+	postType: PropTypes.array.isRequired,
 	modalTitle: PropTypes.string,
 	onSelect: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,
@@ -101,7 +100,7 @@ PostSelectModal.propTypes = {
 	onChangeContentState: PropTypes.func.isRequired,
 	contentState: PropTypes.string.isRequired,
 	termFilters: PropTypes.array,
-	selection: PropTypes.array,
+	selection: PropTypes.arrayOf( PropTypes.object ),
 	modalRef: PropTypes.func.isRequired,
 };
 

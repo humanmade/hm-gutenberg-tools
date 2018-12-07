@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import _uniqBy from 'lodash/uniqBy';
 
 import FormFieldSelect from '../components/form-field-select';
+import { fetchJson } from '../utils/fetch';
 
-const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
 const { __ } = wp.i18n;
 
@@ -22,6 +22,10 @@ class TermSelect extends React.Component {
 	componentDidMount() {
 		this.fetchPostAbortController = new AbortController();
 		this.fetchTerms();
+	}
+
+	componentWillUnmount() {
+		this.fetchPostAbortController && this.fetchPostAbortController.abort();
 	}
 
 	fetchTerms() {
@@ -39,14 +43,10 @@ class TermSelect extends React.Component {
 
 		this.setState( { isLoading: true } );
 
-		apiFetch( {
+		fetchJson( {
 			path: addQueryArgs( `wp/v2/${restBase}/`, query ),
 			signal: this.fetchPostAbortController.signal,
-			parse: false,
-		} ).then( response => Promise.all( [
-			response.json ? response.json() : [],
-			parseInt( response.headers.get( 'x-wp-totalpages' ), 10 ),
-		] ) ).then( ( [ terms, totalPages ] ) => {
+		} ).then( ( [ terms, headers ] ) => {
 			const newOptions = _uniqBy( [ ...options, ...terms.map( term => ( {
 				value: term.id,
 				label: term.name,
@@ -54,7 +54,7 @@ class TermSelect extends React.Component {
 
 			this.setState( {
 				options: newOptions,
-				hasMore: totalPages > page,
+				hasMore: parseInt( headers['x-wp-totalpages'], 10 ) > page,
 				isLoading: false,
 			} );
 		} );

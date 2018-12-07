@@ -2,11 +2,14 @@
 
 namespace HM\GutenbergTools;
 
+require_once __DIR__ . '/endpoints/class-post-select-controller.php';
+
 /**
  * Setup the plugin.
  */
 function setup() {
 	add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\\enqueue_block_editor_assets' );
+	add_action( 'rest_api_init', __NAMESPACE__ . '\\register_api_endpoints' );
 }
 
 /**
@@ -32,6 +35,16 @@ function enqueue_block_editor_assets() {
 		'postTypes'          => get_post_types(),
 		'postTypeTaxonomies' => get_post_type_taxonomies(),
 	] );
+}
+
+/**
+ * Setup the post select API endpoint.
+ *
+ * @return void
+ */
+function register_api_endpoints() {
+	$controller = new Endpoints\Post_Select_Controller;
+	$controller->register_routes();
 }
 
 /**

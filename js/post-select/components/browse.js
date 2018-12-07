@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import wp from 'wp';
 
 import PostSelectBrowseFilters from './../containers/browse-filters';
-import PostListItem from './post-list-item';
+import PostListItem from './../containers/post-list-item';
 
 const { __ } = wp.i18n;
 const { Button } = wp.components;
@@ -21,6 +21,7 @@ const PostSelectBrowse = props => {
 		onPrevPostsPage,
 		onNextPostsPage,
 		onApplyFilters,
+		postTypes,
 	} = props;
 
 	return (
@@ -28,6 +29,7 @@ const PostSelectBrowse = props => {
 			<div className="menu">
 				<PostSelectBrowseFilters
 					termFilters={ termFilters }
+					postTypes={ postTypes }
 					onApplyFilters={ filters => onApplyFilters( filters ) }
 				/>
 			</div>
@@ -53,8 +55,9 @@ const PostSelectBrowse = props => {
 									<PostListItem
 										key={ post.id }
 										post={ post }
-										onToggleSelected={ () => onToggleSelected( post.id ) }
-										isSelected={ selection.length ? selection.indexOf( post.id ) >= 0 : false }
+										postType={ post.type }
+										onToggleSelected={ () => onToggleSelected( post ) }
+										isSelected={ selection.findIndex( p => p.id === post.id ) >= 0 }
 									/>
 								) ) }
 							</ol>
@@ -75,10 +78,10 @@ const PostSelectBrowse = props => {
 }
 
 PostSelectBrowse.propTypes = {
-	postType: PropTypes.string,
+	postTypes: PropTypes.arrayOf( PropTypes.string ).isRequired,
 	selection: PropTypes.array,
 	onToggleSelected: PropTypes.func.isRequired,
-	termFilters: PropTypes.arrayOf( PropTypes.string ).isRequired,
+	termFilters: PropTypes.arrayOf( PropTypes.string ),
 	hasPrev: PropTypes.bool.isRequired,
 	hasMore: PropTypes.bool.isRequired,
 	onPrevPostsPage: PropTypes.func.isRequired,

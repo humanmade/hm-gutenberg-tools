@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import wp from 'wp';
 
+import FormFieldSelect from './form-field-select';
 import FormFieldSearch from './form-field-search';
 import FormFieldSelectTerm from '../containers/term-select-form-field';
 
@@ -12,6 +13,7 @@ const PostBrowseFilters = ( {
 	formId,
 	value,
 	terms,
+	postTypeObjects,
 	onSubmitFilters,
 	onUpdateFilters,
 } ) => (
@@ -23,8 +25,8 @@ const PostBrowseFilters = ( {
 		} }
 	>
 		<FormFieldSearch
-			label={ __( 'Search Posts…' ) }
-			placeholder={ __( 'Search posts…' ) }
+			label={ __( 'Search' ) }
+			placeholder={ __( 'Search' ) }
 			fieldId={ `${formId}-search` }
 			value={ value.search || '' }
 			onChange={ search => onUpdateFilters( {
@@ -33,6 +35,22 @@ const PostBrowseFilters = ( {
 			} ) }
 		/>
 
+		{ postTypeObjects.length > 1 && (
+			<FormFieldSelect
+				fieldId={ `${formId}-post-type` }
+				label={ __( 'Filter by Post Type' ) }
+				onChange={ type => onUpdateFilters( {
+					...value,
+					type,
+				} ) }
+				options={ postTypeObjects.map( postType => ( {
+					label: postType.labels.name,
+					value: postType.slug,
+				} ) ) }
+				placeholder={ __( 'Filter by Post Type' ) }
+			/>
+		) }
+
 		{ terms.map( term => (
 			<FormFieldSelectTerm
 				key={ `term-filter-${ term.slug }` }
@@ -40,12 +58,10 @@ const PostBrowseFilters = ( {
 				restBase={ term.rest_base }
 				fieldId={ `${formId}-${term.slug}` }
 				value={ value[ term.rest_base ] }
-				onChange={ filterValue => {
-					onUpdateFilters( {
-						...value,
-						[term.rest_base]: filterValue,
-					} );
-				} }
+				onChange={ filterValue => onUpdateFilters( {
+					...value,
+					[term.rest_base]: filterValue,
+				} ) }
 			/>
 		) ) }
 
