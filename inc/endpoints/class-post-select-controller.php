@@ -82,6 +82,10 @@ class Post_Select_Controller extends WP_REST_Controller {
 		$search  = $request->get_param( self::PROP_SEARCH );
 		$include = $request->get_param( self::PROP_INCLUDE );
 
+		if ( empty( $request->get_param( self::PROP_TYPE ) ) ) {
+			return [];
+		}
+
 		$query_args = [
 			'post_type'      => $request->get_param( self::PROP_TYPE ),
 			'posts_per_page' => $request->get_param( self::PROP_PER_PAGE ),
