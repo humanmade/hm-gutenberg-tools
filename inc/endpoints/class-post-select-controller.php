@@ -286,6 +286,9 @@ class Post_Select_Controller extends WP_REST_Controller {
 	/**
 	 * Get allowed post types.
 	 *
+	 * By default this is only post types that have show_in_rest set to true.
+	 * You can filter this to support more post types if required.
+	 *
 	 * @return array
 	 */
 	public function get_allowed_post_types() {
@@ -299,7 +302,13 @@ class Post_Select_Controller extends WP_REST_Controller {
 			unset( $allowed_types[ $key ] );
 		}
 
-		return $allowed_types;
+		/**
+		 * Filter the allowed post types.
+		 *
+		 * Note that if you allow this for posts that are not otherwise public,
+		 * this data will be accessible using this endpoint for any logged in user with the edit_post capability.
+		 */
+		return apply_filters( 'hm_gb_tools_post_select_allowed_post_types', $allowed_types );
 	}
 
 	/**
