@@ -290,8 +290,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 	 */
 	public function get_allowed_post_types() {
 		$allowed_types = array_values( get_post_types( [
-			'public' => true,
-			'exclude_from_search' => false,
+			'show_in_rest' => true,
 		] ) );
 
 		$key = array_search( 'attachment', $allowed_types, true );
