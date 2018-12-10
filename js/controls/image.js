@@ -44,7 +44,7 @@ const ImageControl = ( {
 
 		<div className="hm-image-control__actions">
 			<MediaUpload
-				onSelect={ i => onChange( i.id ) }
+				onSelect={ onChange }
 				type="image"
 				value={ value }
 				render={ ( { open } ) => (
@@ -88,7 +88,7 @@ ImageControl.propTypes = {
 export default withSelect( ( select, ownProps ) => {
 	const { getEntityRecord } = select( 'core' );
 	const { value } = ownProps;
-	const image = value ? getEntityRecord( 'postType', 'attachment', ownProps.value ) : null;
+	const image = value ? getEntityRecord( 'root', 'media', value ) : null;
 
 	return {
 		image,
