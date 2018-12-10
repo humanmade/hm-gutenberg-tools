@@ -28,11 +28,11 @@ const ImageControl = ( {
 	isLoading = false,
 } ) => (
 	<BaseControl label={ label } id={ id } help={ help } className="hm-image-control">
+		{ isLoading && <Spinner /> }
 
 		{ image && ( <div className="hm-image-control__img-container">
 			<img
 				src={ image.media_details.sizes.thumbnail.source_url }
-				data-id={ value }
 				width={ image.media_details.sizes.thumbnail.width }
 				height={ image.media_details.sizes.thumbnail.height }
 				style={ {
@@ -61,8 +61,6 @@ const ImageControl = ( {
 					onClick={ () => onChange() }
 				>{ __( 'Remove' ) }</Button>
 			) }
-
-			{ isLoading && <Spinner /> }
 		</div>
 	</BaseControl>
 );
