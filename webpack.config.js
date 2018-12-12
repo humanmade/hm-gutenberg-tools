@@ -16,30 +16,32 @@ if ( isProduction ) {
 }
 
 module.exports = {
-	entry: { editor: './js/editor.js', },
+	entry: {
+		editor: './js/editor.js',
+	},
 	output: {
-		path:     path.resolve( __dirname, 'build' ),
+		path: path.resolve( __dirname, 'build' ),
 		filename: '[name].bundle.js',
 	},
 	module: {
 		rules: [
 			{
-				test:    /\.(js|jsx|mjs)$/,
+				test: /\.(js|jsx|mjs)$/,
 				exclude: /(node_modules|bower_components)/,
-				use:     { loader: 'babel-loader' },
+				use: { loader: 'babel-loader' },
 			},
 		],
 	},
 	externals: {
-		jquery:      'jQuery',
-		tinymce:     'tinymce',
-		moment:      'moment',
-		react:       'React',
+		jquery: 'jQuery',
+		tinymce: 'tinymce',
+		moment: 'moment',
+		react: 'React',
 		'react-dom': 'ReactDOM',
-		wp:          'wp',
-		backbone:    'Backbone',
+		wp: 'wp',
+		backbone: 'Backbone',
 	},
-	stats:   { colors: true },
+	stats: { colors: true },
 	devtool: isProduction ? false : 'source-map',
 	plugins,
 };

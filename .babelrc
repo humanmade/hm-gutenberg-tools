@@ -1,14 +1,8 @@
 {
     "presets": [ "@babel/preset-env", "@babel/preset-react" ],
     "plugins": [
-        [
-            "transform-object-rest-spread",
-            { "useBuiltIns": true }
-        ],
-        [
-            "transform-react-jsx",
-            { "pragma": "wp.element.createElement" }
-        ],
-        "transform-class-properties"
+        [ "@babel/plugin-transform-react-jsx", { "pragma": "wp.element.createElement" } ],
+        "@babel/plugin-proposal-class-properties",
+        [ "@babel/plugin-proposal-object-rest-spread", { "useBuiltIns": true } ]
     ]
 }

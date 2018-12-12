@@ -15,7 +15,7 @@ stying to work better in the sidebar.
 
 ## Instructions
 
-Install as a plugin, mu-plugin, or you can include it in your theme/plugin. 
+Install as a plugin, mu-plugin, or you can include it in your theme/plugin.
 
 You will need to run `yarn && yarn build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
 
@@ -43,3 +43,10 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 * `yarn build` Builds a production version of the code.
 * `yarn watch` Watches for changes and builds development versions of the code.
 * `yarn lint` Lints your JS and fixes your code.
+
+## Changelog
+
+### v0.2.0
+
+* Deprecate EditableHTML. You can now just use the Gutenberg component `wp.editor.RichText` and set the `format` prop to `string`.
+* Updates to work with the latest version of Gutenberg (3.5).

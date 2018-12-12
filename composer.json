@@ -1,5 +1,9 @@
 {
+    "name": "humanmade/hm-gutenberg-tools",
+    "description": "Human Made Gutenberg Tools",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
     "require": {
-        "humanmade/coding-standards": "^0.3.0"
+        "humanmade/coding-standards": "^0.5.0"
     }
 }
