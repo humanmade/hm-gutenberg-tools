@@ -1,9 +1,10 @@
+/* global wp */
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import wp from 'wp';
 
-import PostSelectButton from '../post-select';
-import CurrentSelection from '../current-selection';
+import PostSelectButton from '../index';
+import CurrentSelection from '../containers/current-selection';
 
 const { BaseControl } = wp.components;
 const { __ } = wp.i18n;
@@ -11,7 +12,7 @@ const { __ } = wp.i18n;
 /**
  * InspectorControl for image upload.
  */
-const PostControl = ( {
+const PostSelectControl = ( {
 	label,
 	id,
 	help,
@@ -20,9 +21,6 @@ const PostControl = ( {
 	postSelectProps,
 	btnText,
 } ) => {
-	postSelectProps.btnProps = postSelectProps.btnProps || {};
-	postSelectProps.btnProps.isLarge = true;
-
 	return (
 		<BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
 			<PostSelectButton
@@ -34,27 +32,25 @@ const PostControl = ( {
 			{ value.length > 0 && (
 				<CurrentSelection
 					postIds={ value }
-					postType={ postSelectProps.postType || 'post' }
+					postTypes={ postSelectProps.postType || [ 'post' ] }
 				/>
 			) }
 		</BaseControl>
 	)
 }
 
-PostControl.defaultProps = {
+PostSelectControl.defaultProps = {
 	btnText: __( 'Select post' ),
 	postSelectProps: { btnProps: {} },
 }
 
-PostControl.propTypes = {
+PostSelectControl.propTypes = {
 	label: PropTypes.string.isRequired,
 	help: PropTypes.string,
 	id: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.arrayOf( PropTypes.number ).isRequired,
-	postSelectProps: PropTypes.object,
-	btnText: PropTypes.string,
 }
 
-export default PostControl;
+export default PostSelectControl;
 

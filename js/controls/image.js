@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import wp from 'wp';
 
 const {
@@ -8,53 +9,88 @@ const {
 const {
 	Button,
 	BaseControl,
+	Spinner,
 } = wp.components;
 
 const { __ } = wp.i18n;
+const { withSelect } = wp.data;
 
 /**
  * InspectorControl for image upload.
  */
-const ImageControl = props => {
-	const {
-		label,
-		id,
-		help,
-		onChange,
-		value = { id: null, src: null },
-	} = props;
+const ImageControl = ( {
+	label,
+	id,
+	help,
+	onChange,
+	value,
+	image,
+	isLoading = false,
+} ) => (
+	<BaseControl label={ label } id={ id } help={ help } className="hm-image-control">
+		{ isLoading && <Spinner /> }
 
-	const uploadButtonProps = { isLarge: true };
-	const removeButtonProps = { isLarge: true, style: { marginLeft: '8px' } };
+		{ image && ( <div className="hm-image-control__img-container">
+			<img
+				src={ image.media_details.sizes.thumbnail.source_url }
+				width={ image.media_details.sizes.thumbnail.width }
+				height={ image.media_details.sizes.thumbnail.height }
+				style={ {
+					display: 'block',
+					marginBottom: '8px',
+				} }
+			/>
+		</div> ) }
 
-	return <BaseControl label={ label } id={ id } help={ help }>
-		{ value.src && <img
-			src={ value.src }
-			data-id={ value.id }
-			width="100"
-			height="100"
-			style={ { display: 'block', marginBottom: '8px' } }
-		/> }
+		<div className="hm-image-control__actions">
+			<MediaUpload
+				onSelect={ onChange }
+				type="image"
+				value={ value }
+				render={ ( { open } ) => (
+					<Button isLarge onClick={ open }>
+						{ value ? __( 'Change' ) : __( 'Select' ) }
+					</Button>
+				) }
+			/>
 
-		<MediaUpload
-			onSelect={ onChange }
-			type="image"
-			value={ value.id }
-			render={ ( { open } ) => (
-				<Button { ...uploadButtonProps } onClick={ open }>
-					{ value.src ? __( 'Change' ) : __( 'Select' ) }
-				</Button>
+			{ !! value && (
+				<Button
+					isLarge
+					style={ { marginLeft: '8px' } }
+					onClick={ () => onChange() }
+				>{ __( 'Remove' ) }</Button>
 			) }
-		/>
-
-		{ value.src && <Button
-			{ ...removeButtonProps }
-			onClick={ () => onChange() }
-		>
-			{ __( 'Remove' ) }
-		</Button> }
+		</div>
 	</BaseControl>
+);
+
+ImageControl.defaultProps = {
+	image: null,
+	value: 0,
+	label: '',
+	id: '',
+	help: '',
+	isLoading: false,
 }
 
-export default ImageControl;
+ImageControl.propTypes = {
+	image: PropTypes.object,
+	value: PropTypes.number,
+	label: PropTypes.string,
+	id: PropTypes.string,
+	help: PropTypes.string,
+	isLoading: PropTypes.bool,
+}
+
+export default withSelect( ( select, ownProps ) => {
+	const { getEntityRecord } = select( 'core' );
+	const { value } = ownProps;
+	const image = value ? getEntityRecord( 'root', 'media', value ) : null;
+
+	return {
+		image,
+		isLoading: !! value && ! image,
+	};
+} )( ImageControl );
 
