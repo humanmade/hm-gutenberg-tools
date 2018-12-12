@@ -46,6 +46,12 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 ## Changelog
 
+### v1.0.0
+
+* Refactor how it works for compatability with WordPress 5.0
+    * Use core data store
+    * Use custom endpoint to fetch content to handle multiple post types.
+
 ### v0.2.0
 
 * Deprecate EditableHTML. You can now just use the Gutenberg component `wp.editor.RichText` and set the `format` prop to `string`.
