@@ -16,7 +16,7 @@ stying to work better in the sidebar.
 
 Install as a plugin, mu-plugin, or you can include it in your theme/plugin.
 
-You will need to run `yarn && yarn build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
+You will need to run `npm install && npm run build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
 
 Note that if you are including in a theme (or anywhere outside of plugins/mu-plugins directories) you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
 
@@ -39,9 +39,9 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 ## Development
 
-* `yarn build` Builds a production version of the code.
-* `yarn watch` Watches for changes and builds development versions of the code.
-* `yarn lint` Lints your JS and fixes your code.
+* `npm run build` Builds a production version of the code.
+* `npm run watch` Watches for changes and builds development versions of the code.
+* `npm run lint` Lints your JS and fixes your code.
 
 ## Changelog
 
