@@ -1,9 +1,6 @@
 import wp from 'wp';
 import React from 'react';
 import PropTypes from 'prop-types';
-import _uniqueId from 'lodash/uniqueId';
-import _isEqual from 'lodash/isEqual';
-import _get from 'lodash/get';
 
 import PostSelectModal from '../components/post-select-modal';
 import { fetchPostsById } from '../utils/fetch';
