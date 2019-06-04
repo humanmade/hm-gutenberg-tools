@@ -11,7 +11,6 @@ stying to work better in the sidebar.
     * [Link control.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Link-Control) A wrapper for the core UrlInput, but with some style improvements.
     * [Image.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Image-Control) Sidebar UI for selecting an image.
     * [Post.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button) A wrapper for the post select button component.
-* [EditableHTML.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Editable-HTML) A wrapper for the core Gutenberg Editable component that allows you to store data as strings of HTML.
 
 ## Instructions
 
