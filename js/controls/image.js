@@ -35,6 +35,7 @@ const ImageControl = ( {
 				src={ image.media_details.sizes.thumbnail.source_url }
 				width={ image.media_details.sizes.thumbnail.width }
 				height={ image.media_details.sizes.thumbnail.height }
+				alt={ __( 'Thumbnail of the selected image.' ) }
 				style={ {
 					display: 'block',
 					marginBottom: '8px',

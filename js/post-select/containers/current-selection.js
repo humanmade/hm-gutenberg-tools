@@ -1,5 +1,6 @@
 /* global wp */
 
+import React from 'react';
 import CurrentSelection from '../components/current-selection';
 import { fetchPostsById } from '../utils/fetch';
 
@@ -10,7 +11,7 @@ class CurrentSelectionContainer extends Component {
 		posts: [],
 		isLoading: false,
 		isMounted: false,
-	}
+	};
 
 	componentDidMount() {
 		this.setState( { isMounted: true } );
