@@ -11,7 +11,7 @@ import {
 	moveItemAtIndexUp,
 } from '../utils/array-utils';
 
-const { __ } = wp.i18n;
+const { sprintf, __ } = wp.i18n;
 
 class PostSelectModalContainer extends React.Component {
 	static defaultProps = {
@@ -119,8 +119,8 @@ class PostSelectModalContainer extends React.Component {
 			this.setState( { selection: deleteAtIndex( selection, index ) } );
 		} else {
 			if ( maxPosts && selection.length >= maxPosts ) {
-				/* translators: ${maxPosts} is total number of posts. */
-				alert( __( `Max number (${maxPosts}) reached.`, 'rbmh' ) );
+				/* translators: %d is total number of posts. */
+				alert( sprintf( __( 'Max number %d reached.', 'rbmh' ), maxPosts ) );
 				return;
 			} else {
 				this.setState( { selection: [ ...selection, post ] } );
