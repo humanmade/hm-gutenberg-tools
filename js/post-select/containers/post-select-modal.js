@@ -119,7 +119,8 @@ class PostSelectModalContainer extends React.Component {
 			this.setState( { selection: deleteAtIndex( selection, index ) } );
 		} else {
 			if ( maxPosts && selection.length >= maxPosts ) {
-				alert( `Max number (${maxPosts}) reached.` );
+				/* translators: ${maxPosts} is total number of posts. */
+				alert( __( `Max number (${maxPosts}) reached.`, 'rbmh' ) );
 				return;
 			} else {
 				this.setState( { selection: [ ...selection, post ] } );

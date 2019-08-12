@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import classNames from 'classnames';
 
+import wp from 'wp';
+
+const { __ }  = wp.i18n;
+
 const PostListItem = ( { post, author, postTypeObject, isSelected, onToggleSelected } ) => (
 	<li className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }>
 		<label htmlFor={ `select-post-${post.id}` }>
@@ -15,8 +19,8 @@ const PostListItem = ( { post, author, postTypeObject, isSelected, onToggleSelec
 			/>
 			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 			<div className="post-list-item--meta">
-				{ postTypeObject && ( <span><b>Type:</b> { postTypeObject.labels.singular_name }</span> ) }
-				<span><b>Published:</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>
+				{ postTypeObject && ( <span><b>{ __( 'Type:' , 'rbmh' ) }</b> { postTypeObject.labels.singular_name }</span> ) }
+				<span><b>{ __( 'Published:' , 'rbmh' ) }</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>
 				{ author && ( <span><b>Author:</b> { author.name }</span> ) }
 			</div>
 		</label>

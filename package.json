@@ -37,7 +37,7 @@
     "babel-eslint": "^10.0.1",
     "babel-jest": "^24.8.0",
     "babel-loader": "^8.0.0-beta.0",
-    "chokidar-cli": "^1.2.0",
+    "chokidar-cli": "^1.2.3",
     "classnames": "^2.2.5",
     "concurrently": "^3.5.1",
     "cross-env": "^5.*",
@@ -65,5 +65,7 @@
     "webpack": "^3.10.0",
     "webpack-bundle-analyzer": "^3.3.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.15"
+  }
 }

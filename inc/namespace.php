@@ -35,6 +35,8 @@ function enqueue_block_editor_assets() {
 		'restBase' => esc_url_raw( get_rest_url() ),
 		'postSelectEndpoint' => '/rbmh/v1/post-select',
 	] );
+
+	wp_set_script_translations( 'hm-gb-tools-editor', 'rbmh' );
 }
 
 /**
