@@ -25,3 +25,5 @@ yarn-error.log*
 *.sublime-*
 .phpintel
 /asset-manifest.json
+
+.idea
