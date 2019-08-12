@@ -29,7 +29,7 @@ const Modal = ( {
 			>
 				<span className="media-modal-icon">
 					<span className="screen-reader-text">
-						{ __( 'Close modal' ) }
+						{ __( 'Close modal', 'hm-gb-tools' ) }
 					</span>
 				</span>
 			</Button>

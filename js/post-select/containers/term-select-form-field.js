@@ -9,7 +9,7 @@ import FormFieldSelect from '../components/form-field-select';
 import { fetchJson } from '../utils/fetch';
 
 const { addQueryArgs } = wp.url;
-const { sprintf ,__ } = wp.i18n;
+const { sprintf, __ } = wp.i18n;
 
 class TermSelect extends React.Component {
 	state = {
@@ -89,14 +89,14 @@ class TermSelect extends React.Component {
 	}
 
 	render() {
-		const labelText = sprintf( __( 'Filter by %s' ), this.props.label );
+		const labelText = sprintf( __( 'Filter by %s', 'hm-gb-tools' ), this.props.label );
 
 		return (
 			<FormFieldSelect
 				{ ...this.state }
 				{ ...this.props }
 				fieldId={ this.props.fieldId }
-				label={ labelText}
+				label={ labelText }
 				placeholder={ labelText  }
 				onChange={ value => this.handleChange( value ) }
 				onFetchMoreTerms={ () => this.fetchMoreTerms() }

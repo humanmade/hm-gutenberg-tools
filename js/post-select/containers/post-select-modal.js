@@ -19,7 +19,7 @@ class PostSelectModalContainer extends React.Component {
 		maxPosts: 0,
 		postType: [ 'post' ],
 		value: [],
-		modalTitle: __( 'Select a post' ),
+		modalTitle: __( 'Select a post', 'hm-gb-tools' ),
 	};
 
 	static propTypes = {

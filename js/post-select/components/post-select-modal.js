@@ -84,7 +84,7 @@ const PostSelectModal = props => {
 }
 
 PostSelectModal.defaultProps = {
-	modalTitle: __( 'Select a post' ),
+	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
 	contentState: 'browse',
 	selection: [],
 };
