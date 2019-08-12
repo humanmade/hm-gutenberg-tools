@@ -120,7 +120,7 @@ class PostSelectModalContainer extends React.Component {
 		} else {
 			if ( maxPosts && selection.length >= maxPosts ) {
 				/* translators: %d is total number of posts. */
-				alert( sprintf( __( 'Max number %d reached.', 'rbmh' ), maxPosts ) );
+				alert( sprintf( __( 'Max number %d reached.', 'hm-gb-tools' ), maxPosts ) );
 				return;
 			} else {
 				this.setState( { selection: [ ...selection, post ] } );

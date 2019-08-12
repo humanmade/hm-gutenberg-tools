@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-08-12T08:25:49+00:00\n"
+"POT-Creation-Date: 2019-08-12T09:44:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.2.0\n"
-"X-Domain: rbmh\n"
+"X-Domain: hm-gb-tools\n"
 
 #. Plugin Name of the plugin
 msgid "HM Gutenberg Tools Plugin"
@@ -31,23 +31,23 @@ msgstr ""
 msgid "Human Made Limited"
 msgstr ""
 
-#: inc/endpoints/class-post-select-controller.php:210
+#: inc/endpoints/class-post-select-controller.php:207
 msgid "Limit results to items of an object type."
 msgstr ""
 
-#: inc/endpoints/class-post-select-controller.php:223
+#: inc/endpoints/class-post-select-controller.php:220
 msgid "Limit results to items that match search query."
 msgstr ""
 
-#: inc/endpoints/class-post-select-controller.php:228
+#: inc/endpoints/class-post-select-controller.php:225
 msgid "Include posts by ID."
 msgstr ""
 
-#: inc/endpoints/class-post-select-controller.php:239
+#: inc/endpoints/class-post-select-controller.php:236
 msgid "Number of results to return."
 msgstr ""
 
-#: inc/endpoints/class-post-select-controller.php:248
+#: inc/endpoints/class-post-select-controller.php:245
 msgid "Page of results to return."
 msgstr ""
 

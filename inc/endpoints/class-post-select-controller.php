@@ -37,7 +37,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->namespace = 'rbmh/v1';
+		$this->namespace = 'hm-gb-tools/v1';
 		$this->rest_base = 'post-select';
 	}
 
@@ -142,14 +142,11 @@ class Post_Select_Controller extends WP_REST_Controller {
 	 * @return WP_REST_Response Response object.
 	 */
 	public function prepare_item_for_response( $post, $request ) {
-
-		$short_title = get_post_meta( $post->ID, 'rbmh_online_title_stv', true );
-
 		$data = [
 			'id' => $post->ID,
 			'title' => [
 				'raw'      => $post->post_title,
-				'rendered' => $short_title ? sprintf( '(%s) %s', $short_title, get_the_title( $post->ID ) ) : get_the_title( $post->ID ),
+				'rendered' => $post->post_title,
 			],
 			'type' => $post->post_type,
 			'date' => $this->prepare_date_response( $post->post_date_gmt, $post->post_date ),
@@ -207,7 +204,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 		$allowed_types = $this->get_allowed_post_types();
 
 		$query_params[ self::PROP_TYPE ] = [
-			'description' => __( 'Limit results to items of an object type.', 'rbmh' ),
+			'description' => __( 'Limit results to items of an object type.', 'hm-gb-tools' ),
 			'type'        => 'array',
 			'items'       => [
 				'type' => 'string',
@@ -220,12 +217,12 @@ class Post_Select_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_SEARCH ] = [
-			'description' => __( 'Limit results to items that match search query.', 'rbmh' ),
+			'description' => __( 'Limit results to items that match search query.', 'hm-gb-tools' ),
 			'type'        => 'string',
 		];
 
 		$query_params[ self::PROP_INCLUDE ] = [
-			'description' => __( 'Include posts by ID.', 'rbmh' ),
+			'description' => __( 'Include posts by ID.', 'hm-gb-tools' ),
 			'type'        => 'array',
 			'validate_callback' => function( $ids ) {
 				return count( $ids ) > 0;
@@ -236,7 +233,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_PER_PAGE ] = [
-			'description' => __( 'Number of results to return.', 'rbmh' ),
+			'description' => __( 'Number of results to return.', 'hm-gb-tools' ),
 			'type'        => 'number',
 			'sanitize_callback' => function( $val ) {
 				return min( absint( $val ), 100 );
@@ -245,7 +242,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 		];
 
 		$query_params[ self::PROP_PAGE ] = [
-			'description' => __( 'Page of results to return.', 'rbmh' ),
+			'description' => __( 'Page of results to return.', 'hm-gb-tools' ),
 			'type'        => 'number',
 			'sanitize_callback' => function( $val ) {
 				return absint( $val );
