@@ -9,6 +9,7 @@ const { Component } = wp.element;
 class CurrentSelectionContainer extends Component {
 	constructor( props ) {
 		super( props );
+
 		this.state = {
 			posts: [],
 			isLoading: false,
