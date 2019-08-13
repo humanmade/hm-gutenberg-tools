@@ -12,12 +12,16 @@ const { addQueryArgs } = wp.url;
 const { sprintf, __ } = wp.i18n;
 
 class TermSelect extends React.Component {
-	state = {
-		options: [],
-		isLoading: false,
-		page: 1,
-		hasMore: false,
-	};
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			options: [],
+			isLoading: false,
+			page: 1,
+			hasMore: false,
+		};
+	}
 
 	componentDidMount() {
 		this.fetchPostAbortController = new AbortController();
@@ -89,6 +93,7 @@ class TermSelect extends React.Component {
 	}
 
 	render() {
+		/* translators: %s is type of filter e.g. category, tag */
 		const labelText = sprintf( __( 'Filter by %s', 'hm-gb-tools' ), this.props.label );
 
 		return (

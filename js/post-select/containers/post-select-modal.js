@@ -14,32 +14,15 @@ import {
 const { sprintf, __ } = wp.i18n;
 
 class PostSelectModalContainer extends React.Component {
-	static defaultProps = {
-		minPosts: 0,
-		maxPosts: 0,
-		postType: [ 'post' ],
-		value: [],
-		modalTitle: __( 'Select a post', 'hm-gb-tools' ),
-	};
+	constructor( props ) {
+		super( props );
 
-	static propTypes = {
-		postType: PropTypes.oneOfType( [
-			PropTypes.string,
-			PropTypes.array,
-		] ),
-		minPosts: PropTypes.number,
-		maxPosts: PropTypes.number,
-		onSelect: PropTypes.func.isRequired,
-		onClose: PropTypes.func.isRequired,
-		modalTitle: PropTypes.string,
-		termFilters: PropTypes.arrayOf( PropTypes.string ),
-	};
-
-	state = {
-		isLoadingSelection: true,
-		selection: [],
-		contentState: 'browse',
-	};
+		this.state = {
+			isLoadingSelection: true,
+			selection: [],
+			contentState: 'browse',
+		};
+	}
 
 	componentDidMount() {
 		this.fetchSelection();
@@ -128,6 +111,27 @@ class PostSelectModalContainer extends React.Component {
 		}
 	}
 }
+
+PostSelectModalContainer.defaultProps = {
+	minPosts: 0,
+	maxPosts: 0,
+	postType: [ 'post' ],
+	value: [],
+	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
+};
+
+PostSelectModalContainer.propTypes = {
+	postType: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.array,
+	] ),
+	minPosts: PropTypes.number,
+	maxPosts: PropTypes.number,
+	onSelect: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
+	modalTitle: PropTypes.string,
+	termFilters: PropTypes.arrayOf( PropTypes.string ),
+};
 
 /**
  * Prefetch the initial selection.

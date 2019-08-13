@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-08-12T10:04:26+00:00\n"
+"POT-Creation-Date: 2019-08-13T05:12:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.2.0\n"
 "X-Domain: hm-gb-tools\n"
@@ -102,5 +102,16 @@ msgid "Browse posts"
 msgstr ""
 
 #: js/post-select/components/post-select-modal.js:87
+#: js/post-select/containers/post-select-modal.js:120
 msgid "Select a post"
+msgstr ""
+
+#. translators: %s is type of filter e.g. category, tag
+#: js/post-select/containers/term-select-form-field.js:97
+msgid "Filter by %s"
+msgstr ""
+
+#. translators: %d is total number of posts.
+#: js/post-select/containers/post-select-modal.js:106
+msgid "Max number %d reached."
 msgstr ""
