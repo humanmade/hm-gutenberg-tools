@@ -1,6 +1,6 @@
 {
   "name": "hm-gutenberg-tools",
-  "version": "0.2.1",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "build": "npm run clean:build && concurrently -p name -n \"JS,CSS\" -c \"cyan.bold,yellow.bold\" \"npm run js:build\" \"npm run css:build\"",
