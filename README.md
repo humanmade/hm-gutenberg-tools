@@ -55,3 +55,8 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 * Deprecate EditableHTML. You can now just use the Gutenberg component `wp.editor.RichText` and set the `format` prop to `string`.
 * Updates to work with the latest version of Gutenberg (3.5).
+
+
+### v0.2.1
+
+* Support for i18n.
