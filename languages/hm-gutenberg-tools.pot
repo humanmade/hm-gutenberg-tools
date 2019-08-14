@@ -1,0 +1,117 @@
+# Copyright (C) 2019 Human Made Limited
+# This file is distributed under the same license as the HM Gutenberg Tools Plugin plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: HM Gutenberg Tools Plugin 0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/hm-gutenberg-tools\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-08-13T05:12:21+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.2.0\n"
+"X-Domain: hm-gb-tools\n"
+
+#. Plugin Name of the plugin
+msgid "HM Gutenberg Tools Plugin"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://hmn.md"
+msgstr ""
+
+#. Description of the plugin
+msgid "Tools for Gutenberg."
+msgstr ""
+
+#. Author of the plugin
+msgid "Human Made Limited"
+msgstr ""
+
+#: inc/endpoints/class-post-select-controller.php:207
+msgid "Limit results to items of an object type."
+msgstr ""
+
+#: inc/endpoints/class-post-select-controller.php:220
+msgid "Limit results to items that match search query."
+msgstr ""
+
+#: inc/endpoints/class-post-select-controller.php:225
+msgid "Include posts by ID."
+msgstr ""
+
+#: inc/endpoints/class-post-select-controller.php:236
+msgid "Number of results to return."
+msgstr ""
+
+#: inc/endpoints/class-post-select-controller.php:245
+msgid "Page of results to return."
+msgstr ""
+
+#: js/current-selection/components/current-selection.js:32
+#: js/post-select/components/current-selection.js:31
+msgid "Current Selection"
+msgstr ""
+
+#: js/controls/image.js:38
+msgid "Thumbnail of the selected image."
+msgstr ""
+
+#: js/post-select/components/selection.js:26
+msgid "Move post up"
+msgstr ""
+
+#: js/post-select/components/selection.js:33
+msgid "Move post down"
+msgstr ""
+
+#: js/post-select/components/selection.js:40
+msgid "Remove post from selections"
+msgstr ""
+
+#: js/post-select/components/selection.js:49
+msgid "Nothing selected"
+msgstr ""
+
+#: js/post-select/components/post-list-item.js:22
+msgid "Type:"
+msgstr ""
+
+#: js/post-select/components/post-list-item.js:23
+msgid "Published:"
+msgstr ""
+
+#: js/post-select/components/modal.js:32
+msgid "Close modal"
+msgstr ""
+
+#: js/post-select/components/browse-filters.js:41
+#: js/post-select/components/browse-filters.js:50
+msgid "Filter by Post Type"
+msgstr ""
+
+#: js/post-select/components/post-select-modal.js:41
+msgid "View Selected Posts"
+msgstr ""
+
+#: js/post-select/components/post-select-modal.js:48
+msgid "Browse posts"
+msgstr ""
+
+#: js/post-select/components/post-select-modal.js:87
+#: js/post-select/containers/post-select-modal.js:120
+msgid "Select a post"
+msgstr ""
+
+#. translators: %s is type of filter e.g. category, tag
+#: js/post-select/containers/term-select-form-field.js:97
+msgid "Filter by %s"
+msgstr ""
+
+#. translators: %d is total number of posts.
+#: js/post-select/containers/post-select-modal.js:106
+msgid "Max number %d reached."
+msgstr ""

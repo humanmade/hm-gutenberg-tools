@@ -11,13 +11,12 @@ stying to work better in the sidebar.
     * [Link control.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Link-Control) A wrapper for the core UrlInput, but with some style improvements.
     * [Image.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Image-Control) Sidebar UI for selecting an image.
     * [Post.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Post-Select-Button) A wrapper for the post select button component.
-* [EditableHTML.](https://github.com/humanmade/hm-gutenberg-tools/wiki/Editable-HTML) A wrapper for the core Gutenberg Editable component that allows you to store data as strings of HTML.
 
 ## Instructions
 
 Install as a plugin, mu-plugin, or you can include it in your theme/plugin.
 
-You will need to run `yarn && yarn build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
+You will need to run `npm install && npm run build` in in the hm-gutenberg-tools directory to ensure all the built files are available (In the future I hope to make this step redundant and provide built release versions).
 
 Note that if you are including in a theme (or anywhere outside of plugins/mu-plugins directories) you must define `HM_GB_TOOLS_DIR` and `HM_GB_TOOLS_URL`. For example
 
@@ -40,9 +39,9 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 ## Development
 
-* `yarn build` Builds a production version of the code.
-* `yarn watch` Watches for changes and builds development versions of the code.
-* `yarn lint` Lints your JS and fixes your code.
+* `npm run build` Builds a production version of the code.
+* `npm run watch` Watches for changes and builds development versions of the code.
+* `npm run lint` Lints your JS and fixes your code.
 
 ## Changelog
 
@@ -56,3 +55,8 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 * Deprecate EditableHTML. You can now just use the Gutenberg component `wp.editor.RichText` and set the `format` prop to `string`.
 * Updates to work with the latest version of Gutenberg (3.5).
+
+
+### v0.2.1
+
+* Support for i18n.

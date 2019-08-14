@@ -1,15 +1,20 @@
 /* global wp */
 
+import React from 'react';
 import CurrentSelection from '../components/current-selection';
 import { fetchPostsById } from '../utils/fetch';
 
 const { Component } = wp.element;
 
 class CurrentSelectionContainer extends Component {
-	state = {
-		posts: [],
-		isLoading: false,
-		isMounted: false,
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			posts: [],
+			isLoading: false,
+			isMounted: false,
+		};
 	}
 
 	componentDidMount() {

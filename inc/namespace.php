@@ -18,7 +18,7 @@ function setup() {
 function enqueue_block_editor_assets() {
 	wp_enqueue_script(
 		'hm-gb-tools-editor',
-		HM_GB_TOOLS_URL . '/build/editor.bundle.js',
+		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editor.bundle.js',
 		[ 'wp-blocks', 'wp-element', 'wp-url', 'wp-components', 'wp-editor' ],
 		filemtime( HM_GB_TOOLS_DIR . '/build/editor.bundle.js' ),
 		false
@@ -26,15 +26,17 @@ function enqueue_block_editor_assets() {
 
 	wp_enqueue_style(
 		'hm-gb-tools-editor',
-		HM_GB_TOOLS_URL . '/build/editor.css',
+		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editor.css',
 		[],
 		filemtime( HM_GB_TOOLS_DIR . '/build/editor.css' )
 	);
 
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
 		'restBase' => esc_url_raw( get_rest_url() ),
-		'postSelectEndpoint' => '/rbmh/v1/post-select',
+		'postSelectEndpoint' => '/hm-gb-tools/v1/post-select',
 	] );
+
+	wp_set_script_translations( 'hm-gb-tools-editor', 'hm-gb-tools' );
 }
 
 /**

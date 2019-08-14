@@ -38,7 +38,7 @@ const PostBrowseFilters = ( {
 		{ postTypeObjects.length > 1 && (
 			<FormFieldSelect
 				fieldId={ `${formId}-post-type` }
-				label={ __( 'Filter by Post Type' ) }
+				label={ __( 'Filter by Post Type', 'hm-gb-tools' ) }
 				onChange={ type => onUpdateFilters( {
 					...value,
 					type,
@@ -47,7 +47,7 @@ const PostBrowseFilters = ( {
 					label: postType.labels.name,
 					value: postType.slug,
 				} ) ) }
-				placeholder={ __( 'Filter by Post Type' ) }
+				placeholder={ __( 'Filter by Post Type', 'hm-gb-tools' ) }
 			/>
 		) }
 

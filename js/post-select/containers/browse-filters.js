@@ -10,9 +10,13 @@ import PostBrowseFilters from '../components/browse-filters';
 const { withSelect } = wp.data;
 
 class PostBrowseFiltersContainer extends React.Component {
-	state = {
-		filters: {},
-	};
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			filters: {},
+		};
+	}
 
 	componentDidMount() {
 		this.setState( { id: _uniqueId( 'post-select-modal-filters-' ) } );

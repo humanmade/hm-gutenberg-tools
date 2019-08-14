@@ -1,9 +1,6 @@
 import wp from 'wp';
 import React from 'react';
 import PropTypes from 'prop-types';
-import _uniqueId from 'lodash/uniqueId';
-import _isEqual from 'lodash/isEqual';
-import _get from 'lodash/get';
 
 import PostSelectModal from '../components/post-select-modal';
 import { fetchPostsById } from '../utils/fetch';
@@ -14,35 +11,18 @@ import {
 	moveItemAtIndexUp,
 } from '../utils/array-utils';
 
-const { __ } = wp.i18n;
+const { sprintf, __ } = wp.i18n;
 
 class PostSelectModalContainer extends React.Component {
-	static defaultProps = {
-		minPosts: 0,
-		maxPosts: 0,
-		postType: [ 'post' ],
-		value: [],
-		modalTitle: __( 'Select a post' ),
-	};
+	constructor( props ) {
+		super( props );
 
-	static propTypes = {
-		postType: PropTypes.oneOfType( [
-			PropTypes.string,
-			PropTypes.array,
-		] ),
-		minPosts: PropTypes.number,
-		maxPosts: PropTypes.number,
-		onSelect: PropTypes.func.isRequired,
-		onClose: PropTypes.func.isRequired,
-		modalTitle: PropTypes.string,
-		termFilters: PropTypes.arrayOf( PropTypes.string ),
-	};
-
-	state = {
-		isLoadingSelection: true,
-		selection: [],
-		contentState: 'browse',
-	};
+		this.state = {
+			isLoadingSelection: true,
+			selection: [],
+			contentState: 'browse',
+		};
+	}
 
 	componentDidMount() {
 		this.fetchSelection();
@@ -122,7 +102,8 @@ class PostSelectModalContainer extends React.Component {
 			this.setState( { selection: deleteAtIndex( selection, index ) } );
 		} else {
 			if ( maxPosts && selection.length >= maxPosts ) {
-				alert( `Max number (${maxPosts}) reached.` );
+				/* translators: %d is total number of posts. */
+				alert( sprintf( __( 'Max number %d reached.', 'hm-gb-tools' ), maxPosts ) );
 				return;
 			} else {
 				this.setState( { selection: [ ...selection, post ] } );
@@ -130,6 +111,27 @@ class PostSelectModalContainer extends React.Component {
 		}
 	}
 }
+
+PostSelectModalContainer.defaultProps = {
+	minPosts: 0,
+	maxPosts: 0,
+	postType: [ 'post' ],
+	value: [],
+	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
+};
+
+PostSelectModalContainer.propTypes = {
+	postType: PropTypes.oneOfType( [
+		PropTypes.string,
+		PropTypes.array,
+	] ),
+	minPosts: PropTypes.number,
+	maxPosts: PropTypes.number,
+	onSelect: PropTypes.func.isRequired,
+	onClose: PropTypes.func.isRequired,
+	modalTitle: PropTypes.string,
+	termFilters: PropTypes.arrayOf( PropTypes.string ),
+};
 
 /**
  * Prefetch the initial selection.
