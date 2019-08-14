@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import wp from 'wp';
 
 import SelectionListItem from '../containers/selection-item';
+
+const { __ } = wp.i18n;
 
 const Selection = ( {
 	selection,
@@ -20,21 +23,21 @@ const Selection = ( {
 						actions={ [
 							{
 								id: 'move-post-up',
-								text: 'Move post up',
+								text: __( 'Move post up', 'hm-gb-tools' ),
 								icon: 'arrow-up-alt2',
 								disabled: post.id === selection[0].id,
 								onClick: () => onMoveItemUp( post ),
 							},
 							{
 								id: 'move-post-down',
-								text: 'Move post down',
+								text: __( 'Move post down', 'hm-gb-tools' ),
 								icon: 'arrow-down-alt2',
 								disabled: post.id === selection[ selection.length - 1 ].id,
 								onClick: () => onMoveItemDown( post ),
 							},
 							{
 								id: 'remove-post',
-								text: 'Remove post from selections',
+								text: __( 'Remove post from selections', 'hm-gb-tools' ),
 								icon: 'dismiss',
 								onClick: () => onRemoveItem( post ),
 							},
@@ -43,7 +46,7 @@ const Selection = ( {
 				) ) }
 			</ol>
 		) : (
-			<p className="no-selection">Nothing selected</p>
+			<p className="no-selection">{ __( 'Nothing selected', 'hm-gb-tools' ) }</p>
 		) }
 	</Fragment>
 );

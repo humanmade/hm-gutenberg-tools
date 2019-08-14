@@ -29,7 +29,7 @@ const CurrentSelection = ( {
 
 CurrentSelection.defaultProps = {
 	isLoading: false,
-	title: __( 'Current Selection' ),
+	title: __( 'Current Selection', 'hm-gb-tools' ),
 }
 
 CurrentSelection.propTypes = {

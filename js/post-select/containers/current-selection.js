@@ -7,11 +7,15 @@ import { fetchPostsById } from '../utils/fetch';
 const { Component } = wp.element;
 
 class CurrentSelectionContainer extends Component {
-	state = {
-		posts: [],
-		isLoading: false,
-		isMounted: false,
-	};
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			posts: [],
+			isLoading: false,
+			isMounted: false,
+		};
+	}
 
 	componentDidMount() {
 		this.setState( { isMounted: true } );

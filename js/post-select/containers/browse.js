@@ -10,14 +10,18 @@ const { addQueryArgs } = wp.url;
 const { postSelectEndpoint } = window.hmGbToolsData;
 
 class PostSelectBrowse extends React.Component {
-	state = {
-		posts: [],
-		filters: {},
-		page: 1,
-		isLoading: false,
-		hasPrev: false,
-		hasMore: true,
-	};
+	constructor( props ) {
+		super( props );
+
+		this.state = {
+			posts: [],
+			filters: {},
+			page: 1,
+			isLoading: false,
+			hasPrev: false,
+			hasMore: true,
+		};
+	}
 
 	componentDidMount() {
 		this.fetchPosts();

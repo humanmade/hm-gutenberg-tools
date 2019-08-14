@@ -38,14 +38,14 @@ const PostSelectModal = props => {
 					isPrimary={ false }
 					isLarge
 					onClick={ () => onChangeContentState( 'selection' ) }
-				>View Selected Posts</Button>
+				>{ __( 'View Selected Posts', 'hm-gb-tools' ) }</Button>
 			) }
 			{ contentState !== 'browse' && (
 				<Button
 					isPrimary={ false }
 					isLarge
 					onClick={ () => onChangeContentState( 'browse' ) }
-				>Browse posts</Button>
+				>{ __( 'Browse posts', 'hm-gb-tools' ) }</Button>
 			) }
 		</Fragment>
 	);
@@ -84,7 +84,7 @@ const PostSelectModal = props => {
 }
 
 PostSelectModal.defaultProps = {
-	modalTitle: __( 'Select a post' ),
+	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
 	contentState: 'browse',
 	selection: [],
 };
