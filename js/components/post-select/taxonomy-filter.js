@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import Select from 'react-select';
 import wp from 'wp';
 
+import { getTaxonomyRoute } from '../../utils/get-taxonomy-collection';
+
 class TaxonomyFilter extends React.Component {
 	constructor( props ) {
 		super( props );
@@ -57,7 +59,7 @@ class TaxonomyFilter extends React.Component {
 	}
 
 	createCollection() {
-		const route = '/' + wp.api.versionString + wp.api.getTaxonomyRoute( this.props.taxonomy );
+		const route = '/' + wp.api.versionString + getTaxonomyRoute( this.props.taxonomy );
 		const CollectionClass = wp.api.getCollectionByRoute( route );
 		this.collection = new CollectionClass();
 

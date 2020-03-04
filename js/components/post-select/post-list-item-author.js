@@ -2,10 +2,10 @@ import React from 'react';
 import wp from 'wp';
 import _get from 'lodash/get';
 
-const { withAPIData } = wp.components;
+const { withSelect } = wp.data;
 
-const PostListItemAuthor = ( { user } ) => {
-	return <span><b>Author:</b> { user.isLoading ? ' loading...' : _get( user, 'data.name', '' ) }</span>;
+const PostListItemAuthor = ( { user, isLoading = true } ) => {
+	return <span><b>Author:</b> { isLoading ? ' loading...' : user && user.name }</span>;
 }
 
-export default withAPIData( ( { id } ) => ( { user: `/wp/v2/users/${ id }` } ) )( PostListItemAuthor );
+export default withSelect( ( select, { id } ) => ( { isLoading: false, user: select( 'core' ).getAuthors().filter( user => user.id === id )[0] } ) )( PostListItemAuthor );

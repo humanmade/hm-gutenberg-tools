@@ -16,7 +16,8 @@ function enqueue_block_editor_assets() {
 	wp_enqueue_script(
 		'hm-gb-tools-editor',
 		HM_GB_TOOLS_URL . '/build/editor.bundle.js',
-		[ 'wp-blocks', 'wp-element' ],
+		[ 'wp-blocks', 'wp-element', 'wp-api' ],
+		// [ 'wp-api' ],
 		filemtime( HM_GB_TOOLS_DIR . '/build/editor.bundle.js' ),
 		false
 	);
@@ -29,9 +30,29 @@ function enqueue_block_editor_assets() {
 	);
 
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
-		'postTypeLabels'     => get_post_type_labels(),
-		'postTypeTaxonomies' => get_post_type_taxonomies(),
+		'postTypeLabels'          => get_post_type_labels(),
+		'postTypeTaxonomies'      => get_post_type_taxonomies(),
+		'postTypeRestBaseMapping' => get_post_types(),
+		'taxonomyRestBaseMapping' => get_all_tax(),
 	] );
+}
+
+function get_all_tax() {
+	$taxonomy_rest_base_mapping = array();
+	foreach ( get_taxonomies( array(), 'objects' ) as $taxonomy_object ) {
+		$rest_base = ! empty( $taxonomy_object->rest_base ) ? $taxonomy_object->rest_base : $taxonomy_object->name;
+		$taxonomy_rest_base_mapping[ $taxonomy_object->name ] = $rest_base;
+	}
+	return apply_filters( 'hm_gb_tools_tax', $taxonomy_rest_base_mapping );
+}
+
+function get_all_post_types() {
+	$post_type_rest_base_mapping = array();
+	foreach ( get_post_types( array(), 'objects' ) as $post_type_object ) {
+		$rest_base = ! empty( $post_type_object->rest_base ) ? $post_type_object->rest_base : $post_type_object->name;
+		$post_type_rest_base_mapping[ $post_type_object->name ] = $rest_base;
+	}
+	return apply_filters( 'hm_gb_tools_post_types', $post_type_rest_base_mapping );
 }
 
 /**
