@@ -14,7 +14,7 @@ class PostSelectButton extends React.Component {
 
 	showPromptToDisableAutoLeadMedia() {
 		const userActionTaken = confirm(`New Post cannot be pinned here when Auto Lead Media option is enabled. Do you want to disable Auto Lead Media option?`);
-		if( userActionTaken ) {
+    if( userActionTaken ) {
 			const { onDisableAutoLeadMedia } = this.props;
 			onDisableAutoLeadMedia();
 		}
