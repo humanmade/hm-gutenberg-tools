@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import Select from 'react-select'
-import PropTypes from 'prop-types'
+import Select from 'react-select';
 
 import FormRow from './form-row';
 
@@ -15,19 +15,19 @@ const FormFieldSelect = ( {
 	placeholder,
 } ) => (
 	<FormRow
-		labelFor={ fieldId }
 		label={ label }
+		labelFor={ fieldId }
 	>
 		<Select
-			onChange={ options => onChange( options.map( option => option.value ) ) }
 			id={ fieldId }
-			options={ options }
-			isMulti={ true }
 			isLoading={ isLoading }
-			onMenuScrollToBottom={ () => onFetchMoreTerms && onFetchMoreTerms() }
-			onInputChange={ s => onUpdateSearch && onUpdateSearch( s ) }
+			isMulti
 			maxMenuHeight={ 300 }
+			options={ options }
 			placeholder={ placeholder }
+			onChange={ options => onChange( options.map( option => option.value ) ) }
+			onInputChange={ s => onUpdateSearch && onUpdateSearch( s ) }
+			onMenuScrollToBottom={ () => onFetchMoreTerms && onFetchMoreTerms() }
 		/>
 	</FormRow>
 );
@@ -47,6 +47,6 @@ FormFieldSelect.propTypes = {
 	isLoading: PropTypes.bool,
 	onFetchMoreTerms: PropTypes.func,
 	onUpdateSearch: PropTypes.func,
-}
+};
 
 export default FormFieldSelect;

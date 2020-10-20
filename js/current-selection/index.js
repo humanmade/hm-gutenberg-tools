@@ -13,5 +13,5 @@ export default withSelect( ( select, ownProps ) => {
 	return {
 		posts: posts || [],
 		isLoading: ! posts,
-	}
+	};
 } )( CurrentSelection );

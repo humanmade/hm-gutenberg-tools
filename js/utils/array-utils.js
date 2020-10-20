@@ -2,7 +2,7 @@ const deleteAtIndex = ( a, i ) => {
 	const newArray = [ ...a ];
 	newArray.splice( i, 1 );
 	return newArray;
-}
+};
 
 const moveItemAtIndexUp = ( a, i ) => {
 	const newArray = [ ...a ];
@@ -16,7 +16,7 @@ const moveItemAtIndexUp = ( a, i ) => {
 	newArray.splice( newArray.indexOf( insertAfterItem ), 0, ...value );
 
 	return newArray;
-}
+};
 
 const moveItemAtIndexDown = ( a, i ) => {
 	const newArray = [ ...a ];
@@ -30,7 +30,7 @@ const moveItemAtIndexDown = ( a, i ) => {
 	newArray.splice( newArray.indexOf( insertAfterItem ) + 1, 0, ...value );
 
 	return newArray;
-}
+};
 
 export {
 	deleteAtIndex,

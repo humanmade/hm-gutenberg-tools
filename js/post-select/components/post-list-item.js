@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
 import classNames from 'classnames';
-
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React from 'react';
 import wp from 'wp';
 
 const { __ }  = wp.i18n;
@@ -11,10 +10,10 @@ const PostListItem = ( { post, author, postTypeObject, isSelected, onToggleSelec
 	<li className={ classNames( 'post-list-item', { 'post-list-item--selected': isSelected } ) }>
 		<label htmlFor={ `select-post-${post.id}` }>
 			<input
-				className="screen-reader-text"
-				type="checkbox"
 				checked={ isSelected }
+				className="screen-reader-text"
 				id={ `select-post-${post.id}` }
+				type="checkbox"
 				onChange={ () => onToggleSelected() }
 			/>
 			<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
@@ -32,11 +31,11 @@ PostListItem.propTypes = {
 	postTypeObject: PropTypes.object,
 	isSelected: PropTypes.bool,
 	onToggleSelected: PropTypes.func.isRequired,
-}
+};
 
 PostListItem.defaultProps = {
 	actions: [],
 	onSelectItem: () => {},
-}
+};
 
 export default PostListItem;

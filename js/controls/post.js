@@ -1,9 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import wp from 'wp';
 
-import PostSelectButton from '../post-select';
 import CurrentSelection from '../current-selection';
+import PostSelectButton from '../post-select';
 
 const { BaseControl } = wp.components;
 const { __ } = wp.i18n;
@@ -25,7 +25,7 @@ const PostControl = ( {
 	postSelectProps.btnProps.isSecondary = true;
 
 	return (
-		<BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
+		<BaseControl className="hm-post-control" help={ help } id={ id } label={ label }>
 			<PostSelectButton
 				{ ...postSelectProps }
 				value={ value }
@@ -39,13 +39,13 @@ const PostControl = ( {
 				/>
 			) }
 		</BaseControl>
-	)
-}
+	);
+};
 
 PostControl.defaultProps = {
 	btnText: __( 'Select post' ),
 	postSelectProps: { btnProps: {} },
-}
+};
 
 PostControl.propTypes = {
 	label: PropTypes.string.isRequired,
@@ -55,6 +55,6 @@ PostControl.propTypes = {
 	value: PropTypes.arrayOf( PropTypes.number ).isRequired,
 	postSelectProps: PropTypes.object,
 	btnText: PropTypes.string,
-}
+};
 
 export default PostControl;

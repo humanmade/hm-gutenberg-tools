@@ -1,7 +1,7 @@
 /* global wp */
 
-import _get from 'lodash/get';
 import _difference from 'lodash/difference';
+import _get from 'lodash/get';
 
 /**
  * Fitler an array of post IDs to only those that are not alredy in the core data store.
@@ -16,6 +16,6 @@ const filterIdsByNotStored = ( ids, postType = 'post' ) => {
 	const items = _get( state, `entities.data.postType.${postType}.items`, {} );
 	const idsInStore = Object.keys( items ).map( id => parseInt( id, 10 ) );
 	return _difference( ids, idsInStore );
-}
+};
 
 export default filterIdsByNotStored;

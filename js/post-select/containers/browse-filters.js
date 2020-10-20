@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import _uniqueId from 'lodash/uniqueId';
-import wp from 'wp';
 import _flatten from 'lodash/flatten';
 import _uniq from 'lodash/uniq';
+import _uniqueId from 'lodash/uniqueId';
+import PropTypes from 'prop-types';
+import React from 'react';
+import wp from 'wp';
 
 import PostBrowseFilters from '../components/browse-filters';
 
@@ -26,11 +26,11 @@ class PostBrowseFiltersContainer extends React.Component {
 		return (
 			<PostBrowseFilters
 				formId={ this.state.id }
-				value={ this.state.filters }
-				terms={ this.props.terms }
 				postTypeObjects={ this.props.postTypeObjects }
-				onUpdateFilters={ filters => this.setState( { filters } ) }
+				terms={ this.props.terms }
+				value={ this.state.filters }
 				onSubmitFilters={ () => this.props.onApplyFilters( this.state.filters ) }
+				onUpdateFilters={ filters => this.setState( { filters } ) }
 			/>
 		);
 	}
@@ -39,7 +39,7 @@ class PostBrowseFiltersContainer extends React.Component {
 PostBrowseFiltersContainer.propTypes = {
 	onApplyFilters: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.string ),
-}
+};
 
 const applyWithSelect = withSelect( ( select, ownProps ) => {
 	const { getEntityRecord } = select( 'core' );

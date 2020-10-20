@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import wp from 'wp';
-import moment from 'moment';
 import classNames from 'classnames';
+import moment from 'moment';
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import wp from 'wp';
 
 import SelectionListItemAction from './selection-item-action';
 
@@ -34,11 +34,11 @@ SelectionListItem.propTypes = {
 	post: PropTypes.object,
 	isSelected: PropTypes.bool,
 	actions: PropTypes.array,
-}
+};
 
 SelectionListItem.defaultProps = {
 	actions: [],
 	onSelectItem: () => {},
-}
+};
 
 export default SelectionListItem;

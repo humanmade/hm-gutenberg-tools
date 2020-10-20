@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import wp from 'wp';
 
 const {
@@ -22,18 +22,18 @@ const LinkControl = ( {
 } ) => {
 	return (
 		<BaseControl
-			label={ label }
-			id={ id }
-			help={ help }
 			className="hm-link-control"
+			help={ help }
+			id={ id }
+			label={ label }
 		>
 			<URLInput
 				value={ value }
 				onChange={ onChange }
 			/>
 		</BaseControl>
-	)
-}
+	);
+};
 
 LinkControl.propTypes = {
 	label: PropTypes.string.isRequired,
@@ -41,7 +41,7 @@ LinkControl.propTypes = {
 	id: PropTypes.string,
 	onChange: PropTypes.func.isRequired,
 	value: PropTypes.string,
-}
+};
 
 export default LinkControl;
 

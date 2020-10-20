@@ -1,6 +1,6 @@
-import wp from 'wp';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import wp from 'wp';
 
 const { __ } = wp.i18n;
 const { Button } = wp.components;
@@ -15,12 +15,12 @@ const Modal = ( {
 	<div className="post-select post-select-modal">
 		<div className="media-modal-backdrop"></div>
 		<div
-			className="modal media-modal wp-core-ui"
-			tabIndex="-1"
-			role="dialog"
-			aria-modal="true"
-			aria-labelledby="media-modal-title"
 			ref={ modalRef }
+			aria-labelledby="media-modal-title"
+			aria-modal="true"
+			className="modal media-modal wp-core-ui"
+			role="dialog"
+			tabIndex="-1"
 			onKeyDown={ e => e.keyCode === 27 && onClose() }
 		>
 			<Button
@@ -55,6 +55,6 @@ Modal.propTypes = {
 	modalContent: PropTypes.node.isRequired,
 	modalToolbar: PropTypes.node.isRequired,
 	// modalRef: PropTypes.node.isRequired,
-}
+};
 
 export default Modal;
