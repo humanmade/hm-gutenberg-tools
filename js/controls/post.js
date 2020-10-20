@@ -22,6 +22,7 @@ const PostControl = ( {
 } ) => {
 	postSelectProps.btnProps = postSelectProps.btnProps || {};
 	postSelectProps.btnProps.isLarge = true;
+	postSelectProps.btnProps.isSecondary = true;
 
 	return (
 		<BaseControl label={ label } id={ id } help={ help } className="hm-post-control">
@@ -57,4 +58,3 @@ PostControl.propTypes = {
 }
 
 export default PostControl;
-
