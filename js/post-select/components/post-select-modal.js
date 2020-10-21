@@ -39,7 +39,7 @@ const PostSelectModal = props => {
 					isLarge
 					isPrimary={ false }
 					onClick={ () => onChangeContentState( 'selection' ) }
-				>{ __( 'View Selected Posts', 'hm-gb-tools' ) }</Button>
+				>{ __( 'Manage current selection', 'hm-gb-tools' ) }</Button>
 			) }
 			{ contentState !== 'browse' && (
 				<Button
