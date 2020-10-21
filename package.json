@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --config=.config/webpack.config.prod.js",
+    "start": "webpack-dev-server --config .config/webpack.config.dev.js",
     "lint": "eslint ./js --fix",
     "test": "jest"
   },
@@ -38,8 +39,8 @@
     "react-dom": "^16.4.2",
     "react-select": "^2.0.0",
     "react-test-renderer": "^16.4.2",
-    "webpack": "^5.1.3",
-    "webpack-cli": "^4.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
