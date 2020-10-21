@@ -1,7 +1,6 @@
 import wp from 'wp';
 
 import CurrentSelection from './components/current-selection';
-// import filterIdsByNotStored from '../utils/filter-ids-by-not-stored';
 
 const { withSelect } = wp.data;
 
@@ -13,5 +12,5 @@ export default withSelect( ( select, ownProps ) => {
 	return {
 		posts: posts || [],
 		isLoading: ! posts,
-	}
+	};
 } )( CurrentSelection );

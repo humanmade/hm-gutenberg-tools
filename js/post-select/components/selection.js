@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import wp from 'wp';
 
 import SelectionListItem from '../containers/selection-item';
@@ -18,8 +18,6 @@ const Selection = ( {
 				{ selection.map( post => (
 					<SelectionListItem
 						key={ post.id }
-						postType={ post.type }
-						post={ post }
 						actions={ [
 							{
 								id: 'move-post-up',
@@ -42,6 +40,8 @@ const Selection = ( {
 								onClick: () => onRemoveItem( post ),
 							},
 						] }
+						post={ post }
+						postType={ post.type }
 					/>
 				) ) }
 			</ol>

@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import wp from 'wp';
 
 const {
@@ -8,11 +8,11 @@ const {
 } = wp.components;
 
 const PostListItemAction = ( { text, icon, onClick, disabled } ) => (
-	<Button className="post-list-item-remove" onClick={ onClick } disabled={ disabled } isSmall>
+	<Button className="post-list-item-remove" disabled={ disabled } isSmall onClick={ onClick }>
 		<Dashicon icon={ icon } />
 		<span className="screen-reader-text">{ text }</span>
 	</Button>
-)
+);
 
 PostListItemAction.propTypes = {
 	id: PropTypes.string.isRequired,
@@ -20,10 +20,10 @@ PostListItemAction.propTypes = {
 	icon: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
 	disabled: PropTypes.bool,
-}
+};
 
 PostListItemAction.defaultProps = {
 	disabled: false,
-}
+};
 
 export default PostListItemAction;

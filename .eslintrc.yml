@@ -1,0 +1,11 @@
+---
+extends: "@humanmade/eslint-config"
+rules:
+  jsdoc/require-jsdoc: off
+  jsdoc/check-types: off
+  jsdoc/require-returns: off
+  jsdoc/no-undefined-types: off
+  jsdoc/check-param-names: off
+  jsdoc/require-param: off
+  jsdoc/require-param-type: off
+  jsdoc/require-param-description: off

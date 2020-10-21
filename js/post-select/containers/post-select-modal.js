@@ -1,15 +1,14 @@
-import wp from 'wp';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import wp from 'wp';
 
 import PostSelectModal from '../components/post-select-modal';
-import { fetchPostsById } from '../utils/fetch';
-
 import {
 	deleteAtIndex,
 	moveItemAtIndexDown,
 	moveItemAtIndexUp,
 } from '../utils/array-utils';
+import { fetchPostsById } from '../utils/fetch';
 
 const { sprintf, __ } = wp.i18n;
 
@@ -66,19 +65,19 @@ class PostSelectModalContainer extends React.Component {
 
 		return (
 			<PostSelectModal
+				contentState={ contentState }
+				isLoading={ isLoadingSelection }
+				modalRef={ el => this.modalElement = el }
 				modalTitle={ modalTitle }
 				postType={ postType }
-				onSelect={ () => onSelect( selection ) }
+				selection={ selection }
+				termFilters={ termFilters }
+				onChangeContentState={ contentState => this.setState( { contentState } ) }
 				onClose={ onClose }
-				onToggleSelected={ id => this.toggleSelected( id ) }
 				onMoveItemDown={ id => this.moveDown( id ) }
 				onMoveItemUp={ id => this.moveUp( id ) }
-				onChangeContentState={ contentState => this.setState( { contentState } ) }
-				termFilters={ termFilters }
-				contentState={ contentState }
-				selection={ selection }
-				modalRef={ el => this.modalElement = el }
-				isLoading={ isLoadingSelection }
+				onSelect={ () => onSelect( selection ) }
+				onToggleSelected={ id => this.toggleSelected( id ) }
 			/>
 		);
 	}

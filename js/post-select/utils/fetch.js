@@ -1,5 +1,5 @@
-import wp from 'wp';
 import _zipObject from 'lodash/zipObject';
+import wp from 'wp';
 
 const { apiFetch } = wp;
 const { addQueryArgs } = wp.url;
@@ -24,8 +24,8 @@ export const fetchJson = ( args, headerKeys = [ 'x-wp-totalpages' ] ) => {
 		] ) ).then( data => (
 			resolve( data )
 		) ).catch( () => {} );
-	} )
-}
+	} );
+};
 
 /**
  * Helper function to fetch posts by ID.
@@ -49,7 +49,7 @@ export const fetchPostsById = ( ids, postTypes ) => {
 				}
 			),
 		} ).then( ( [ posts, headers ] ) => {
-			resolve( posts, headers )
+			resolve( posts, headers );
 		} ).catch( () => {} );
 	} );
-}
+};

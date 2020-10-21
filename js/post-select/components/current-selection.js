@@ -1,7 +1,7 @@
 /* global wp */
 
+import PropTypes from 'prop-types';
 import React from 'react';
-import PropTypes from 'prop-types'
 
 const { Spinner } = wp.components;
 const { __ } = wp.i18n;
@@ -29,12 +29,12 @@ const CurrentSelection = ( {
 CurrentSelection.defaultProps = {
 	isLoading: false,
 	title: __( 'Current Selection', 'hm-gb-tools' ),
-}
+};
 
 CurrentSelection.propTypes = {
 	posts: PropTypes.arrayOf( PropTypes.object ).isRequired,
 	isLoading: PropTypes.bool,
 	title: PropTypes.string,
-}
+};
 
 export default CurrentSelection;

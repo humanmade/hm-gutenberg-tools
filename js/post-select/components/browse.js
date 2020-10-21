@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import wp from 'wp';
 
 import PostSelectBrowseFilters from './../containers/browse-filters';
@@ -28,8 +28,8 @@ const PostSelectBrowse = props => {
 		<div className="menu-container">
 			<div className="menu">
 				<PostSelectBrowseFilters
-					termFilters={ termFilters }
 					postTypes={ postTypes }
+					termFilters={ termFilters }
 					onApplyFilters={ filters => onApplyFilters( filters ) }
 				/>
 			</div>
@@ -41,9 +41,9 @@ const PostSelectBrowse = props => {
 						{ hasPrev && (
 							<Button
 								className="prev-page"
+								disabled={ isLoading }
 								isLarge
 								onClick={ () => onPrevPostsPage() }
-								disabled={ isLoading }
 							>
 								Previous page
 							</Button>
@@ -54,10 +54,10 @@ const PostSelectBrowse = props => {
 								{ posts.map( post => (
 									<PostListItem
 										key={ post.id }
+										isSelected={ selection.findIndex( p => p.id === post.id ) >= 0 }
 										post={ post }
 										postType={ post.type }
 										onToggleSelected={ () => onToggleSelected( post ) }
-										isSelected={ selection.findIndex( p => p.id === post.id ) >= 0 }
 									/>
 								) ) }
 							</ol>
@@ -67,15 +67,15 @@ const PostSelectBrowse = props => {
 
 						{ hasMore && <Button
 							className="next-page"
-							onClick={ () => onNextPostsPage() }
 							isLarge
+							onClick={ () => onNextPostsPage() }
 						>Next page</Button> }
 					</Fragment>
 				) }
 			</div>
 		</div>
 	);
-}
+};
 
 PostSelectBrowse.propTypes = {
 	postTypes: PropTypes.arrayOf( PropTypes.string ).isRequired,
@@ -87,6 +87,6 @@ PostSelectBrowse.propTypes = {
 	onPrevPostsPage: PropTypes.func.isRequired,
 	onNextPostsPage: PropTypes.func.isRequired,
 	onApplyFilters: PropTypes.func.isRequired,
-}
+};
 
 export default PostSelectBrowse;

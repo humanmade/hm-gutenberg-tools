@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 import wp from 'wp';
 
 import PostSelectModal from './containers/post-select-modal';
@@ -33,23 +33,23 @@ class PostSelectButton extends React.Component {
 					<PostSelectModal
 						value={ value }
 						{ ...this.props }
+						onClose={ onClose }
 						onSelect={ posts => {
 							onSelect( posts );
 							onClose();
 						} }
-						onClose={ onClose }
 					/>,
 					document.getElementById( 'wpbody' )
 				)
 			) }
-		</div> )
+		</div> );
 	}
 }
 
 PostSelectButton.defaultProps = {
 	value: [],
 	btnProps: {},
-}
+};
 
 PostSelectButton.propTypes = {
 	onSelect: PropTypes.func.isRequired,
@@ -59,6 +59,6 @@ PostSelectButton.propTypes = {
 		PropTypes.array,
 	] ),
 	btnProps: PropTypes.object,
-}
+};
 
 export default PostSelectButton;

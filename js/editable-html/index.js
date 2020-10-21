@@ -19,9 +19,9 @@ const EditableHTML = props => {
 	const richTextProps = {
 		...props,
 		format: 'string',
-	}
+	};
 
-	return <RichText { ...richTextProps } />
-}
+	return <RichText { ...richTextProps } />;
+};
 
 export default EditableHTML;
