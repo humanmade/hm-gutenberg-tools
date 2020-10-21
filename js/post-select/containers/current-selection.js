@@ -1,6 +1,7 @@
 /* global wp */
 
 import React from 'react';
+
 import CurrentSelection from '../components/current-selection';
 import { fetchPostsById } from '../utils/fetch';
 
@@ -50,8 +51,8 @@ class CurrentSelectionContainer extends Component {
 		return (
 			<CurrentSelection
 				{ ...this.props }
-				posts={ this.state.posts }
 				isLoading={ this.state.isLoading }
+				posts={ this.state.posts }
 			/>
 		);
 	}

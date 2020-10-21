@@ -1,10 +1,11 @@
-import wp from 'wp';
-import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+import wp from 'wp';
 
 import PostSelectBrowse from '../containers/browse';
-import PostSelectSelection from './selection';
+
 import Modal from './modal';
+import PostSelectSelection from './selection';
 
 const { Button } = wp.components;
 const { __ } = wp.i18n;
@@ -29,21 +30,21 @@ const PostSelectModal = props => {
 	const modalToolbar = (
 		<Fragment>
 			<Button
-				isPrimary={ true }
 				isLarge
+				isPrimary
 				onClick={ () => onSelect() }
 			>Select</Button>
 			{ contentState !== 'selection' && (
 				<Button
-					isPrimary={ false }
 					isLarge
+					isPrimary={ false }
 					onClick={ () => onChangeContentState( 'selection' ) }
 				>{ __( 'View Selected Posts', 'hm-gb-tools' ) }</Button>
 			) }
 			{ contentState !== 'browse' && (
 				<Button
-					isPrimary={ false }
 					isLarge
+					isPrimary={ false }
 					onClick={ () => onChangeContentState( 'browse' ) }
 				>{ __( 'Browse posts', 'hm-gb-tools' ) }</Button>
 			) }
@@ -54,19 +55,19 @@ const PostSelectModal = props => {
 		<Fragment>
 			{ ( contentState === 'browse' ) && (
 				<PostSelectBrowse
-					selection={ selection }
 					postType={ postType }
-					onToggleSelected={ onToggleSelected }
+					selection={ selection }
 					termFilters={ termFilters }
+					onToggleSelected={ onToggleSelected }
 				/>
 			) }
 			{ ( contentState === 'selection' ) && (
 				<PostSelectSelection
-					selection={ selection }
 					postType={ postType }
-					onRemoveItem={ onToggleSelected }
-					onMoveItemUp={ onMoveItemUp }
+					selection={ selection }
 					onMoveItemDown={ onMoveItemDown }
+					onMoveItemUp={ onMoveItemUp }
+					onRemoveItem={ onToggleSelected }
 				/>
 			) }
 		</Fragment>
@@ -74,14 +75,14 @@ const PostSelectModal = props => {
 
 	return (
 		<Modal
-			modalRef={ modalRef }
-			modalToolbar={ modalToolbar }
 			modalContent={ isLoading ? <Fragment/> : modalContent }
+			modalRef={ modalRef }
 			modalTitle={ modalTitle }
+			modalToolbar={ modalToolbar }
 			onClose={ onClose }
 		/>
 	);
-}
+};
 
 PostSelectModal.defaultProps = {
 	modalTitle: __( 'Select a post', 'hm-gb-tools' ),

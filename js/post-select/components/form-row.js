@@ -1,9 +1,9 @@
-import * as React from 'react';
 import PropTypes from 'prop-types';
+import * as React from 'react';
 
 const FormRow = ( { label, labelFor, children } ) => (
 	<div className="post-select-form-row">
-		<label htmlFor={ labelFor } className="screen-reader-text">
+		<label className="screen-reader-text" htmlFor={ labelFor }>
 			{ label }
 		</label>
 		{ children }
@@ -17,6 +17,6 @@ FormRow.propTypes = {
 		PropTypes.arrayOf( PropTypes.node ),
 		PropTypes.node,
 	] ).isRequired,
-}
+};
 
 export default FormRow;

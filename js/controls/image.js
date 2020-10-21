@@ -1,5 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import wp from 'wp';
 
 const {
@@ -27,32 +27,32 @@ const ImageControl = ( {
 	image,
 	isLoading = false,
 } ) => (
-	<BaseControl label={ label } id={ id } help={ help } className="hm-image-control">
+	<BaseControl className="hm-image-control" help={ help } id={ id } label={ label }>
 		{ isLoading && <Spinner /> }
 
 		{ image && ( <div className="hm-image-control__img-container">
 			<img
-				src={ image.media_details.sizes.thumbnail.source_url }
-				width={ image.media_details.sizes.thumbnail.width }
-				height={ image.media_details.sizes.thumbnail.height }
 				alt={ __( 'Thumbnail of the selected image.', 'hm-gb-tools' ) }
+				height={ image.media_details.sizes.thumbnail.height }
+				src={ image.media_details.sizes.thumbnail.source_url }
 				style={ {
 					display: 'block',
 					marginBottom: '8px',
 				} }
+				width={ image.media_details.sizes.thumbnail.width }
 			/>
 		</div> ) }
 
 		<div className="hm-image-control__actions">
 			<MediaUpload
-				onSelect={ onChange }
-				type="image"
-				value={ value }
 				render={ ( { open } ) => (
 					<Button isLarge onClick={ open }>
 						{ value ? __( 'Change' ) : __( 'Select' ) }
 					</Button>
 				) }
+				type="image"
+				value={ value }
+				onSelect={ onChange }
 			/>
 
 			{ !! value && (
@@ -73,7 +73,7 @@ ImageControl.defaultProps = {
 	id: '',
 	help: '',
 	isLoading: false,
-}
+};
 
 ImageControl.propTypes = {
 	image: PropTypes.object,
@@ -82,7 +82,7 @@ ImageControl.propTypes = {
 	id: PropTypes.string,
 	help: PropTypes.string,
 	isLoading: PropTypes.bool,
-}
+};
 
 export default withSelect( ( select, ownProps ) => {
 	const { getEntityRecord } = select( 'core' );

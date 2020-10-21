@@ -18,17 +18,17 @@ function setup() {
 function enqueue_block_editor_assets() {
 	wp_enqueue_script(
 		'hm-gb-tools-editor',
-		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editor.bundle.js',
+		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editor.js',
 		[ 'wp-blocks', 'wp-element', 'wp-url', 'wp-components', 'wp-editor' ],
-		filemtime( HM_GB_TOOLS_DIR . '/build/editor.bundle.js' ),
+		filemtime( HM_GB_TOOLS_DIR . '/build/editor.js' ),
 		false
 	);
 
 	wp_enqueue_style(
 		'hm-gb-tools-editor',
-		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editor.css',
+		trailingslashit( HM_GB_TOOLS_URL ) . 'build/editorStyles.css',
 		[],
-		filemtime( HM_GB_TOOLS_DIR . '/build/editor.css' )
+		filemtime( HM_GB_TOOLS_DIR . '/build/editorStyles.css' )
 	);
 
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [

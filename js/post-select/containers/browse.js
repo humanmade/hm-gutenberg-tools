@@ -1,7 +1,7 @@
 /* global wp */
 
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import Browse from '../components/browse';
 import { fetchJson } from '../utils/fetch';
@@ -76,17 +76,17 @@ class PostSelectBrowse extends React.Component {
 
 		return (
 			<Browse
+				hasMore={ hasMore }
+				hasPrev={ hasPrev }
 				isLoading={ isLoading }
 				posts={ posts }
-				selection={ selection }
-				onToggleSelected={ onToggleSelected }
-				termFilters={ termFilters }
 				postTypes={ Array.isArray( postType ) ? postType : [ postType ] }
-				hasPrev={ hasPrev }
-				hasMore={ hasMore }
-				onPrevPostsPage={ () => this.prevPage() }
-				onNextPostsPage={ () => this.nextPage() }
+				selection={ selection }
+				termFilters={ termFilters }
 				onApplyFilters={ filters => this.applyFilters( filters ) }
+				onNextPostsPage={ () => this.nextPage() }
+				onPrevPostsPage={ () => this.prevPage() }
+				onToggleSelected={ onToggleSelected }
 			/>
 		);
 	}
@@ -115,6 +115,6 @@ PostSelectBrowse.propTypes = {
 	selection: PropTypes.arrayOf( PropTypes.object ).isRequired,
 	onToggleSelected: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.string ),
-}
+};
 
 export default PostSelectBrowse;

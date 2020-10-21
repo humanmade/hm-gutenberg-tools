@@ -1,9 +1,8 @@
 /* global wp */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-
 import _uniqBy from 'lodash/uniqBy';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 import FormFieldSelect from '../components/form-field-select';
 import { fetchJson } from '../utils/fetch';
@@ -116,6 +115,6 @@ TermSelect.propTypes = {
 	label: PropTypes.string.isRequired,
 	restBase: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
-}
+};
 
 export default TermSelect;
