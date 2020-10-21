@@ -6,10 +6,14 @@
 		float: none;
 	}
 
+	.post-select {
+		margin: 8px 0 12px 0;
+	}
+
 	.hm-post-control-current-selection {
 		border: 1px solid #e2e4e7;
 		background: #edeff0;
-		margin: 1.5em auto 8px;
+		margin: 12px auto 8px;
 		padding: 8px;
 
 		> h4 {
