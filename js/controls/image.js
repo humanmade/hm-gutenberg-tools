@@ -86,13 +86,12 @@ ImageControl.propTypes = {
 };
 
 export default withSelect( ( select, ownProps ) => {
-	const { getEntityRecord } = select( 'core' );
+	const { getMedia } = select( 'core' );
 	const { value } = ownProps;
-	const image = value ? getEntityRecord( 'root', 'media', value ) : null;
+	const image = value ? getMedia( value ) : null;
 
 	return {
 		image,
 		isLoading: !! value && ! image,
 	};
 } )( ImageControl );
-
