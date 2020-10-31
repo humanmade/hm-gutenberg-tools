@@ -46,7 +46,7 @@ const ImageControl = ( {
 		<div className="hm-image-control__actions">
 			<MediaUpload
 				render={ ( { open } ) => (
-					<Button isLarge onClick={ open }>
+					<Button isLarge isSecondary onClick={ open }>
 						{ value ? __( 'Change' ) : __( 'Select' ) }
 					</Button>
 				) }
@@ -58,6 +58,7 @@ const ImageControl = ( {
 			{ !! value && (
 				<Button
 					isLarge
+					isSecondary
 					style={ { marginLeft: '8px' } }
 					onClick={ () => onChange() }
 				>{ __( 'Remove' ) }</Button>
