@@ -60,7 +60,7 @@ const ImageControl = ( {
 					isLarge
 					isSecondary
 					style={ { marginLeft: '8px' } }
-					onClick={ () => onChange() }
+					onClick={ () => onChange( null ) }
 				>{ __( 'Remove' ) }</Button>
 			) }
 		</div>
