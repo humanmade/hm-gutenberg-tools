@@ -46,7 +46,7 @@ const ImageControl = ( {
 		<div className="hm-image-control__actions">
 			<MediaUpload
 				render={ ( { open } ) => (
-					<Button isLarge onClick={ open }>
+					<Button isLarge isSecondary onClick={ open }>
 						{ value ? __( 'Change' ) : __( 'Select' ) }
 					</Button>
 				) }
@@ -58,8 +58,9 @@ const ImageControl = ( {
 			{ !! value && (
 				<Button
 					isLarge
+					isSecondary
 					style={ { marginLeft: '8px' } }
-					onClick={ () => onChange() }
+					onClick={ () => onChange( null ) }
 				>{ __( 'Remove' ) }</Button>
 			) }
 		</div>
@@ -85,13 +86,12 @@ ImageControl.propTypes = {
 };
 
 export default withSelect( ( select, ownProps ) => {
-	const { getEntityRecord } = select( 'core' );
+	const { getMedia } = select( 'core' );
 	const { value } = ownProps;
-	const image = value ? getEntityRecord( 'root', 'media', value ) : null;
+	const image = value ? getMedia( value ) : null;
 
 	return {
 		image,
 		isLoading: !! value && ! image,
 	};
 } )( ImageControl );
-
