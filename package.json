@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --config=.config/webpack.config.prod.js",
-    "start": "webpack-dev-server --config .config/webpack.config.dev.js",
+    "start": "npm run build -- --watch",
     "lint": "eslint ./js --fix",
     "test": "jest"
   },
