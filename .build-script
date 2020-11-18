@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+#install latest version of node
+nvm install 12
+
+npm install
+npm run build
