@@ -182,7 +182,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 	protected function prepare_date_response( $date_gmt, $date = null ) {
 		// Use the date if passed.
 		if ( isset( $date ) ) {
-			return mysql_to_rfc3339( $date );
+			return mysql_to_rfc3339( $date ); // phpcs:ignore -- this is an internal WordPress function not mysql lib
 		}
 
 		// Return null if $date_gmt is empty/zeros.
@@ -191,7 +191,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 		}
 
 		// Return the formatted datetime.
-		return mysql_to_rfc3339( $date_gmt );
+		return mysql_to_rfc3339( $date_gmt ); // phpcs:ignore -- this is an internal WordPress function not mysql lib
 	}
 
 	/**
