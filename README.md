@@ -45,13 +45,12 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 ## Releasing a new version.
 
-There is a bash script that can be run to release a new version from the master branch.
+1. Update the version numbers in `plugin.php` and `package.json`.
+2. Add the changelog to the readme for the new version.
+3. Commit your changes to master and push. 
+4. Run the bash script: `./release.sh v1.2.3`
 
-```
-./release.sh v1.2.3
-```
-
-This will sync the the build branch with master, build assets, and publish a tag.
+The script will sync the the build branch with master, build assets and commit the changes, and publish a new tagged release.
 
 ## Changelog
 
