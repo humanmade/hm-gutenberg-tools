@@ -43,6 +43,16 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 * `npm run watch` Watches for changes and builds development versions of the code.
 * `npm run lint` Lints your JS and fixes your code.
 
+## Releasing a new version.
+
+There is a bash script that can be run to release a new version from the master branch.
+
+```
+./release.sh v1.2.3
+```
+
+This will sync the the build branch with master, build assets, and publish a tag.
+
 ## Changelog
 
 ### v1.1.0
