@@ -67,7 +67,6 @@ const PostBrowseFilters = ( {
 		) ) }
 
 		<Button
-			isLarge
 			isPrimary
 			type="submit"
 		>

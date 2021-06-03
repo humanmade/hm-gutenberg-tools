@@ -21,7 +21,6 @@ const PostControl = ( {
 	btnText,
 } ) => {
 	postSelectProps.btnProps = postSelectProps.btnProps || {};
-	postSelectProps.btnProps.isLarge = true;
 	postSelectProps.btnProps.isSecondary = true;
 
 	return (

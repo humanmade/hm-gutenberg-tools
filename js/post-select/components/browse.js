@@ -42,7 +42,6 @@ const PostSelectBrowse = props => {
 							<Button
 								className="prev-page"
 								disabled={ isLoading }
-								isLarge
 								onClick={ () => onPrevPostsPage() }
 							>
 								Previous page
@@ -67,7 +66,6 @@ const PostSelectBrowse = props => {
 
 						{ hasMore && <Button
 							className="next-page"
-							isLarge
 							onClick={ () => onNextPostsPage() }
 						>Next page</Button> }
 					</Fragment>
