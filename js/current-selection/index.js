@@ -7,13 +7,13 @@ const { withSelect } = wp.data;
 export default withSelect( ( select, ownProps ) => {
 	const { getEntityRecords } = select( 'core' );
 	const { postIds, postType } = ownProps;
-	const sortedPosts = getEntityRecords( 'postType', postType, {
+	const posts = getEntityRecords( 'postType', postType, {
 		include: postIds,
 		orderby: 'include',
 	} ) || [];
 
 	return {
-		posts: sortedPosts,
-		isLoading: ! sortedPosts,
+		posts: posts,
+		isLoading: ! posts,
 	};
 } )( CurrentSelection );
