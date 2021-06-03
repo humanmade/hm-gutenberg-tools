@@ -10,7 +10,7 @@ fi
 
 echo "Releasing version $1";
 
-if [ -d "$SCRIPT_DIR/release" ] || [ ! -d "$SCRIPT_DIR/release/.git" ]
+if [ ! -d "$SCRIPT_DIR/release" ] || [ -d "$SCRIPT_DIR/release" ] && [ ! -d "$SCRIPT_DIR/release/.git" ]
 	then
 		# Cleanup and clone fresh copy of repo on build branch.
 		rm -rf "$SCRIPT_DIR/release";
