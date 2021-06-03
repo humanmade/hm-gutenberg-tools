@@ -13,7 +13,7 @@ echo "Releasing version $1";
 if [ -d "$SCRIPT_DIR/release" ] || [ ! -d "$SCRIPT_DIR/release/.git" ]
 	then
 		# Cleanup and clone fresh copy of repo on build branch.
-		rm -r "$SCRIPT_DIR/release";
+		rm -rf "$SCRIPT_DIR/release";
 		git clone --recursive --branch build git@github.com:humanmade/hm-gutenberg-tools.git release
 	else
 		# Cleanup any changes and reset to build branch.
