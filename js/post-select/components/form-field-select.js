@@ -25,7 +25,7 @@ const FormFieldSelect = ( {
 			maxMenuHeight={ 300 }
 			options={ options }
 			placeholder={ placeholder }
-			onChange={ options => onChange( options.map( option => option.value ) ) }
+			onChange={ options => onChange( ( options || [] ).map( option => option.value ) ) }
 			onInputChange={ s => onUpdateSearch && onUpdateSearch( s ) }
 			onMenuScrollToBottom={ () => onFetchMoreTerms && onFetchMoreTerms() }
 		/>
