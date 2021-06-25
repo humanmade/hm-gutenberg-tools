@@ -12,4 +12,5 @@ export default withSelect( ( select, ownProps ) => ( {
 	...ownProps,
 	author: select( 'core' ).getAuthors().find( a => ownProps.post.author.id === a.id ),
 	postTypeObject: select( 'core' ).getEntityRecord( 'root', 'postType', ownProps.post.type ),
+	thumbnail: ownProps.post.thumbnail ? select( 'core' ).getMedia( ownProps.post.thumbnail ) : null,
 } ) )( SelectionItem );
