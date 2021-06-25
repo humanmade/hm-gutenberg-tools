@@ -49,6 +49,7 @@ class PostSelectModalContainer extends React.Component {
 
 	render() {
 		const {
+			filters,
 			onClose,
 			modalTitle,
 			termFilters,
@@ -66,6 +67,7 @@ class PostSelectModalContainer extends React.Component {
 		return (
 			<PostSelectModal
 				contentState={ contentState }
+				filters={ filters }
 				isLoading={ isLoadingSelection }
 				modalRef={ el => this.modalElement = el }
 				modalTitle={ modalTitle }
@@ -120,6 +122,7 @@ PostSelectModalContainer.defaultProps = {
 };
 
 PostSelectModalContainer.propTypes = {
+	filters: PropTypes.objectOf( PropTypes.arrayOf( PropTypes.number ) ),
 	postType: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.array,
