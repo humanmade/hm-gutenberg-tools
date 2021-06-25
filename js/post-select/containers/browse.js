@@ -12,10 +12,11 @@ const { postSelectEndpoint } = window.hmGbToolsData;
 class PostSelectBrowse extends React.Component {
 	constructor( props ) {
 		super( props );
+		const { filters } = props;
 
 		this.state = {
 			posts: [],
-			filters: {},
+			filters: { ...filters },
 			page: 1,
 			isLoading: false,
 			hasPrev: false,
@@ -71,11 +72,12 @@ class PostSelectBrowse extends React.Component {
 	}
 
 	render() {
-		const { posts, hasPrev, hasMore, isLoading } = this.state;
+		const { filters, posts, hasPrev, hasMore, isLoading } = this.state;
 		const { selection, onToggleSelected, termFilters, postType } = this.props;
 
 		return (
 			<Browse
+				filters={ filters }
 				hasMore={ hasMore }
 				hasPrev={ hasPrev }
 				isLoading={ isLoading }
@@ -111,6 +113,7 @@ class PostSelectBrowse extends React.Component {
 }
 
 PostSelectBrowse.propTypes = {
+	filters: PropTypes.objectOf( PropTypes.arrayOf( PropTypes.number ) ),
 	postType: PropTypes.arrayOf( PropTypes.string ).isRequired,
 	selection: PropTypes.arrayOf( PropTypes.object ).isRequired,
 	onToggleSelected: PropTypes.func.isRequired,

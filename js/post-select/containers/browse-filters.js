@@ -12,9 +12,10 @@ const { withSelect } = wp.data;
 class PostBrowseFiltersContainer extends React.Component {
 	constructor( props ) {
 		super( props );
+		const { filters } = props;
 
 		this.state = {
-			filters: {},
+			filters: { ...filters },
 		};
 	}
 
@@ -37,6 +38,7 @@ class PostBrowseFiltersContainer extends React.Component {
 }
 
 PostBrowseFiltersContainer.propTypes = {
+	filters: PropTypes.objectOf( PropTypes.arrayOf( PropTypes.number ) ),
 	onApplyFilters: PropTypes.func.isRequired,
 	termFilters: PropTypes.arrayOf( PropTypes.string ),
 };

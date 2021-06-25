@@ -13,6 +13,7 @@ const FormFieldSelect = ( {
 	onFetchMoreTerms,
 	onUpdateSearch,
 	placeholder,
+	value,
 } ) => (
 	<FormRow
 		label={ label }
@@ -25,7 +26,8 @@ const FormFieldSelect = ( {
 			maxMenuHeight={ 300 }
 			options={ options }
 			placeholder={ placeholder }
-			onChange={ options => onChange( ( options || [] ).map( option => option.value ) ) }
+			value={ value }
+			onChange={ onChange }
 			onInputChange={ s => onUpdateSearch && onUpdateSearch( s ) }
 			onMenuScrollToBottom={ () => onFetchMoreTerms && onFetchMoreTerms() }
 		/>
@@ -36,6 +38,13 @@ FormFieldSelect.propTypes = {
 	fieldId: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
 	placeholder: PropTypes.string.isRequired,
+	value: PropTypes.arrayOf( PropTypes.shape( {
+		label: PropTypes.string.isRequired,
+		value: PropTypes.oneOfType( [
+			PropTypes.string,
+			PropTypes.number,
+		] ).isRequired,
+	} ) ),
 	onChange: PropTypes.func.isRequired,
 	options: PropTypes.arrayOf( PropTypes.shape( {
 		label: PropTypes.string.isRequired,

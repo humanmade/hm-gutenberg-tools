@@ -81,7 +81,12 @@ PostBrowseFilters.defaultProps = {
 };
 
 PostBrowseFilters.propTypes = {
-	value: PropTypes.object,
+	value: PropTypes.objectOf(
+		PropTypes.oneOf( [
+			PropTypes.arrayOf( PropTypes.number ),
+			PropTypes.string,
+		] )
+	),
 	onUpdateFilters: PropTypes.func.isRequired,
 	terms: PropTypes.arrayOf( PropTypes.object ),
 };
