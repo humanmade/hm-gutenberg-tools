@@ -102,7 +102,10 @@ class PostSelectModalContainer extends React.Component {
 		if ( index >= 0 ) {
 			this.setState( { selection: deleteAtIndex( selection, index ) } );
 		} else {
-			if ( maxPosts && selection.length >= maxPosts ) {
+			if ( maxPosts && maxPosts === 1 ) {
+				// Special "switch" behavior for single-post-max
+				this.setState( { selection: [ post ] } );
+			} else if ( maxPosts && selection.length >= maxPosts ) {
 				/* translators: %d is total number of posts. */
 				alert( sprintf( __( 'Max number %d reached.', 'hm-gb-tools' ), maxPosts ) );
 				return;
