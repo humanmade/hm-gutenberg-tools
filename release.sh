@@ -33,7 +33,7 @@ git add .;
 git add -f build;
 
 # Commit to build branch and tag release.
-git commit -m "Build release $1";
+git commit -m "Build version $1";
 git tag "${1}";
 git push origin build;
 git push --tags;
