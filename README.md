@@ -50,7 +50,7 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 3. Commit your changes to master and push. 
 4. Run the bash script: `./release.sh v1.2.3`
 
-The script will sync the the build branch with master, build assets and commit the changes, and publish a new tagged release.
+The script will sync the the build branch with master, build assets and commit the changes, and publish a new tagged version.
 
 ## Changelog
 
