@@ -25,7 +25,7 @@ fi
 # Merge in latest from master, install dependencies and build.
 cd "${SCRIPT_DIR}/release" || exit;
 git merge origin/master --no-edit;
-npm install;
+npm ci;
 npm run build;
 
 # Stage changes ready for commit.
