@@ -93,6 +93,7 @@ class TermSelect extends React.Component {
 		this.setState( {
 			search: null,
 			page: 1,
+			value,
 		} );
 		onChange( ( value || [] ).map( option => option.value ) );
 	}
