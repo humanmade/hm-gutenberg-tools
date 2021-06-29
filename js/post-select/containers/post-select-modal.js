@@ -49,6 +49,7 @@ class PostSelectModalContainer extends React.Component {
 
 	render() {
 		const {
+			filters,
 			onClose,
 			modalTitle,
 			termFilters,
@@ -66,6 +67,7 @@ class PostSelectModalContainer extends React.Component {
 		return (
 			<PostSelectModal
 				contentState={ contentState }
+				filters={ filters }
 				isLoading={ isLoadingSelection }
 				modalRef={ el => this.modalElement = el }
 				modalTitle={ modalTitle }
@@ -100,7 +102,10 @@ class PostSelectModalContainer extends React.Component {
 		if ( index >= 0 ) {
 			this.setState( { selection: deleteAtIndex( selection, index ) } );
 		} else {
-			if ( maxPosts && selection.length >= maxPosts ) {
+			if ( maxPosts && maxPosts === 1 ) {
+				// Special "switch" behavior for single-post-max
+				this.setState( { selection: [ post ] } );
+			} else if ( maxPosts && selection.length >= maxPosts ) {
 				/* translators: %d is total number of posts. */
 				alert( sprintf( __( 'Max number %d reached.', 'hm-gb-tools' ), maxPosts ) );
 				return;
@@ -120,6 +125,7 @@ PostSelectModalContainer.defaultProps = {
 };
 
 PostSelectModalContainer.propTypes = {
+	filters: PropTypes.objectOf( PropTypes.arrayOf( PropTypes.number ) ),
 	postType: PropTypes.oneOfType( [
 		PropTypes.string,
 		PropTypes.array,
