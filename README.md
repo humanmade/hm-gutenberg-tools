@@ -54,6 +54,14 @@ The script will sync the the build branch with master, build assets and commit t
 
 ## Changelog
 
+### v1.4.0
+
+* Support thumbnails in post select components
+
+### v1.3.1
+
+* Switch selection when clicking off single-post selections
+
 ### v1.1.0
 
 * Support for i18n.
