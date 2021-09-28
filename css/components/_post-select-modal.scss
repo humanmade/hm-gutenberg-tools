@@ -88,7 +88,6 @@
 
 .post-list-item {
 	box-sizing: border-box;
-	padding: 10px 20px;
 	margin: 0;
 	border-bottom: 1px solid #e2e4e7;
 	display: block;
@@ -96,6 +95,10 @@
 	text-align: left;
 	background: white;
 	position: relative;
+
+	&--inner {
+		padding: 10px 20px;
+	}
 
 	&--meta {
 		color: #666;
@@ -105,17 +108,21 @@
 		}
 	}
 
+	&--image {
+		width: 75px;
+		height: 75px;
+	}
+
 	.components-spinner {
 		float: none;
 		display: block;
 		margin: 16px;
 	}
 
-	> label {
+	> label,
+	&--selection {
 		font-size: inherit;
-		display: block;
-		margin: -10px -20px;
-		padding: 10px 20px;
+		display: flex;
 		position: relative;
 
 		&:focus,

@@ -43,7 +43,24 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 * `npm run watch` Watches for changes and builds development versions of the code.
 * `npm run lint` Lints your JS and fixes your code.
 
+## Releasing a new version.
+
+1. Update the version numbers in `plugin.php` and `package.json`.
+2. Add the changelog to the readme for the new version.
+3. Commit your changes to master and push. 
+4. Run the bash script: `./release.sh v1.2.3`
+
+The script will sync the the build branch with master, build assets and commit the changes, and publish a new tagged version.
+
 ## Changelog
+
+### v1.4.0
+
+* Support thumbnails in post select components
+
+### v1.3.1
+
+* Switch selection when clicking off single-post selections
 
 ### v1.1.0
 
