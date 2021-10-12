@@ -115,6 +115,8 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['post__in'] = $include;
 			$query_args['orderby']  = 'post__in';
 		}
+		
+		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
 		$query = new WP_Query( $query_args );
 		$posts = [];
