@@ -47,7 +47,8 @@ const PostBrowseFilters = ( {
 				placeholder={ __( 'Filter by Post Type', 'hm-gb-tools' ) }
 				onChange={ type => onUpdateFilters( {
 					...value,
-					type,
+					// Convert type option objects to their post type slug.
+					type: type.map( ( { value } ) => value ),
 				} ) }
 			/>
 		) }
