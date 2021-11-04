@@ -54,6 +54,12 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.5.0
+
+* Handle current selections across multiple post types
+* Correctly handle post type filters in post selection modal
+* Preserbe specified Post Type list when clearing Types token list
+
 ### v1.4.1
 
 * Adds a filter to allow the post select query to be modified
