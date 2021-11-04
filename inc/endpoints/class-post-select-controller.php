@@ -34,6 +34,17 @@ class Post_Select_Controller extends WP_REST_Controller {
 	const PROP_PAGE = 'page';
 
 	/**
+	 * Published After property name.
+	 */
+	const PROP_PUBLISHED_AFTER = 'publishedAfter';
+
+
+	/**
+	 * Published Before property name.
+	 */
+	const PROP_PUBLISHED_BEFORE = 'publishedBefore';
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -98,6 +109,17 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['s'] = $search;
 		}
 
+		$published_after  = $request->get_param( self::PROP_PUBLISHED_AFTER );
+		$published_before  = $request->get_param( self::PROP_PUBLISHED_BEFORE );
+
+		if ( ! empty( $published_after ) ) {
+			$query_args['date_query']['after'] = $published_after;
+		}
+
+		if ( ! empty( $published_before ) ) {
+			$query_args['date_query']['before'] = $published_before;
+		}
+
 		foreach ( $this->get_allowed_tax_filters() as $taxonomy ) {
 			$base  = ! empty( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
 			$query = $request->get_param( $base );
@@ -115,7 +137,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['post__in'] = $include;
 			$query_args['orderby']  = 'post__in';
 		}
-		
+
 		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
 		$query = new WP_Query( $query_args );

@@ -73,7 +73,7 @@ class PostSelectBrowse extends React.Component {
 
 	render() {
 		const { filters, posts, hasPrev, hasMore, isLoading } = this.state;
-		const { selection, onToggleSelected, termFilters, postType } = this.props;
+		const { selection, onToggleSelected, termFilters, postType, showDateFilters } = this.props;
 
 		return (
 			<Browse
@@ -84,6 +84,7 @@ class PostSelectBrowse extends React.Component {
 				posts={ posts }
 				postTypes={ Array.isArray( postType ) ? postType : [ postType ] }
 				selection={ selection }
+				showDateFilters={ showDateFilters }
 				termFilters={ termFilters }
 				onApplyFilters={ filters => this.applyFilters( filters ) }
 				onNextPostsPage={ () => this.nextPage() }

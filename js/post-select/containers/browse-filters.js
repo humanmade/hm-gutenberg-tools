@@ -28,6 +28,7 @@ class PostBrowseFiltersContainer extends React.Component {
 			<PostBrowseFilters
 				formId={ this.state.id }
 				postTypeObjects={ this.props.postTypeObjects }
+				showDateFilters={ this.props.showDateFilters }
 				terms={ this.props.terms }
 				value={ this.state.filters }
 				onSubmitFilters={ () => this.props.onApplyFilters( this.state.filters ) }

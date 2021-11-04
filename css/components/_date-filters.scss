@@ -1,0 +1,17 @@
+.hm-published-date-filters-container {
+	.components-notice {
+		margin: 0;
+		padding-right: 0;
+
+		.components-notice__content {
+			margin: 0;
+		}
+	}
+
+	.hm-published-date-filters {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 10px;
+		margin: 16px 0 16px 0;
+	}
+}
