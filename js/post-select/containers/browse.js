@@ -46,7 +46,7 @@ class PostSelectBrowse extends React.Component {
 			per_page: 25,
 		};
 
-		if ( ! query.type ) {
+		if ( ! query.type || ! query.type.length ) {
 			query.type = Array.isArray( postType ) ? postType : [ postType ];
 		}
 
