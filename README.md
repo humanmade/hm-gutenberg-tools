@@ -47,10 +47,10 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 
 1. Update the version numbers in `plugin.php` and `package.json`.
 2. Add the changelog to the readme for the new version.
-3. Commit your changes to master and push.
+3. Commit your changes to `main` and push.
 4. Run the bash script: `./release.sh v1.2.3`
 
-The script will sync the the build branch with master, build assets and commit the changes, and publish a new tagged version.
+The script will sync the the build branch with main, build assets and commit the changes, and publish a new tagged version.
 
 ## Changelog
 
