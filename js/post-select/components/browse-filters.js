@@ -4,7 +4,7 @@ import wp from 'wp';
 
 import FormFieldSelectTerm from '../containers/term-select-form-field';
 
-import DateFilters from './date-filters';
+import FormFieldDates from './form-field-dates';
 import FormFieldSearch from './form-field-search';
 import FormFieldSelect from './form-field-select';
 
@@ -30,7 +30,7 @@ const PostBrowseFilters = ( {
 
 		{
 			showDateFilters && (
-				<DateFilters value={ value } onUpdateFilters={ onUpdateFilters } />
+				<FormFieldDates value={ value } onUpdateFilters={ onUpdateFilters } />
 			)
 		}
 

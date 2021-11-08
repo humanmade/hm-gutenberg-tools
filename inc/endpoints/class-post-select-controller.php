@@ -34,15 +34,15 @@ class Post_Select_Controller extends WP_REST_Controller {
 	const PROP_PAGE = 'page';
 
 	/**
-	 * Published After property name.
+	 * Date query after property name.
 	 */
-	const PROP_PUBLISHED_AFTER = 'publishedAfter';
+	const PROP_AFTER = 'after';
 
 
 	/**
-	 * Published Before property name.
+	 * Date query before property name.
 	 */
-	const PROP_PUBLISHED_BEFORE = 'publishedBefore';
+	const PROP_BEFORE = 'before';
 
 	/**
 	 * Constructor.
@@ -109,15 +109,15 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['s'] = $search;
 		}
 
-		$published_after  = $request->get_param( self::PROP_PUBLISHED_AFTER );
-		$published_before  = $request->get_param( self::PROP_PUBLISHED_BEFORE );
+		$date_query_after  = $request->get_param( self::PROP_AFTER );
+		$date_query_before  = $request->get_param( self::PROP_BEFORE );
 
-		if ( ! empty( $published_after ) ) {
-			$query_args['date_query']['after'] = $published_after;
+		if ( ! empty( $date_query_after ) ) {
+			$query_args['date_query']['after'] = $date_query_after;
 		}
 
-		if ( ! empty( $published_before ) ) {
-			$query_args['date_query']['before'] = $published_before;
+		if ( ! empty( $date_query_before ) ) {
+			$query_args['date_query']['before'] = $date_query_before;
 		}
 
 		foreach ( $this->get_allowed_tax_filters() as $taxonomy ) {
