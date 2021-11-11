@@ -1,0 +1,31 @@
+.hm-date-filters-modal {
+	.components-modal__content {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.components-modal__header {
+		width: 100%;
+	}
+
+	.components-notice {
+		margin: 0;
+		padding-right: 0;
+
+		.components-notice__content {
+			margin: 0;
+		}
+	}
+
+	.hm-date-filters-modal-btn-confirm-container {
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
+	}
+}
+
+// z-index is increased so that the modals for date filters appear above the post select modal
+.hm-date-filters-modal-overlay {
+	z-index: 170000;
+}

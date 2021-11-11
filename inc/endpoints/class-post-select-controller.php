@@ -34,6 +34,17 @@ class Post_Select_Controller extends WP_REST_Controller {
 	const PROP_PAGE = 'page';
 
 	/**
+	 * Date query after property name.
+	 */
+	const PROP_AFTER = 'after';
+
+
+	/**
+	 * Date query before property name.
+	 */
+	const PROP_BEFORE = 'before';
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -98,6 +109,17 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['s'] = $search;
 		}
 
+		$date_query_after  = $request->get_param( self::PROP_AFTER );
+		$date_query_before  = $request->get_param( self::PROP_BEFORE );
+
+		if ( ! empty( $date_query_after ) ) {
+			$query_args['date_query']['after'] = $date_query_after;
+		}
+
+		if ( ! empty( $date_query_before ) ) {
+			$query_args['date_query']['before'] = $date_query_before;
+		}
+
 		foreach ( $this->get_allowed_tax_filters() as $taxonomy ) {
 			$base  = ! empty( $taxonomy->rest_base ) ? $taxonomy->rest_base : $taxonomy->name;
 			$query = $request->get_param( $base );
@@ -115,7 +137,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 			$query_args['post__in'] = $include;
 			$query_args['orderby']  = 'post__in';
 		}
-		
+
 		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
 		$query = new WP_Query( $query_args );

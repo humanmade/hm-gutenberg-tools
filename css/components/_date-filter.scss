@@ -1,0 +1,14 @@
+.hm-form-field-date-filter {
+	width: 100%;
+
+	.DayPicker {
+		margin: 0 auto;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+    .hm-form-field-date-filter{
+       max-width: min-content;
+	   margin: 0 10px;
+    }
+}
