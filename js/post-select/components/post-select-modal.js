@@ -24,6 +24,7 @@ const PostSelectModal = props => {
 		contentState,
 		termFilters,
 		selection,
+		showDateFilters,
 		modalRef,
 		isLoading,
 	} = props;
@@ -56,6 +57,7 @@ const PostSelectModal = props => {
 					filters={ filters }
 					postType={ postType }
 					selection={ selection }
+					showDateFilters={ showDateFilters }
 					termFilters={ termFilters }
 					onToggleSelected={ onToggleSelected }
 				/>
@@ -103,6 +105,7 @@ PostSelectModal.propTypes = {
 	termFilters: PropTypes.array,
 	selection: PropTypes.arrayOf( PropTypes.object ),
 	modalRef: PropTypes.func.isRequired,
+	showDateFilters: PropTypes.bool,
 };
 
 export default PostSelectModal;

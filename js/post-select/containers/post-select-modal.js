@@ -52,6 +52,7 @@ class PostSelectModalContainer extends React.Component {
 			filters,
 			onClose,
 			modalTitle,
+			showDateFilters,
 			termFilters,
 			onSelect,
 		} = this.props;
@@ -73,6 +74,7 @@ class PostSelectModalContainer extends React.Component {
 				modalTitle={ modalTitle }
 				postType={ postType }
 				selection={ selection }
+				showDateFilters={ showDateFilters }
 				termFilters={ termFilters }
 				onChangeContentState={ contentState => this.setState( { contentState } ) }
 				onClose={ onClose }
@@ -120,6 +122,7 @@ PostSelectModalContainer.defaultProps = {
 	minPosts: 0,
 	maxPosts: 0,
 	postType: [ 'post' ],
+	showDateFilters: false,
 	value: [],
 	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
 };
@@ -135,6 +138,7 @@ PostSelectModalContainer.propTypes = {
 	onSelect: PropTypes.func.isRequired,
 	onClose: PropTypes.func.isRequired,
 	modalTitle: PropTypes.string,
+	showDateFilters: PropTypes.bool,
 	termFilters: PropTypes.arrayOf( PropTypes.string ),
 };
 

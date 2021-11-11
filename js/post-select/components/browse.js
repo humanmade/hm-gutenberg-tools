@@ -23,6 +23,7 @@ const PostSelectBrowse = props => {
 		onNextPostsPage,
 		onApplyFilters,
 		postTypes,
+		showDateFilters,
 	} = props;
 
 	return (
@@ -31,6 +32,7 @@ const PostSelectBrowse = props => {
 				<PostSelectBrowseFilters
 					filters={ filters }
 					postTypes={ postTypes }
+					showDateFilters={ showDateFilters }
 					termFilters={ termFilters }
 					onApplyFilters={ filters => onApplyFilters( filters ) }
 				/>
