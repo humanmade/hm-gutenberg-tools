@@ -54,6 +54,10 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.6.1
+
+* Reset PostSelect current page when filters are changed
+
 ### v1.6.0
 
 * Adds date range filters for use when searching posts
