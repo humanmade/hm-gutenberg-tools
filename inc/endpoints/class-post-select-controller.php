@@ -140,7 +140,12 @@ class Post_Select_Controller extends WP_REST_Controller {
 
 		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
+		do_action( 'hm_gb_tools_post_select_before_query' );
+
 		$query = new WP_Query( $query_args );
+
+		do_action( 'hm_gb_tools_post_select_after_query' );
+
 		$posts = [];
 
 		foreach ( $query->posts as $post ) {
