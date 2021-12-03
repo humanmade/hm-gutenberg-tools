@@ -3,9 +3,7 @@
     "description": "Human Made Gutenberg Tools",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",
-    "require": {
-    },
     "require-dev": {
-        "humanmade/coding-standards": "^0.6.0"
+        "humanmade/coding-standards": "^1.1"
     }
 }

@@ -1,0 +1,13 @@
+{
+    "apiVersion": 2,
+    "name": "hm-gb-tools/dev",
+    "title": "HM Gutenberg Tools Dev",
+    "category": "widgets",
+    "icon": "smiley",
+    "description": "Test block for use during development.",
+    "supports": {
+        "html": false
+    },
+    "textdomain": "hm-gb",
+    "editorScript": "hm-gb-tools-block-dev-editor"
+}
