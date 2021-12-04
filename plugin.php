@@ -14,7 +14,7 @@
 
 defined( 'HM_GB_TOOLS_DIR' ) || define( 'HM_GB_TOOLS_DIR', plugin_dir_path( __FILE__ ) );
 defined( 'HM_GB_TOOLS_URL' ) || define( 'HM_GB_TOOLS_URL', plugin_dir_url( __FILE__ ) );
-defined( 'HM_GB_TOOLS_DEV' ) || define( 'HM_GB_TOOLS_DEV', true );
+defined( 'HM_GB_TOOLS_DEV' ) || define( 'HM_GB_TOOLS_DEV', false );
 
 require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/endpoints/class-post-select-controller.php';
