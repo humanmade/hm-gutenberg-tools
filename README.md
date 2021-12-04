@@ -43,6 +43,8 @@ HM Gutenberg Tools then exposes all functionality globally as `window.hm`. You c
 * `npm run watch` Watches for changes and builds development versions of the code.
 * `npm run lint` Lints your JS and fixes your code.
 
+To assist with local development, you can define `define( 'HM_GB_TOOLS_DEV', true );` to enable the "HM Gutenberg Tools Dev" block, which includes examples of many of features offered by this plugin.
+
 ## Releasing a new version.
 
 1. Update the version numbers in `plugin.php` and `package.json`.
