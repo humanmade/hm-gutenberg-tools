@@ -8,6 +8,11 @@
     "supports": {
         "html": false
     },
+    "attributes": {
+        "testPostControl": {
+            "type": "array"
+        }
+    },
     "textdomain": "hm-gb",
     "editorScript": "hm-gb-tools-block-dev-editor"
 }
