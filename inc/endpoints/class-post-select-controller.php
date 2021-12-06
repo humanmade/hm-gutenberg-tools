@@ -193,7 +193,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 		$query = new WP_Query( $query_args );
 
 		if ( $query_args['search_by_title_only'] ) {
-			add_filter( 'posts_search', [ $this, 'search_by_title_only' ], 10, 2 );
+			remove_filter( 'posts_search', [ $this, 'search_by_title_only' ], 10 );
 		}
 
 		$posts = [];
