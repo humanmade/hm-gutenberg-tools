@@ -90,7 +90,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 	 * @param WP_Query $wp_query
 	 * @return string The modified SQL
 	 */
-	function search_by_title_only( $search, &$wp_query ): string {
+	public function search_by_title_only( $search, &$wp_query ): string {
 		global $wpdb;
 
 		if ( empty( $search ) ) {
@@ -186,14 +186,14 @@ class Post_Select_Controller extends WP_REST_Controller {
 
 		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
-		if ( $query_args->search_by_title_only ) {
-			add_filter( 'posts_search', __NAMESPACE__ . '\\search_by_title_only', 10, 2 );
+		if ( $query_args['search_by_title_only'] ) {
+			add_filter( 'posts_search', [ $this, 'search_by_title_only' ], 10, 2 );
 		}
 
 		$query = new WP_Query( $query_args );
 
-		if ( $query_args->search_by_title_only ) {
-			add_filter( 'posts_search', __NAMESPACE__ . '\\search_by_title_only', 10, 2 );
+		if ( $query_args['search_by_title_only'] ) {
+			add_filter( 'posts_search', [ $this, 'search_by_title_only' ], 10, 2 );
 		}
 
 		$posts = [];
