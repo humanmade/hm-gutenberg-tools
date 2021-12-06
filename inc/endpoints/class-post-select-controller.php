@@ -84,6 +84,51 @@ class Post_Select_Controller extends WP_REST_Controller {
 	}
 
 	/**
+	 * Update search SQL to only look for search string in title only.
+	 *
+	 * @param string $search
+	 * @param WP_Query $wp_query
+	 * @return string The modified SQL
+	 */
+	function search_by_title_only( $search, &$wp_query ): string {
+		global $wpdb;
+
+		if ( empty( $search ) ) {
+			return $search; // skip processing - no search term in query
+		}
+
+		$q = $wp_query->query_vars;
+		$n = ! empty( $q['exact'] ) ? '' : '%';
+		$search =
+		$searchand = '';
+
+		foreach ( ( array )$q['search_terms'] as $term ) {
+			$term = esc_sql( $wpdb->esc_like( $term ) );
+
+			$search .= $wpdb->prepare(
+				'%1$s(%2$s.post_title LIKE \'%3$s%4$s%5$s\')',
+				$searchand,
+				$wpdb->posts,
+				$n,
+				$term,
+				$n
+			);
+
+			$searchand = ' AND ';
+		}
+
+		if ( ! empty( $search ) ) {
+			$search = " AND ({$search}) ";
+
+			if ( ! is_user_logged_in() ) {
+				$search .= " AND ($wpdb->posts.post_password = '') ";
+			}
+		}
+
+		return $search;
+	}
+
+	/**
 	 * Retrieves a collection of objects.
 	 *
 	 * @param WP_REST_Request $request Full details about the request.
@@ -98,11 +143,12 @@ class Post_Select_Controller extends WP_REST_Controller {
 		}
 
 		$query_args = [
-			'post_type'      => $request->get_param( self::PROP_TYPE ),
-			'posts_per_page' => $request->get_param( self::PROP_PER_PAGE ),
-			'paged'          => $request->get_param( self::PROP_PAGE ),
-			'tax_query'      => [],
-			'filter_bundles' => true,
+			'post_type'            => $request->get_param( self::PROP_TYPE ),
+			'posts_per_page'       => $request->get_param( self::PROP_PER_PAGE ),
+			'paged'                => $request->get_param( self::PROP_PAGE ),
+			'tax_query'            => [],
+			'filter_bundles'       => true,
+			'search_by_title_only' => false,
 		];
 
 		if ( ! empty( $search ) ) {
@@ -140,11 +186,15 @@ class Post_Select_Controller extends WP_REST_Controller {
 
 		$query_args = apply_filters( 'hm_gb_tools_post_select_query_args', $query_args );
 
-		do_action( 'hm_gb_tools_post_select_before_query', $query_args );
+		if ( $query_args->search_by_title_only ) {
+			add_filter( 'posts_search', __NAMESPACE__ . '\\search_by_title_only', 10, 2 );
+		}
 
 		$query = new WP_Query( $query_args );
 
-		do_action( 'hm_gb_tools_post_select_after_query', $query_args );
+		if ( $query_args->search_by_title_only ) {
+			add_filter( 'posts_search', __NAMESPACE__ . '\\search_by_title_only', 10, 2 );
+		}
 
 		$posts = [];
 
