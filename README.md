@@ -22,7 +22,7 @@ It is reccomended to install as a plugin or mu-plugin using composer.
 composer require humanmade/hm-gutenberg-tools
 ```
 
-If you install using another method (e.g. git submodule), note that the `main` branch does not include built assets, but tagged releases and the `build` branch do include them.
+If you install using another method (e.g. git submodule), note that the `main` branch does not include built assets, but tagged releases and the `build` branch do include them. You should not need to build the assets for this plugin as part of your project build process. 
 
 ### Bundling in a theme
 
