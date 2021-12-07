@@ -38,6 +38,8 @@ const FormFieldDates = ( { onUpdateFilters, value } ) => {
 					`${__( 'Published between', 'hm-gb-tools' )} ${filtersUpdate.after} ${__( 'and', 'hm-gb-tools' )} ${filtersUpdate.before}`
 				);
 			}
+		} else {
+			setSelectedDateRange( '' );
 		}
 
 		onUpdateFilters( filtersUpdate );

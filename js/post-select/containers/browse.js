@@ -1,5 +1,6 @@
 /* global wp */
 
+import _isEqual from 'lodash/isequal';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -108,8 +109,13 @@ class PostSelectBrowse extends React.Component {
 		);
 	}
 
-	applyFilters( filters ) {
-		this.setState( { filters }, () => this.fetchPosts() );
+	applyFilters( newFilters ) {
+		const { filters, page } = this.state;
+		const didFiltersChange = ! _isEqual( filters, newFilters );
+		this.setState( {
+			filters: newFilters,
+			page: didFiltersChange ? 1 : page,
+		}, () => this.fetchPosts() );
 	}
 }
 
