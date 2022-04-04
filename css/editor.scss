@@ -50,8 +50,8 @@
 .hm-image-control {
 	&__img-container {
 		position: relative;
-		display: inline-block;
-		margin-bottom: 10px;
+		display: table;
+		margin: 10px 0;
 
 		&:after {
 			content: ' ';
@@ -72,5 +72,6 @@
 
 	&__actions {
 		clear: both;
+		margin: 10px 0;
 	}
 }

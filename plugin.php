@@ -3,7 +3,7 @@
  * Plugin Name:  HM Gutenberg Tools Plugin
  * Plugin URI:   https://hmn.md
  * Description:  Tools for Gutenberg.
- * Version:      1.6.1
+ * Version:      1.6.2
  * Author:       Human Made Limited
  * Author URI:   https://hmn.md
  * License:      GPL2
