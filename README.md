@@ -16,13 +16,13 @@ stying to work better in the sidebar.
 
 ## Installation Instructions
 
-It is reccomended to install as a plugin or mu-plugin using composer. 
+It is reccomended to install as a plugin or mu-plugin using composer.
 
 ```
 composer require humanmade/hm-gutenberg-tools
 ```
 
-If you install using another method (e.g. git submodule), note that the `main` branch does not include built assets, but tagged releases and the `build` branch do include them. You should not need to build the assets for this plugin as part of your project build process. 
+If you install using another method (e.g. git submodule), note that the `main` branch does not include built assets, but tagged releases and the `build` branch do include them. You should not need to build the assets for this plugin as part of your project build process.
 
 ### Bundling in a theme
 
@@ -35,7 +35,7 @@ define( 'HM_GB_TOOLS_URL', get_stylesheet_directory_uri() . '/lib/hm-gutenberg-t
 
 ## Using components from HM Gutenberg Tools
 
-You should specify the script `hm-gb-tools-editor` as a dependency of the script in which you are using it. 
+You should specify the script `hm-gb-tools-editor` as a dependency of the script in which you are using it.
 
 ```php
 wp_enqueue_script( 'my-custom-block', plugins_url( 'my-custom-block.js', dirname(__FILE__) ), [ 'hm-gb-tools-editor' ], '1.0' );
@@ -48,12 +48,12 @@ const { PostSelectButton } = window.hm.components;
 
 function Edit( { attributes, setAttributes } ) {
     return (
-        <PostSelectButton 
+        <PostSelectButton
             value={ attributes.postIds }
             onSelect={ posts => setAttributes( { postIds: posts.map( p => p.id ) } ) }
-            postType="page" 
+            postType="page"
             btnProps={ { isLarge: true } }
-        >    
+        >
     );
 }
 ```
@@ -64,7 +64,8 @@ function Edit( { attributes, setAttributes } ) {
 
 * `npm run build` Builds a production version of the code.
 * `npm run watch` Watches for changes and builds development versions of the code.
-* `npm run lint` Lints your JS and fixes your code.
+* `npm run lint` Lints your JS. Run `npm run lint -- --fix` to fix it too.
+* `composer run lint` Lints your PHP code.
 
 To assist with local development, you can define `define( 'HM_GB_TOOLS_DEV', true );` to enable the "HM Gutenberg Tools Dev" block, which includes examples of many of features offered by this plugin.
 
