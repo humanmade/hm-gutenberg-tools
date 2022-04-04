@@ -18,12 +18,12 @@ defined( 'HM_GB_TOOLS_DEV' ) || define( 'HM_GB_TOOLS_DEV', false );
 
 require_once __DIR__ . '/inc/namespace.php';
 require_once __DIR__ . '/inc/endpoints/class-post-select-controller.php';
-require_once __DIR__ . '/blocks/dev/block.php';
 
 add_action( 'after_setup_theme', function() {
 	\HM\GutenbergTools\setup();
 
 	if ( HM_GB_TOOLS_DEV ) {
+		require_once __DIR__ . '/blocks/dev/block.php';
 		\HM\GutenbergTools\Blocks\Dev\setup();
 	}
 });
