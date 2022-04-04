@@ -5,8 +5,7 @@
   "scripts": {
     "build": "webpack --config=.config/webpack.config.prod.js",
     "start": "npm run build -- --watch -d",
-    "lint:php": "vendor/bin/phpcs --standard=phpcs.ruleset.xml . -s",
-    "lint:js": "eslint ./js",
+    "lint": "eslint ./js",
     "test": "jest"
   },
   "jest": {
