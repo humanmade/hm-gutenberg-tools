@@ -117,9 +117,6 @@ function Edit(  { attributes, clientId, setAttributes }  ) {
 				parentBlockId={ clientId }
 				slideLimit={ 3 }
 			/>
-
-			Test
-
 		</div>
 	);
 }
