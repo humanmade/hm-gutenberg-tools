@@ -12,19 +12,17 @@ import Navigation from './navigation';
  *
  * @param {object} root0 - Component props.
  * @param {string} root0.parentBlockId - Parent block clientId.
- * @param {number} root0.slidesPerPage - Number of visible slides.
  * @param {string} root0.allowedBlock - Allowed block type.
  * @param {Array} root0.template - Initial block template.
- * @param {string} root0.slideHeight - Slider height as CSS value with units.
  * @param {number} root0.slideLimit - Maximum allowed slides.
  * @returns {ReactNode} Component.
  */
-const InnerBlockSlider = ( {
+function InnerBlockSlider( {
 	parentBlockId,
 	allowedBlock,
 	template,
 	slideLimit,
-} ) => {
+} ) {
 	const innerBlockTemplate = template || [ [ allowedBlock ] ];
 
 	const [ currentPage, setCurrentPage ] = useState( 1 );
@@ -96,7 +94,7 @@ const InnerBlockSlider = ( {
 			/>
 		</div>
 	);
-};
+}
 
 InnerBlockSlider.defaultProps = {
 	template: null,
@@ -104,11 +102,9 @@ InnerBlockSlider.defaultProps = {
 };
 
 InnerBlockSlider.propTypes = {
-	slidesPerPage: PropTypes.number,
 	parentBlockId: PropTypes.string.isRequired,
 	allowedBlock: PropTypes.string.isRequired,
 	template: PropTypes.array,
-	slideHeight: PropTypes.string,
 };
 
 export default InnerBlockSlider;

@@ -110,7 +110,7 @@ function Edit(  { attributes, clientId, setAttributes }  ) {
 				</div>
 			</div>
 
-			<h3>Inner Block Slider { clientId }</h3>
+			<h3>Inner Block Slider</h3>
 
 			<InnerBlockSlider
 				allowedBlock={ 'core/image' }
