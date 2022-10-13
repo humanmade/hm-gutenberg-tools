@@ -5,7 +5,7 @@
   "scripts": {
     "build": "webpack --config=.config/webpack.config.prod.js",
     "start": "npm run build -- --watch -d",
-    "lint": "eslint ./js --fix",
+    "lint": "eslint ./js",
     "test": "jest"
   },
   "jest": {
@@ -15,8 +15,8 @@
     ]
   },
   "devDependencies": {
-    "@humanmade/eslint-config": "^1.1.0",
-    "@humanmade/webpack-helpers": "^0.9.0",
+    "@humanmade/eslint-config": "^1.1.3",
+    "@humanmade/webpack-helpers": "^0.11.1",
     "@wordpress/data": "^2.0.0",
     "babel-eslint": "^10.1.0",
     "classnames": "^2.2.5",

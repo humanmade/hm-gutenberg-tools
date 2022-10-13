@@ -11,14 +11,26 @@ const { filePath } = helpers;
  */
 loaders.file.defaults.exclude = [ /\.(js|html|json)$/, /node_modules/ ];
 
-module.exports = presets.production( {
-	name: 'editor',
-	externals,
-	entry: {
-		editor: filePath( 'js/editor.js' ),
-		editorStyles: filePath( 'css/editor.scss' ),
-	},
-	output: {
-		path: filePath( 'build' ),
-	},
-} );
+module.exports = [
+	presets.production( {
+		name: 'editor',
+		externals,
+		entry: {
+			editor: filePath( 'js/editor.js' ),
+			editorStyles: filePath( 'css/editor.scss' ),
+		},
+		output: {
+			path: filePath( 'build' ),
+		},
+	} ),
+	presets.production( {
+		name: 'block-dev',
+		externals,
+		entry: {
+			editor: filePath( 'blocks/dev/js/editor.js' ),
+		},
+		output: {
+			path: filePath( 'blocks/dev/build' ),
+		},
+	} ),
+];
