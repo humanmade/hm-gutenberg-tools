@@ -2,6 +2,7 @@ import ImageControl from './controls/image';
 import LinkControl from './controls/link';
 import PostControl from './controls/post';
 import EditableHTML from './editable-html';
+import InnerBlockSlider from './inner-block-slider';
 import PostSelectButton from './post-select';
 
 window.hm = {
@@ -15,6 +16,7 @@ window.hm = {
 	components: {
 		PostSelectButton,
 		EditableHTML,
+		InnerBlockSlider,
 	},
 };
 
