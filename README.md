@@ -80,6 +80,10 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.6.3
+
+* Ignore sticky posts by default.
+
 ### v1.6.2
 
 * Fix date filter label not being cleared when both selected dates are unset.
