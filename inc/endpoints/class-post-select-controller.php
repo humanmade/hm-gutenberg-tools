@@ -98,10 +98,11 @@ class Post_Select_Controller extends WP_REST_Controller {
 		}
 
 		$query_args = [
-			'post_type'      => $request->get_param( self::PROP_TYPE ),
+			'ignore_sticky_posts' => true,
+			'post_type' => $request->get_param( self::PROP_TYPE ),
 			'posts_per_page' => $request->get_param( self::PROP_PER_PAGE ),
-			'paged'          => $request->get_param( self::PROP_PAGE ),
-			'tax_query'      => [],
+			'paged' => $request->get_param( self::PROP_PAGE ),
+			'tax_query' => [],
 			'filter_bundles' => true,
 		];
 

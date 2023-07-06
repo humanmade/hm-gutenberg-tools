@@ -10,6 +10,7 @@
 
 # production
 /build
+/blocks/**/build
 /release
 
 # misc

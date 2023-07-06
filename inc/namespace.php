@@ -1,8 +1,9 @@
 <?php
+/**
+ * Main Plugin Functionality.
+ */
 
 namespace HM\GutenbergTools;
-
-require_once __DIR__ . '/endpoints/class-post-select-controller.php';
 
 /**
  * Setup the plugin.
