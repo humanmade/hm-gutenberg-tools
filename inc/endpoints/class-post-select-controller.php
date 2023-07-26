@@ -19,6 +19,11 @@ class Post_Select_Controller extends WP_REST_Controller {
 	const PROP_SEARCH = 'search';
 
 	/**
+	 * Status property name.
+	 */
+	const PROP_STATUS = 'status';
+
+	/**
 	 * Include property name.
 	 */
 	const PROP_INCLUDE = 'include';
@@ -37,7 +42,6 @@ class Post_Select_Controller extends WP_REST_Controller {
 	 * Date query after property name.
 	 */
 	const PROP_AFTER = 'after';
-
 
 	/**
 	 * Date query before property name.
@@ -75,7 +79,6 @@ class Post_Select_Controller extends WP_REST_Controller {
 	/**
 	 * Checks if a given request has access to search content.
 	 *
-	 *
 	 * @param WP_REST_Request $request Full details about the request.
 	 * @return true|WP_Error True if the request has search access, WP_Error object otherwise.
 	 */
@@ -99,6 +102,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 
 		$query_args = [
 			'ignore_sticky_posts' => true,
+			'post_status' => $request->get_param( self::PROP_STATUS ) ?? 'publish',
 			'post_type' => $request->get_param( self::PROP_TYPE ),
 			'posts_per_page' => $request->get_param( self::PROP_PER_PAGE ),
 			'paged' => $request->get_param( self::PROP_PAGE ),
