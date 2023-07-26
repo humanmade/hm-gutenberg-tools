@@ -30,7 +30,8 @@ const PostListItem = ( { post, author, thumbnail, postTypeObject, isSelected, on
 				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
 				<div className="post-list-item--meta">
 					{ postTypeObject && ( <span><b>{ __( 'Type:', 'hm-gb-tools' ) }</b> { postTypeObject.labels.singular_name }</span> ) }
-					<span><b>{ __( 'Published:', 'hm-gb-tools' ) }</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>
+					<span><b>{ __( 'Status:', 'hm-gb-tools' ) }</b> { post.status }</span>
+					<span><b>{ __( 'Published / Last Modified:', 'hm-gb-tools' ) }</b> { moment( post.date_gmt ).format( 'Do MMM, YYYY' ) }</span>
 					{ author && ( <span><b>Author:</b> { author.name }</span> ) }
 				</div>
 			</div>
