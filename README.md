@@ -80,6 +80,13 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.7.0
+
+* Add post status field select.
+* Allow to accept status from the Rest API endpoint.
+* Add status field in the post list item.
+* Update deprecated mediaUpload function.
+
 ### v1.6.3
 
 * Ignore sticky posts by default.

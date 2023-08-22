@@ -4,7 +4,7 @@ import wp from 'wp';
 
 const {
 	MediaUpload,
-} = wp.editor;
+} = wp.blockEditor;
 
 const {
 	Button,

@@ -35,6 +35,7 @@ function enqueue_block_editor_assets() {
 	wp_localize_script( 'hm-gb-tools-editor', 'hmGbToolsData', [
 		'restBase' => esc_url_raw( get_rest_url() ),
 		'postSelectEndpoint' => '/hm-gb-tools/v1/post-select',
+		'postStatuses' => get_post_stati( [ 'internal' => false ] ),
 	] );
 
 	wp_set_script_translations( 'hm-gb-tools-editor', 'hm-gb-tools' );
