@@ -9,6 +9,7 @@ import { fetchJson } from '../utils/fetch';
 
 const { addQueryArgs } = wp.url;
 const { sprintf, __ } = wp.i18n;
+const { applyFilters } = wp.hooks;
 
 class TermSelect extends React.Component {
 	constructor( props ) {
@@ -36,16 +37,22 @@ class TermSelect extends React.Component {
 		const { restBase } = this.props;
 		const { page, options, search } = this.state;
 
-		const query = {
+		let query = {
 			page,
 			per_page: 10,
 		};
 
-		if ( search && search.length >= 3 ) {
+		// Allow 3rd party to change the minimum search length.
+		const searchMinLength = applyFilters( 'hmGbTools.termSelect.searchMinLength', 3 );
+
+		if ( search && search.length >= searchMinLength ) {
 			query.search = search;
 		}
 
 		this.setState( { isLoading: true } );
+
+		// Allow 3rd party to change the default query.
+		query = applyFilters( 'hmGbTools.termSelect.query', query );
 
 		fetchJson( {
 			path: addQueryArgs( `wp/v2/${restBase}/`, query ),
@@ -80,7 +87,9 @@ class TermSelect extends React.Component {
 	}
 
 	updateSearch( search ) {
-		if ( search.length >= 3 ) {
+		const searchMinLength = applyFilters( 'hmGbTools.termSelect.searchMinLength', 3 );
+
+		if ( search.length >= searchMinLength ) {
 			this.setState( {
 				search,
 				page: 1,
