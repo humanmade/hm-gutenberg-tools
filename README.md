@@ -80,6 +80,11 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.7.1
+
+* Add filter for minimum search length for term select.
+* Add filter for term select query.
+
 ### v1.7.0
 
 * Add post status field select.
