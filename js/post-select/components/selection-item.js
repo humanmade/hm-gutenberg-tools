@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { sanitize } from 'dompurify';
+import DOMPurify from 'dompurify';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
@@ -19,13 +19,13 @@ const SelectionListItem = ( { post, thumbnail, author, postTypeObject, isSelecte
 			<Fragment>
 				{ thumbnail
 					? <img
-						alt={ sanitize( post.title.rendered ) }
+						alt={ DOMPurify.sanitize( post.title.rendered ) }
 						className="post-list-item--image"
 						src={ thumbnail.media_details.sizes.thumbnail.source_url }
 					/>
 					: '' }
 				<div className="post-list-item--inner">
-					<h2 dangerouslySetInnerHTML={ { __html: sanitize( post.title.rendered ) } } />
+					<h2 dangerouslySetInnerHTML={ { __html: DOMPurify.sanitize( post.title.rendered ) } } />
 					<div className="post-list-item--meta">
 						{ postTypeObject && ( <span><b>{ __( 'Type:', 'hm-gb-tools' ) }</b> { postTypeObject.labels.singular_name }</span> ) }
 						<span><b>{ __( 'Status:', 'hm-gb-tools' ) }</b> { post.status }</span>
