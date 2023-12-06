@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import DOMPurify from 'dompurify';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -14,7 +15,7 @@ const PostListItem = ( { post, author, thumbnail, postTypeObject, isSelected, on
 		<label htmlFor={ `select-post-${post.id}` }>
 			{ thumbnail
 				? <img
-					alt={ post.title.rendered }
+					alt={ DOMPurify.sanitize( post.title.rendered ) }
 					className="post-list-item--image"
 					src={ thumbnail.media_details.sizes.thumbnail.source_url }
 				/>
@@ -27,7 +28,7 @@ const PostListItem = ( { post, author, thumbnail, postTypeObject, isSelected, on
 					type="checkbox"
 					onChange={ () => onToggleSelected() }
 				/>
-				<h2 dangerouslySetInnerHTML={ { __html: post.title.rendered } } />
+				<h2 dangerouslySetInnerHTML={ { __html: DOMPurify.sanitize( post.title.rendered ) } } />
 				<div className="post-list-item--meta">
 					{ postTypeObject && ( <span><b>{ __( 'Type:', 'hm-gb-tools' ) }</b> { postTypeObject.labels.singular_name }</span> ) }
 					<span><b>{ __( 'Status:', 'hm-gb-tools' ) }</b> { post.status }</span>
