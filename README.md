@@ -80,6 +80,12 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.7.2
+
+* Upgraded dependencies for enhanced performance, security and stability.
+* Audit fix dependency upgrade, improving code security.
+* Enhanced security by introducing sanitization for `post.title.rendered` mitigating XSS attack risks.
+
 ### v1.7.1
 
 * Add filter for minimum search length for term select.
