@@ -1,6 +1,6 @@
 /* global wp */
 
-import _isEqual from 'lodash/isequal';
+import _isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import React from 'react';
 
