@@ -1,6 +1,6 @@
 {
   "name": "hm-gutenberg-tools",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "private": true,
   "scripts": {
     "build": "webpack --config=.config/webpack.config.prod.js",

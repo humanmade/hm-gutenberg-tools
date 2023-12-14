@@ -80,6 +80,10 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.7.3
+
+* Restore built asset files not included in v1.7.2 due to release process error.
+
 ### v1.7.2
 
 * Upgraded dependencies for enhanced performance, security and stability.
