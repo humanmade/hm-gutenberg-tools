@@ -14,9 +14,9 @@ const { postStatuses } = window.hmGbToolsData;
 
 const PostBrowseFilters = ( {
 	formId,
-	value,
+	value = {},
 	showDateFilters,
-	terms,
+	terms = [],
 	postTypeObjects,
 	onSubmitFilters,
 	onUpdateFilters,
@@ -102,11 +102,6 @@ const PostBrowseFilters = ( {
 		</Button>
 	</form>
 );
-
-PostBrowseFilters.defaultProps = {
-	value: {},
-	terms: [],
-};
 
 PostBrowseFilters.propTypes = {
 	value: PropTypes.objectOf(

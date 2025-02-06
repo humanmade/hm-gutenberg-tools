@@ -17,8 +17,8 @@ const PostControl = ( {
 	help,
 	onChange,
 	value,
-	postSelectProps,
-	btnText,
+	postSelectProps = { btnProps: {} },
+	btnText = __( 'Select post' ),
 } ) => {
 	postSelectProps.btnProps = postSelectProps.btnProps || {};
 	postSelectProps.btnProps.isSecondary = true;
@@ -39,11 +39,6 @@ const PostControl = ( {
 			) }
 		</BaseControl>
 	);
-};
-
-PostControl.defaultProps = {
-	btnText: __( 'Select post' ),
-	postSelectProps: { btnProps: {} },
 };
 
 PostControl.propTypes = {

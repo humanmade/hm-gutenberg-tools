@@ -23,6 +23,15 @@ class PostSelectModalContainer extends React.Component {
 		};
 	}
 
+	static defaultProps = {
+		minPosts: 0,
+		maxPosts: 0,
+		postType: [ 'post' ],
+		showDateFilters: false,
+		value: [],
+		modalTitle: __( 'Select a post', 'hm-gb-tools' ),
+	};
+
 	componentDidMount() {
 		this.fetchSelection();
 		this.modalElement && this.modalElement.focus();
@@ -117,15 +126,6 @@ class PostSelectModalContainer extends React.Component {
 		}
 	}
 }
-
-PostSelectModalContainer.defaultProps = {
-	minPosts: 0,
-	maxPosts: 0,
-	postType: [ 'post' ],
-	showDateFilters: false,
-	value: [],
-	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
-};
 
 PostSelectModalContainer.propTypes = {
 	filters: PropTypes.objectOf( PropTypes.arrayOf( PropTypes.number ) ),
