@@ -20,7 +20,7 @@ function PostList( { postIds } ) {
 		<ul>
 			{ postIds.map( id => {
 				return (
-					<li>{ id }</li>
+					<li key={ `hm-gutenberg-tools-post-list-id-${id}` }>{ id }</li>
 				);
 			} ) }
 		</ul>
