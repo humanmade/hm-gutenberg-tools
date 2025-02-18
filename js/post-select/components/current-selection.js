@@ -8,8 +8,8 @@ const { __ } = wp.i18n;
 
 const CurrentSelection = ( {
 	posts,
-	isLoading,
-	title,
+	isLoading = false,
+	title = __( 'Current Selection', 'hm-gb-tools' ),
 } ) => (
 	<div className="hm-post-control-current-selection">
 		<h4>{ title }</h4>
@@ -25,11 +25,6 @@ const CurrentSelection = ( {
 		) }
 	</div>
 );
-
-CurrentSelection.defaultProps = {
-	isLoading: false,
-	title: __( 'Current Selection', 'hm-gb-tools' ),
-};
 
 CurrentSelection.propTypes = {
 	posts: PropTypes.arrayOf( PropTypes.object ).isRequired,

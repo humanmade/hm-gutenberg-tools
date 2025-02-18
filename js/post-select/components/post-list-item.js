@@ -7,7 +7,7 @@ import wp from 'wp';
 
 const { __ }  = wp.i18n;
 
-const PostListItem = ( { post, author, thumbnail, postTypeObject, isSelected, onToggleSelected } ) => (
+const PostListItem = ( { post, author, thumbnail, postTypeObject, isSelected, onToggleSelected, actions = [], onSelectItem = () => {} } ) => (
 	<li className={ classNames( 'post-list-item', {
 		'post-list-item--selected': isSelected,
 		'post-list-item--has-thumbnail': thumbnail,
@@ -46,11 +46,6 @@ PostListItem.propTypes = {
 	thumbnail: PropTypes.object,
 	isSelected: PropTypes.bool,
 	onToggleSelected: PropTypes.func.isRequired,
-};
-
-PostListItem.defaultProps = {
-	actions: [],
-	onSelectItem: () => {},
 };
 
 export default PostListItem;

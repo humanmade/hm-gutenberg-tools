@@ -18,8 +18,8 @@ const PostSelectControl = ( {
 	help,
 	onChange,
 	value,
-	postSelectProps,
-	btnText,
+	postSelectProps = { btnProps: {} },
+	btnText= __( 'Select post' ),
 } ) => {
 	return (
 		<BaseControl className="hm-post-control" help={ help } id={ id } label={ label }>
@@ -37,11 +37,6 @@ const PostSelectControl = ( {
 			) }
 		</BaseControl>
 	);
-};
-
-PostSelectControl.defaultProps = {
-	btnText: __( 'Select post' ),
-	postSelectProps: { btnProps: {} },
 };
 
 PostSelectControl.propTypes = {

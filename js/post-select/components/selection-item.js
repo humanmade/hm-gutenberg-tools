@@ -10,7 +10,7 @@ import SelectionListItemAction from './selection-item-action';
 const { Spinner } = wp.components;
 const { __ }  = wp.i18n;
 
-const SelectionListItem = ( { post, thumbnail, author, postTypeObject, isSelected, actions } ) => (
+const SelectionListItem = ( { post, thumbnail, author, postTypeObject, isSelected, actions = [] } ) => (
 	<li className={ classNames( 'post-list-item post-list-item--selection', {
 		'post-list-item--selected': isSelected,
 		'post-list-item--has-thumbnail': thumbnail,
@@ -50,11 +50,6 @@ SelectionListItem.propTypes = {
 	thumbnail: PropTypes.object,
 	isSelected: PropTypes.bool,
 	actions: PropTypes.array,
-};
-
-SelectionListItem.defaultProps = {
-	actions: [],
-	onSelectItem: () => {},
 };
 
 export default SelectionListItem;

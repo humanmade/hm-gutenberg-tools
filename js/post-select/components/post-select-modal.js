@@ -13,7 +13,7 @@ const { __ } = wp.i18n;
 const PostSelectModal = props => {
 	const {
 		filters,
-		modalTitle,
+		modalTitle =  __( 'Select a post', 'hm-gb-tools' ),
 		postType,
 		onSelect,
 		onClose,
@@ -21,9 +21,9 @@ const PostSelectModal = props => {
 		onMoveItemUp,
 		onMoveItemDown,
 		onChangeContentState,
-		contentState,
+		contentState = 'browse',
 		termFilters,
-		selection,
+		selection = [],
 		showDateFilters,
 		modalRef,
 		isLoading,
@@ -83,12 +83,6 @@ const PostSelectModal = props => {
 			onClose={ onClose }
 		/>
 	);
-};
-
-PostSelectModal.defaultProps = {
-	modalTitle: __( 'Select a post', 'hm-gb-tools' ),
-	contentState: 'browse',
-	selection: [],
 };
 
 PostSelectModal.propTypes = {
