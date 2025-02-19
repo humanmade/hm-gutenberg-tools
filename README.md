@@ -1,6 +1,9 @@
 Human Made Gutenberg Tools
 ==========================
 
+> [!WARNING]  
+> This project is no longer actively developed. It is recommended that you the components from our [Block Editor Components library instead](https://github.com/humanmade/block-editor-components).  
+
 A place to bundle useful reusable Gutenberg components and other tools.
 
 ## What does this include?
