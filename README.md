@@ -83,6 +83,10 @@ The script will sync the the build branch with main, build assets and commit the
 
 ## Changelog
 
+### v1.7.4
+
+* Fix post-select endpoint response, where the rendered title should be rendered with `get_the_title`
+
 ### v1.7.3
 
 * Restore built asset files not included in v1.7.2 due to release process error.
