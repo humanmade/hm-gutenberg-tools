@@ -175,7 +175,7 @@ class Post_Select_Controller extends WP_REST_Controller {
 			'id' => $post->ID,
 			'title' => [
 				'raw'      => $post->post_title,
-				'rendered' => $post->post_title,
+				'rendered' => get_the_title( $post ),
 			],
 			'type' => $post->post_type,
 			'date' => $this->prepare_date_response( $post->post_date_gmt, $post->post_date ),
