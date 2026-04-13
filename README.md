@@ -1,6 +1,9 @@
 Human Made Gutenberg Tools
 ==========================
 
+> [!WARNING]  
+> This project is no longer actively developed. It is recommended that you the components from our [Block Editor Components library instead](https://github.com/humanmade/block-editor-components).  
+
 A place to bundle useful reusable Gutenberg components and other tools.
 
 ## What does this include?
@@ -79,6 +82,10 @@ To assist with local development, you can define `define( 'HM_GB_TOOLS_DEV', tru
 The script will sync the the build branch with main, build assets and commit the changes, and publish a new tagged version.
 
 ## Changelog
+
+### v1.7.4
+
+* Fix post-select endpoint response, where the rendered title should be rendered with `get_the_title`
 
 ### v1.7.3
 

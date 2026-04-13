@@ -19,12 +19,12 @@ const { withSelect } = wp.data;
  * InspectorControl for image upload.
  */
 const ImageControl = ( {
-	label,
-	id,
-	help,
+	label = '',
+	id = '',
+	help = '',
 	onChange,
-	value,
-	image,
+	value = 0,
+	image = null,
 	isLoading = false,
 } ) => (
 	<BaseControl className="hm-image-control" help={ help } id={ id } label={ label }>
@@ -65,15 +65,6 @@ const ImageControl = ( {
 		</div>
 	</BaseControl>
 );
-
-ImageControl.defaultProps = {
-	image: null,
-	value: 0,
-	label: '',
-	id: '',
-	help: '',
-	isLoading: false,
-};
 
 ImageControl.propTypes = {
 	image: PropTypes.object,

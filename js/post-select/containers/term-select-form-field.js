@@ -57,15 +57,15 @@ class TermSelect extends React.Component {
 		fetchJson( {
 			path: addQueryArgs( `wp/v2/${restBase}/`, query ),
 			signal: this.fetchPostAbortController.signal,
-		} ).then( ( [ terms, headers ] ) => {
+		} ).then( ( [ terms = [], headers ] ) => {
 			const { value } = this.props;
 
-			const newOptions = _uniqBy( [ ...options, ...terms.map( term => ( {
+			const newOptions = _uniqBy( [ ...options, ...(terms || []).map( term => ( {
 				value: term.id,
 				label: term.name,
 			} ) ) ], 'value' );
 
-			const newValue = value.map( id => newOptions.find( option => option.value === id ) ).filter( Boolean );
+			const newValue = (value || []).map( id => newOptions.find( option => option.value === id ) ).filter( Boolean );
 
 			this.setState( {
 				options: newOptions,
@@ -125,10 +125,6 @@ class TermSelect extends React.Component {
 		);
 	}
 }
-
-TermSelect.defaultProps = {
-	value: [],
-};
 
 TermSelect.propTypes = {
 	fieldId: PropTypes.string.isRequired,

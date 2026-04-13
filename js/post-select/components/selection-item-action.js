@@ -7,7 +7,7 @@ const {
 	Dashicon,
 } = wp.components;
 
-const PostListItemAction = ( { text, icon, onClick, disabled } ) => (
+const PostListItemAction = ( { text, icon, onClick, disabled = false } ) => (
 	<Button className="post-list-item-remove" disabled={ disabled } isSmall onClick={ onClick }>
 		<Dashicon icon={ icon } />
 		<span className="screen-reader-text">{ text }</span>
@@ -20,10 +20,6 @@ PostListItemAction.propTypes = {
 	icon: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
 	disabled: PropTypes.bool,
-};
-
-PostListItemAction.defaultProps = {
-	disabled: false,
 };
 
 export default PostListItemAction;
